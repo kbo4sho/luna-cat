@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Luna's Kitty 🐱</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  
+  :root {
+    --pink-light: #ffe4f0;
+    --pink: #ff8ec4;
+    --pink-dark: #e85da1;
+    --pink-deep: #d4467a;
+    --purple-light: #f0e0ff;
+    --yellow: #fff3c4;
+    --white: #fff;
+  }
+
+  body {
+    background: linear-gradient(180deg, #ffe4f0 0%, #ffd0e8 40%, #ffc0dd 100%);
+    font-family: 'Arial Rounded MT Bold', 'Nunito', sans-serif;
+    height: 100vh;
+    height: 100dvh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 10px;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  /* Floating hearts background */
+  .bg-hearts {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+  .bg-heart {
+    position: absolute;
+    font-size: 24px;
+    opacity: 0.15;
+    animation: floatHeart 15s linear infinite;
+  }
+  @keyframes floatHeart {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0.15; }
+    50% { opacity: 0.25; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+
+  /* Header */
+  .header {
+    z-index: 10;
+    text-align: center;
+  }
+  .header h1 {
+    font-size: 28px;
+    color: var(--pink-deep);
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  .cat-name {
+    font-size: 18px;
+    color: var(--pink-dark);
+    margin-top: 4px;
+  }
+
+  /* Needs bar */
+  .needs {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    z-index: 10;
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+  .need {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+  }
+  .need-icon {
+    font-size: 22px;
+  }
+  .need-hearts {
+    display: flex;
+    gap: 2px;
+  }
+  .need-heart {
+    font-size: 16px;
+    transition: all 0.3s ease;
+  }
+  .need-heart.empty {
+    opacity: 0.25;
+    filter: grayscale(1);
+  }
+
+  /* Cat area */
+  .cat-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 10;
+    min-height: 200px;
+  }
+
+  .cat-container {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  .cat-container:active {
+    transform: scale(0.95);
+  }
+
+  .cat {
+    font-size: 140px;
+    line-height: 1;
+    filter: drop-shadow(0 8px 16px rgba(0,0,0,0.1));
+    transition: transform 0.3s ease;
+  }
+
+  /* Cat animations */
+  .cat.happy {
+    animation: catBounce 0.5s ease 3;
+  }
+  .cat.eating {
+    animation: catEat 0.4s ease 3;
+  }
+  .cat.playing {
+    animation: catPlay 0.3s ease 5;
+  }
+  .cat.brushing {
+    animation: catBrush 0.5s ease 3;
+  }
+  .cat.sleeping {
+    animation: catSleep 2s ease-in-out infinite;
+  }
+  .cat.purring {
+    animation: catPurr 0.15s ease-in-out 10;
+  }
+
+  @keyframes catBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-20px) scale(1.05); }
+  }
+  @keyframes catEat {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-5deg) translateY(5px); }
+    75% { transform: rotate(5deg) translateY(5px); }
+  }
+  @keyframes catPlay {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-10deg); }
+    75% { transform: rotate(10deg); }
+  }
+  @keyframes catBrush {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.08); }
+  }
+  @keyframes catSleep {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(0.97) rotate(-3deg); }
+  }
+  @keyframes catPurr {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(3px); }
+  }
+
+  /* Reaction bubble */
+  .reaction {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 50px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .reaction.show {
+    animation: reactionPop 1.5s ease forwards;
+  }
+  @keyframes reactionPop {
+    0% { opacity: 0; transform: translateX(-50%) translateY(0) scale(0.3); }
+    20% { opacity: 1; transform: translateX(-50%) translateY(-20px) scale(1.2); }
+    40% { transform: translateX(-50%) translateY(-30px) scale(1); }
+    100% { opacity: 0; transform: translateX(-50%) translateY(-80px) scale(0.8); }
+  }
+
+  /* Floating emoji burst */
+  .emoji-burst {
+    position: absolute;
+    font-size: 30px;
+    pointer-events: none;
+    animation: burst 1.2s ease-out forwards;
+  }
+  @keyframes burst {
+    0% { opacity: 1; transform: translate(0, 0) scale(0.5); }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.2) rotate(var(--rot)); }
+  }
+
+  /* Speech bubble */
+  .speech {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border: 3px solid var(--pink);
+  }
+  .speech.show {
+    opacity: 1;
+  }
+  .speech::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid var(--pink);
+  }
+
+  /* Action buttons */
+  .actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 10;
+    padding: 10px 0 20px;
+    max-width: 500px;
+  }
+
+  .action-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid var(--pink);
+    background: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(232, 93, 161, 0.3);
+    position: relative;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .action-btn:active {
+    transform: scale(0.9);
+    background: var(--pink-light);
+  }
+  .action-btn .label {
+    font-size: 10px;
+    color: var(--pink-dark);
+    font-weight: bold;
+    margin-top: 2px;
+  }
+  .action-btn.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+  }
+
+  /* Sparkle effect on tap */
+  .sparkle {
+    position: fixed;
+    pointer-events: none;
+    font-size: 24px;
+    animation: sparkleFade 0.8s ease-out forwards;
+    z-index: 100;
+  }
+  @keyframes sparkleFade {
+    0% { opacity: 1; transform: scale(0.5) rotate(0deg); }
+    100% { opacity: 0; transform: scale(1.5) rotate(180deg) translateY(-30px); }
+  }
+
+  /* Name input overlay */
+  .overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 200, 220, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    gap: 20px;
+    padding: 20px;
+  }
+  .overlay.hidden { display: none; }
+  .overlay h2 {
+    font-size: 32px;
+    color: var(--pink-deep);
+    text-align: center;
+  }
+  .overlay .big-cat {
+    font-size: 120px;
+    animation: catBounce 1s ease infinite;
+  }
+  .name-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 400px;
+  }
+  .name-btn {
+    padding: 14px 24px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(232, 93, 161, 0.2);
+  }
+  .name-btn:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+
+  /* Zzz floating */
+  .zzz {
+    position: absolute;
+    font-size: 28px;
+    opacity: 0;
+    pointer-events: none;
+    animation: zzzFloat 2s ease-in-out infinite;
+  }
+  .zzz:nth-child(1) { animation-delay: 0s; top: -20px; right: -10px; }
+  .zzz:nth-child(2) { animation-delay: 0.7s; top: -40px; right: -30px; }
+  .zzz:nth-child(3) { animation-delay: 1.4s; top: -60px; right: -20px; }
+  
+  @keyframes zzzFloat {
+    0% { opacity: 0; transform: translateY(0); }
+    30% { opacity: 0.7; }
+    100% { opacity: 0; transform: translateY(-30px); }
+  }
+</style>
+</head>
+<body>
+
+<!-- Background hearts -->
+<div class="bg-hearts" id="bgHearts"></div>
+
+<!-- Name picker overlay -->
+<div class="overlay" id="nameOverlay">
+  <div class="big-cat">🐱</div>
+  <h2>Name your kitty! 💕</h2>
+  <div class="name-options">
+    <button class="name-btn" onclick="chooseName('Pinky')">Pinky 🩷</button>
+    <button class="name-btn" onclick="chooseName('Sparkle')">Sparkle ✨</button>
+    <button class="name-btn" onclick="chooseName('Cupcake')">Cupcake 🧁</button>
+    <button class="name-btn" onclick="chooseName('Rosie')">Rosie 🌹</button>
+    <button class="name-btn" onclick="chooseName('Mittens')">Mittens 🧤</button>
+    <button class="name-btn" onclick="chooseName('Princess')">Princess 👑</button>
+  </div>
+</div>
+
+<!-- Header -->
+<div class="header">
+  <h1>Luna's Kitty 🐱💕</h1>
+  <div class="cat-name" id="catNameDisplay"></div>
+</div>
+
+<!-- Needs -->
+<div class="needs">
+  <div class="need">
+    <span class="need-icon">🍽️</span>
+    <div class="need-hearts" id="hungerHearts"></div>
+  </div>
+  <div class="need">
+    <span class="need-icon">💕</span>
+    <div class="need-hearts" id="loveHearts"></div>
+  </div>
+  <div class="need">
+    <span class="need-icon">⚡</span>
+    <div class="need-hearts" id="energyHearts"></div>
+  </div>
+  <div class="need">
+    <span class="need-icon">✨</span>
+    <div class="need-hearts" id="cleanHearts"></div>
+  </div>
+</div>
+
+<!-- Cat -->
+<div class="cat-area">
+  <div class="cat-container" id="catContainer" onclick="petCat()">
+    <div class="cat" id="cat">🐱</div>
+    <div class="reaction" id="reaction"></div>
+    <div class="speech" id="speech"></div>
+    <div class="zzz" id="zzz1">💤</div>
+    <div class="zzz" id="zzz2">💤</div>
+    <div class="zzz" id="zzz3">💤</div>
+  </div>
+</div>
+
+<!-- Actions -->
+<div class="actions">
+  <button class="action-btn" id="btnFeed" onclick="doAction('feed')">
+    <span>🐟</span>
+    <span class="label">Feed</span>
+  </button>
+  <button class="action-btn" id="btnPet" onclick="doAction('pet')">
+    <span>🤗</span>
+    <span class="label">Pet</span>
+  </button>
+  <button class="action-btn" id="btnPlay" onclick="doAction('play')">
+    <span>🧶</span>
+    <span class="label">Play</span>
+  </button>
+  <button class="action-btn" id="btnBrush" onclick="doAction('brush')">
+    <span>🪮</span>
+    <span class="label">Brush</span>
+  </button>
+  <button class="action-btn" id="btnNap" onclick="doAction('nap')">
+    <span>😴</span>
+    <span class="label">Nap</span>
+  </button>
+</div>
+
+<script>
+  // Audio context for sounds
+  const AudioCtx = window.AudioContext || window.webkitAudioContext;
+  let audioCtx;
+  function getAudioCtx() {
+    if (!audioCtx) audioCtx = new AudioCtx();
+    return audioCtx;
+  }
+
+  // Simple synth sounds
+  function playSound(type) {
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      
+      switch(type) {
+        case 'feed':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(400, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.1);
+          osc.frequency.linearRampToValueAtTime(500, ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+          osc.start(); osc.stop(ctx.currentTime + 0.3);
+          break;
+        case 'pet':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(300, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(500, ctx.currentTime + 0.3);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.4);
+          osc.start(); osc.stop(ctx.currentTime + 0.4);
+          break;
+        case 'play':
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(500, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.1);
+          osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.15);
+          osc.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.25);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+          osc.start(); osc.stop(ctx.currentTime + 0.3);
+          break;
+        case 'brush':
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(600, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+          osc.start(); osc.stop(ctx.currentTime + 0.3);
+          break;
+        case 'nap':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(300, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(200, ctx.currentTime + 0.5);
+          gain.gain.setValueAtTime(0.08, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.6);
+          osc.start(); osc.stop(ctx.currentTime + 0.6);
+          break;
+        case 'happy':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523, ctx.currentTime);
+          osc.frequency.setValueAtTime(659, ctx.currentTime + 0.1);
+          osc.frequency.setValueAtTime(784, ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.35);
+          osc.start(); osc.stop(ctx.currentTime + 0.35);
+          break;
+      }
+    } catch(e) {}
+  }
+
+  // Game state
+  let catName = '';
+  let isSleeping = false;
+  let actionCooldown = false;
+  const needs = {
+    hunger: 3,
+    love: 3,
+    energy: 4,
+    clean: 4
+  };
+  const MAX_NEED = 5;
+
+  // Background hearts
+  function createBgHearts() {
+    const container = document.getElementById('bgHearts');
+    const hearts = ['💕', '💗', '💖', '🩷', '🤍', '♥️'];
+    for (let i = 0; i < 15; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'bg-heart';
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 15 + 's';
+      heart.style.fontSize = (16 + Math.random() * 20) + 'px';
+      container.appendChild(heart);
+    }
+  }
+
+  // Name selection
+  function chooseName(name) {
+    catName = name;
+    localStorage.setItem('lunaCatName', name);
+    document.getElementById('nameOverlay').classList.add('hidden');
+    document.getElementById('catNameDisplay').textContent = name + ' 💕';
+    playSound('happy');
+    showReaction('💖');
+  }
+
+  // Render needs
+  function renderNeeds() {
+    renderNeedHearts('hungerHearts', needs.hunger);
+    renderNeedHearts('loveHearts', needs.love);
+    renderNeedHearts('energyHearts', needs.energy);
+    renderNeedHearts('cleanHearts', needs.clean);
+  }
+
+  function renderNeedHearts(id, value) {
+    const container = document.getElementById(id);
+    container.innerHTML = '';
+    for (let i = 0; i < MAX_NEED; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'need-heart' + (i < value ? '' : ' empty');
+      heart.textContent = '🩷';
+      container.appendChild(heart);
+    }
+  }
+
+  // Show reaction emoji
+  function showReaction(emoji) {
+    const el = document.getElementById('reaction');
+    el.textContent = emoji;
+    el.classList.remove('show');
+    void el.offsetWidth;
+    el.classList.add('show');
+  }
+
+  // Show speech bubble
+  function showSpeech(text, duration = 2000) {
+    const el = document.getElementById('speech');
+    el.textContent = text;
+    el.classList.add('show');
+    setTimeout(() => el.classList.remove('show'), duration);
+  }
+
+  // Emoji burst effect
+  function emojiBurst(emojis, count = 6) {
+    const container = document.getElementById('catContainer');
+    const rect = container.getBoundingClientRect();
+    for (let i = 0; i < count; i++) {
+      const el = document.createElement('div');
+      el.className = 'emoji-burst';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = (rect.left + rect.width / 2) + 'px';
+      el.style.top = (rect.top + rect.height / 2) + 'px';
+      const angle = (Math.PI * 2 * i) / count;
+      const dist = 60 + Math.random() * 60;
+      el.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      el.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      el.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    }
+  }
+
+  // Sparkle on tap
+  document.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    createSparkle(touch.clientX, touch.clientY);
+  });
+  document.addEventListener('click', (e) => {
+    createSparkle(e.clientX, e.clientY);
+  });
+
+  function createSparkle(x, y) {
+    const sparkles = ['✨', '⭐', '💖', '🌟'];
+    const el = document.createElement('div');
+    el.className = 'sparkle';
+    el.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 800);
+  }
+
+  // Cat animation helper
+  function setCatAnim(anim, duration = 1500) {
+    const cat = document.getElementById('cat');
+    cat.className = 'cat ' + anim;
+    setTimeout(() => {
+      if (!isSleeping) cat.className = 'cat';
+    }, duration);
+  }
+
+  // Toggle sleeping visuals
+  function setSleeping(sleeping) {
+    isSleeping = sleeping;
+    document.getElementById('zzz1').style.display = sleeping ? 'block' : 'none';
+    document.getElementById('zzz2').style.display = sleeping ? 'block' : 'none';
+    document.getElementById('zzz3').style.display = sleeping ? 'block' : 'none';
+    if (sleeping) {
+      document.getElementById('cat').textContent = '😺';
+      setCatAnim('sleeping', 999999);
+    } else {
+      document.getElementById('cat').textContent = '🐱';
+      document.getElementById('cat').className = 'cat';
+    }
+  }
+
+  // Pet the cat (tap on cat)
+  function petCat() {
+    if (actionCooldown) return;
+    if (isSleeping) {
+      // Wake up!
+      setSleeping(false);
+      showSpeech('Meow! 😺');
+      showReaction('😺');
+      playSound('happy');
+      return;
+    }
+    doAction('pet');
+  }
+
+  // Perform action
+  function doAction(action) {
+    if (actionCooldown) return;
+    if (isSleeping && action !== 'nap') {
+      setSleeping(false);
+      showSpeech('*yawn* 😺');
+      showReaction('😺');
+      playSound('happy');
+      return;
+    }
+
+    actionCooldown = true;
+    setTimeout(() => actionCooldown = false, 1000);
+
+    playSound(action);
+
+    const speeches = {
+      feed: ['Yummy! 😋', 'Nom nom! 🐟', 'So tasty! 😺', 'Mmmm! 💕'],
+      pet: ['Purrr! 💕', 'So nice! 🥰', '*purr purr* 💗', 'Love you! 💖'],
+      play: ['Wheee! 🎉', 'So fun! 🧶', 'Catch it! ✨', 'Yay! 🌟'],
+      brush: ['So pretty! ✨', 'Shiny! 💎', 'Sparkle! 🌟', 'Fancy! 👑'],
+      nap: ['Sleepy... 💤', 'Night night 🌙', '*yawn* 😴', 'Zzzzz... 💫']
+    };
+
+    const reactions = {
+      feed: ['😋', '🐟', '🍣', '😺'],
+      pet: ['💕', '💖', '🥰', '💗'],
+      play: ['🎉', '🧶', '⭐', '🌈'],
+      brush: ['✨', '💎', '🌟', '👑'],
+      nap: ['💤', '🌙', '😴', '⭐']
+    };
+
+    const bursts = {
+      feed: ['🐟', '🍣', '😋', '💕'],
+      pet: ['💕', '💖', '💗', '🩷', '❤️'],
+      play: ['🧶', '🌈', '⭐', '🎉', '✨'],
+      brush: ['✨', '💎', '🌟', '⭐', '💫'],
+      nap: ['💤', '🌙', '⭐', '💫']
+    };
+
+    const anims = {
+      feed: 'eating',
+      pet: 'purring',
+      play: 'playing',
+      brush: 'brushing',
+      nap: 'sleeping'
+    };
+
+    // Update needs
+    switch(action) {
+      case 'feed':
+        needs.hunger = Math.min(MAX_NEED, needs.hunger + 2);
+        needs.energy = Math.min(MAX_NEED, needs.energy + 1);
+        break;
+      case 'pet':
+        needs.love = Math.min(MAX_NEED, needs.love + 2);
+        break;
+      case 'play':
+        needs.love = Math.min(MAX_NEED, needs.love + 1);
+        needs.energy = Math.max(0, needs.energy - 1);
+        needs.hunger = Math.max(0, needs.hunger - 1);
+        break;
+      case 'brush':
+        needs.clean = Math.min(MAX_NEED, needs.clean + 2);
+        needs.love = Math.min(MAX_NEED, needs.love + 1);
+        break;
+      case 'nap':
+        needs.energy = Math.min(MAX_NEED, needs.energy + 2);
+        setSleeping(true);
+        break;
+    }
+
+    renderNeeds();
+
+    // Pick random speech/reaction
+    const speechList = speeches[action];
+    const reactionList = reactions[action];
+    showSpeech(speechList[Math.floor(Math.random() * speechList.length)]);
+    showReaction(reactionList[Math.floor(Math.random() * reactionList.length)]);
+    emojiBurst(bursts[action], action === 'pet' ? 8 : 6);
+    
+    if (action !== 'nap') {
+      setCatAnim(anims[action], action === 'play' ? 1500 : 1200);
+    }
+
+    // Check if all needs are high — super happy!
+    const total = needs.hunger + needs.love + needs.energy + needs.clean;
+    if (total >= MAX_NEED * 4 - 2) {
+      setTimeout(() => {
+        showReaction('🌈');
+        emojiBurst(['🌈', '⭐', '💖', '✨', '👑'], 10);
+        showSpeech('So happy!! 🌈💕');
+        playSound('happy');
+      }, 1500);
+    }
+
+    saveState();
+  }
+
+  // Needs decay over time
+  function decayNeeds() {
+    if (isSleeping) {
+      needs.energy = Math.min(MAX_NEED, needs.energy + 1);
+    } else {
+      if (Math.random() < 0.3) needs.hunger = Math.max(0, needs.hunger - 1);
+      if (Math.random() < 0.2) needs.love = Math.max(0, needs.love - 1);
+      if (Math.random() < 0.15) needs.energy = Math.max(0, needs.energy - 1);
+      if (Math.random() < 0.1) needs.clean = Math.max(0, needs.clean - 1);
+    }
+    renderNeeds();
+
+    // Cat mood based on needs
+    const total = needs.hunger + needs.love + needs.energy + needs.clean;
+    if (!isSleeping) {
+      if (total <= 4) {
+        document.getElementById('cat').textContent = '😿';
+        if (Math.random() < 0.3) showSpeech('I need help... 🥺');
+      } else if (total <= 8) {
+        document.getElementById('cat').textContent = '🐱';
+      } else if (total <= 14) {
+        document.getElementById('cat').textContent = '😺';
+      } else {
+        document.getElementById('cat').textContent = '😸';
+      }
+    }
+
+    saveState();
+  }
+
+  // Save/load state
+  function saveState() {
+    localStorage.setItem('lunaCatState', JSON.stringify({ needs, isSleeping, catName }));
+  }
+
+  function loadState() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('lunaCatState'));
+      if (saved) {
+        Object.assign(needs, saved.needs);
+        if (saved.catName) {
+          catName = saved.catName;
+          document.getElementById('nameOverlay').classList.add('hidden');
+          document.getElementById('catNameDisplay').textContent = catName + ' 💕';
+        }
+        if (saved.isSleeping) setSleeping(true);
+      }
+    } catch(e) {}
+  }
+
+  // Init
+  function init() {
+    createBgHearts();
+    loadState();
+    renderNeeds();
+    setSleeping(isSleeping);
+
+    // Decay needs every 30 seconds
+    setInterval(decayNeeds, 30000);
+
+    // Cat idle animations
+    setInterval(() => {
+      if (!isSleeping && !actionCooldown) {
+        const idle = ['😺', '😸', '🐱'];
+        const cat = document.getElementById('cat');
+        if (!cat.className.includes(' ')) {
+          cat.textContent = idle[Math.floor(Math.random() * idle.length)];
+        }
+      }
+    }, 5000);
+  }
+
+  init();
+</script>
+</body>
+</html>
