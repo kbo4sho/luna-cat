@@ -1,0 +1,37 @@
+{
+  "project": "Luna's Kitty",
+  "description": "Virtual cat care game for Luna (3yo). Pink/pastel aesthetic, big touch targets for iPad. Goal: make it more fun, engaging, and add age-appropriate learning features.",
+  "audience": {
+    "name": "Luna",
+    "age": 3,
+    "interests": ["pink", "cats", "sparkles", "princesses", "animals"]
+  },
+  "upgrades": [],
+  "ideaPool": [
+    "Color matching mini-game: tap the color the cat asks for (teaches colors)",
+    "Counting game: feed the cat 1-5 fish, count along with emoji",
+    "Shape recognition: cat plays with different shaped toys, name the shape",
+    "ABC letters: cat finds letters around the house, tap to learn the letter sound",
+    "Dress-up/costumes: hats, bows, accessories for the cat (reward for caring)",
+    "Day/night cycle: background changes based on time, teaches time of day",
+    "Cat mood expressions: more varied emoji faces with labeled emotions (teaches feelings)",
+    "Mini sticker collection: earn stickers for good care streaks",
+    "Treat shop: simple drag-and-drop different treats to the cat",
+    "Dance party mode: cat dances when all needs are full, fun music",
+    "Animal friends: other animals visit (teaches animal names/sounds)",
+    "Weather effects: rain/sun/snow on background (teaches weather words)",
+    "Bubble pop mini-game: tap floating bubbles with letters/numbers",
+    "Cat bath time: splash animations, rubber ducky, water sounds",
+    "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
+    "Cat wardrobe: unlock new cat colors/patterns as rewards",
+    "Lullaby mode: gentle music and stars when putting cat to sleep",
+    "Surprise eggs: tap to reveal what's inside (shapes, colors, animals)",
+    "Feeding variety: multiple food types with names (teaches food vocabulary)",
+    "Happy meter celebration: confetti + special animation when cat is at max happiness",
+    "Touch trail sparkles: draw sparkle trails with finger",
+    "Sound board: cat makes different sounds based on mood",
+    "Simple puzzle: 2-4 piece jigsaw of the cat",
+    "Memory card game: flip cards to match cat-themed pairs",
+    "Rainbow bridge: trace rainbow arcs for the cat to walk across"
+  ]
+}
