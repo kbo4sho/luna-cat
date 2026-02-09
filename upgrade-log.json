@@ -6,17 +6,24 @@
     "age": 3,
     "interests": ["pink", "cats", "sparkles", "princesses", "animals"]
   },
-  "upgrades": [],
+  "upgrades": [
+    {
+      "date": "2026-02-09",
+      "ideas": [
+        "Dress-up/costumes: hats, bows, accessories for the cat",
+        "Counting game: feed the cat 1-5 fish, count along with emoji",
+        "Surprise eggs: tap to reveal what's inside (shapes, colors, animals)"
+      ],
+      "summary": "Added 3 new features: (1) Dress-up mode with 9 accessories (crown, bow, flower, star, butterfly, rainbow, gem, hat, hibiscus) that appear on the cat and persist across sessions. (2) Counting fish mini-game — cat asks for 1-5 fish, Luna taps fish to fill slots, celebrates on completion, auto-starts next round. Teaches counting 1-5. (3) Surprise eggs — 3 colorful eggs that shake when tapped and crack open after 3 taps to reveal animals, colors, or shapes with labels. All features have sound feedback, big touch targets, and emoji celebrations."
+    }
+  ],
   "ideaPool": [
     "Color matching mini-game: tap the color the cat asks for (teaches colors)",
-    "Counting game: feed the cat 1-5 fish, count along with emoji",
     "Shape recognition: cat plays with different shaped toys, name the shape",
     "ABC letters: cat finds letters around the house, tap to learn the letter sound",
-    "Dress-up/costumes: hats, bows, accessories for the cat (reward for caring)",
     "Day/night cycle: background changes based on time, teaches time of day",
     "Cat mood expressions: more varied emoji faces with labeled emotions (teaches feelings)",
     "Mini sticker collection: earn stickers for good care streaks",
-    "Treat shop: simple drag-and-drop different treats to the cat",
     "Dance party mode: cat dances when all needs are full, fun music",
     "Animal friends: other animals visit (teaches animal names/sounds)",
     "Weather effects: rain/sun/snow on background (teaches weather words)",
@@ -25,13 +32,15 @@
     "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
     "Cat wardrobe: unlock new cat colors/patterns as rewards",
     "Lullaby mode: gentle music and stars when putting cat to sleep",
-    "Surprise eggs: tap to reveal what's inside (shapes, colors, animals)",
     "Feeding variety: multiple food types with names (teaches food vocabulary)",
     "Happy meter celebration: confetti + special animation when cat is at max happiness",
     "Touch trail sparkles: draw sparkle trails with finger",
     "Sound board: cat makes different sounds based on mood",
     "Simple puzzle: 2-4 piece jigsaw of the cat",
     "Memory card game: flip cards to match cat-themed pairs",
-    "Rainbow bridge: trace rainbow arcs for the cat to walk across"
+    "Rainbow bridge: trace rainbow arcs for the cat to walk across",
+    "Seasons mode: spring/summer/fall/winter backgrounds with themed activities",
+    "Music maker: tap different items to make musical sounds, play simple tunes",
+    "Peek-a-boo: cat hides behind objects, tap to find it (object permanence)"
   ]
 }

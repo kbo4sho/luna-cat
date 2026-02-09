@@ -359,6 +359,330 @@
     30% { opacity: 0.7; }
     100% { opacity: 0; transform: translateY(-30px); }
   }
+
+  /* ===== COSTUME / DRESS-UP ===== */
+  .costume-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(255, 200, 220, 0.97);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 16px;
+    padding: 20px;
+  }
+  .costume-overlay.hidden { display: none; }
+  .costume-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .costume-preview {
+    font-size: 120px;
+    line-height: 1;
+    position: relative;
+    margin: 10px 0;
+  }
+  .costume-accessory-preview {
+    position: absolute;
+    font-size: 60px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+  }
+  .costume-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    max-width: 400px;
+  }
+  .costume-item {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    border: 4px solid var(--pink);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(232, 93, 161, 0.2);
+  }
+  .costume-item:active {
+    transform: scale(0.9);
+    background: var(--pink-light);
+  }
+  .costume-item.selected {
+    border-color: var(--pink-deep);
+    background: var(--pink-light);
+    box-shadow: 0 0 0 3px var(--pink-deep), 0 4px 12px rgba(232, 93, 161, 0.4);
+  }
+  .costume-close {
+    padding: 14px 32px;
+    font-size: 24px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    box-shadow: 0 4px 12px rgba(232, 93, 161, 0.2);
+  }
+  .costume-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+
+  /* Accessory on main cat */
+  .cat-accessory {
+    position: absolute;
+    font-size: 60px;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 11;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+  }
+
+  /* ===== COUNTING FISH GAME ===== */
+  .fish-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #e0f4ff 0%, #c8e8ff 40%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+  }
+  .fish-overlay.hidden { display: none; }
+  .fish-prompt {
+    font-size: 26px;
+    color: var(--pink-deep);
+    text-align: center;
+  }
+  .fish-cat {
+    font-size: 100px;
+    line-height: 1;
+    animation: catBounce 1.5s ease infinite;
+  }
+  .fish-target {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-height: 60px;
+    padding: 10px;
+  }
+  .fish-target-slot {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 4px dashed var(--pink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    background: rgba(255,255,255,0.5);
+    transition: all 0.3s ease;
+  }
+  .fish-target-slot.filled {
+    border-style: solid;
+    background: white;
+    animation: slotPop 0.3s ease;
+  }
+  @keyframes slotPop {
+    0% { transform: scale(0.5); }
+    60% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  .fish-bowl {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 320px;
+    margin-top: 10px;
+  }
+  .fish-btn {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #4dc9f6;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(77, 201, 246, 0.3);
+  }
+  .fish-btn:active {
+    transform: scale(0.85);
+    background: #e0f4ff;
+  }
+  .fish-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .fish-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+  .fish-success {
+    font-size: 60px;
+    animation: fishCelebrate 0.6s ease;
+  }
+  @keyframes fishCelebrate {
+    0% { transform: scale(0.3) rotate(-10deg); }
+    50% { transform: scale(1.3) rotate(5deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  .fish-number {
+    font-size: 80px;
+    color: var(--pink-deep);
+    font-weight: bold;
+    text-shadow: 0 3px 6px rgba(0,0,0,0.1);
+  }
+
+  /* ===== SURPRISE EGGS ===== */
+  .egg-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 50%, #f0e0ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 16px;
+    padding: 20px;
+  }
+  .egg-overlay.hidden { display: none; }
+  .egg-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .egg-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .egg-item {
+    width: 100px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 80px;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .egg-item:active {
+    transform: scale(0.9);
+  }
+  .egg-item.shaking {
+    animation: eggShake 0.4s ease;
+  }
+  .egg-item.cracking {
+    animation: eggCrack 0.6s ease forwards;
+  }
+  @keyframes eggShake {
+    0%, 100% { transform: rotate(0deg); }
+    20% { transform: rotate(-15deg); }
+    40% { transform: rotate(15deg); }
+    60% { transform: rotate(-10deg); }
+    80% { transform: rotate(10deg); }
+  }
+  @keyframes eggCrack {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.2); }
+    60% { transform: scale(0.5); opacity: 0.5; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  .egg-reveal {
+    position: absolute;
+    font-size: 70px;
+    animation: eggReveal 0.8s ease forwards;
+    pointer-events: none;
+  }
+  @keyframes eggReveal {
+    0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+    50% { transform: scale(1.4) rotate(10deg); opacity: 1; }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+  .egg-label {
+    font-size: 22px;
+    color: var(--pink-deep);
+    font-weight: bold;
+    margin-top: 8px;
+    opacity: 0;
+    animation: labelFadeIn 0.5s ease 0.4s forwards;
+  }
+  @keyframes labelFadeIn {
+    to { opacity: 1; }
+  }
+  .egg-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  .egg-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+  .egg-sparkle-ring {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    pointer-events: none;
+    animation: sparkleRing 1s ease forwards;
+  }
+  @keyframes sparkleRing {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+  }
+  .egg-new-btn {
+    padding: 14px 32px;
+    font-size: 24px;
+    border-radius: 30px;
+    border: 3px solid #c9a0dc;
+    background: white;
+    color: #9b59b6;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(155, 89, 182, 0.2);
+  }
+  .egg-new-btn:active {
+    transform: scale(0.95);
+    background: var(--purple-light);
+  }
 </style>
 </head>
 <body>
@@ -377,6 +701,38 @@
     <button class="name-btn" onclick="chooseName('Rosie')">Rosie 🌹</button>
     <button class="name-btn" onclick="chooseName('Mittens')">Mittens 🧤</button>
     <button class="name-btn" onclick="chooseName('Princess')">Princess 👑</button>
+  </div>
+</div>
+
+<!-- Costume overlay -->
+<div class="costume-overlay hidden" id="costumeOverlay">
+  <div class="costume-title">👗 Dress Up! ✨</div>
+  <div class="costume-preview">
+    <span id="costumePreviewCat">🐱</span>
+    <div class="costume-accessory-preview" id="costumePreviewAccessory"></div>
+  </div>
+  <div class="costume-grid" id="costumeGrid"></div>
+  <button class="costume-close" onclick="closeCostume()">✅ Done!</button>
+</div>
+
+<!-- Fish counting game overlay -->
+<div class="fish-overlay hidden" id="fishOverlay">
+  <div class="fish-cat" id="fishCat">😺</div>
+  <div class="fish-prompt" id="fishPrompt"></div>
+  <div class="fish-number" id="fishNumber"></div>
+  <div class="fish-target" id="fishTarget"></div>
+  <div class="fish-bowl" id="fishBowl"></div>
+  <button class="fish-close" onclick="closeFishGame()">🔙 Back</button>
+</div>
+
+<!-- Surprise eggs overlay -->
+<div class="egg-overlay hidden" id="eggOverlay">
+  <div class="egg-title">🎁 Surprise Eggs! 🥚</div>
+  <div class="egg-grid" id="eggGrid"></div>
+  <div id="eggRevealArea" style="text-align:center; min-height: 100px; display: flex; flex-direction: column; align-items: center; justify-content: center;"></div>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;">
+    <button class="egg-new-btn" id="eggNewBtn" onclick="setupEggs()" style="display:none;">🥚 More Eggs!</button>
+    <button class="egg-close" onclick="closeEggs()">🔙 Back</button>
   </div>
 </div>
 
@@ -410,6 +766,7 @@
 <div class="cat-area">
   <div class="cat-container" id="catContainer" onclick="petCat()">
     <div class="cat" id="cat">🐱</div>
+    <div class="cat-accessory" id="catAccessory"></div>
     <div class="reaction" id="reaction"></div>
     <div class="speech" id="speech"></div>
     <div class="zzz" id="zzz1">💤</div>
@@ -439,6 +796,18 @@
   <button class="action-btn" id="btnNap" onclick="doAction('nap')">
     <span>😴</span>
     <span class="label">Nap</span>
+  </button>
+  <button class="action-btn" onclick="openCostume()">
+    <span>👗</span>
+    <span class="label">Dress</span>
+  </button>
+  <button class="action-btn" onclick="openFishGame()" style="border-color: #4dc9f6;">
+    <span>🐟</span>
+    <span class="label">Count</span>
+  </button>
+  <button class="action-btn" onclick="openEggs()" style="border-color: #c9a0dc;">
+    <span>🥚</span>
+    <span class="label">Eggs!</span>
   </button>
 </div>
 
@@ -513,6 +882,50 @@
           gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.35);
           osc.start(); osc.stop(ctx.currentTime + 0.35);
           break;
+        case 'pop':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(800, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(1200, ctx.currentTime + 0.05);
+          osc.frequency.linearRampToValueAtTime(600, ctx.currentTime + 0.1);
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.15);
+          osc.start(); osc.stop(ctx.currentTime + 0.15);
+          break;
+        case 'crack':
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(200, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(800, ctx.currentTime + 0.15);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.2);
+          osc.start(); osc.stop(ctx.currentTime + 0.2);
+          break;
+        case 'tada':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(523, ctx.currentTime);
+          osc.frequency.setValueAtTime(659, ctx.currentTime + 0.12);
+          osc.frequency.setValueAtTime(784, ctx.currentTime + 0.24);
+          osc.frequency.setValueAtTime(1047, ctx.currentTime + 0.36);
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+          osc.start(); osc.stop(ctx.currentTime + 0.5);
+          break;
+        case 'count':
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(600, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.08);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.15);
+          osc.start(); osc.stop(ctx.currentTime + 0.15);
+          break;
+        case 'costume':
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(500, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(700, ctx.currentTime + 0.1);
+          osc.frequency.linearRampToValueAtTime(900, ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+          osc.start(); osc.stop(ctx.currentTime + 0.3);
+          break;
       }
     } catch(e) {}
   }
@@ -521,6 +934,7 @@
   let catName = '';
   let isSleeping = false;
   let actionCooldown = false;
+  let currentAccessory = '';
   const needs = {
     hunger: 3,
     love: 3,
@@ -797,9 +1211,316 @@
     saveState();
   }
 
+  // ===== COSTUME / DRESS-UP =====
+  const accessories = [
+    { emoji: '👑', name: 'Crown' },
+    { emoji: '🎀', name: 'Bow' },
+    { emoji: '🌸', name: 'Flower' },
+    { emoji: '⭐', name: 'Star' },
+    { emoji: '🦋', name: 'Butterfly' },
+    { emoji: '🌈', name: 'Rainbow' },
+    { emoji: '💎', name: 'Gem' },
+    { emoji: '🎩', name: 'Hat' },
+    { emoji: '🌺', name: 'Hibiscus' },
+    { emoji: '❌', name: 'None' }
+  ];
+
+  function openCostume() {
+    playSound('costume');
+    const overlay = document.getElementById('costumeOverlay');
+    overlay.classList.remove('hidden');
+    const grid = document.getElementById('costumeGrid');
+    grid.innerHTML = '';
+    accessories.forEach((acc, i) => {
+      const item = document.createElement('div');
+      item.className = 'costume-item' + (currentAccessory === acc.emoji ? ' selected' : '');
+      if (acc.name === 'None' && !currentAccessory) item.classList.add('selected');
+      item.textContent = acc.emoji;
+      item.onclick = () => selectAccessory(acc, i);
+      grid.appendChild(item);
+    });
+    updateCostumePreview();
+  }
+
+  function selectAccessory(acc, index) {
+    if (acc.name === 'None') {
+      currentAccessory = '';
+    } else {
+      currentAccessory = acc.emoji;
+    }
+    playSound('pop');
+    // Update selection visual
+    const items = document.querySelectorAll('.costume-item');
+    items.forEach((it, i) => {
+      it.classList.toggle('selected', i === index);
+    });
+    updateCostumePreview();
+    updateCatAccessory();
+    saveState();
+  }
+
+  function updateCostumePreview() {
+    document.getElementById('costumePreviewAccessory').textContent = currentAccessory;
+  }
+
+  function updateCatAccessory() {
+    document.getElementById('catAccessory').textContent = currentAccessory;
+  }
+
+  function closeCostume() {
+    playSound('happy');
+    document.getElementById('costumeOverlay').classList.add('hidden');
+    if (currentAccessory) {
+      showReaction(currentAccessory);
+      showSpeech('So fancy! ✨');
+      emojiBurst([currentAccessory, '✨', '💖', '⭐'], 8);
+    }
+  }
+
+  // ===== COUNTING FISH GAME =====
+  let fishTarget = 0;
+  let fishCount = 0;
+  let fishDone = false;
+
+  function openFishGame() {
+    document.getElementById('fishOverlay').classList.remove('hidden');
+    startFishRound();
+  }
+
+  function startFishRound() {
+    fishTarget = 1 + Math.floor(Math.random() * 5); // 1-5
+    fishCount = 0;
+    fishDone = false;
+    const fishEmojis = ['🐟', '🐠', '🐡'];
+
+    document.getElementById('fishCat').textContent = '😺';
+    document.getElementById('fishPrompt').textContent = 'Feed me fish! 🐟';
+    document.getElementById('fishNumber').textContent = fishTarget;
+
+    // Create target slots
+    const target = document.getElementById('fishTarget');
+    target.innerHTML = '';
+    for (let i = 0; i < fishTarget; i++) {
+      const slot = document.createElement('div');
+      slot.className = 'fish-target-slot';
+      target.appendChild(slot);
+    }
+
+    // Create fish buttons to tap
+    const bowl = document.getElementById('fishBowl');
+    bowl.innerHTML = '';
+    for (let i = 0; i < 6; i++) {
+      const btn = document.createElement('div');
+      btn.className = 'fish-btn';
+      btn.textContent = fishEmojis[Math.floor(Math.random() * fishEmojis.length)];
+      btn.onclick = () => tapFish(btn);
+      bowl.appendChild(btn);
+    }
+  }
+
+  function tapFish(btn) {
+    if (fishDone) return;
+    if (fishCount >= fishTarget) return;
+
+    fishCount++;
+    playSound('count');
+
+    // Fill a slot
+    const slots = document.querySelectorAll('.fish-target-slot');
+    if (slots[fishCount - 1]) {
+      slots[fishCount - 1].textContent = '🐟';
+      slots[fishCount - 1].classList.add('filled');
+    }
+
+    // Animate the tapped fish
+    btn.style.transform = 'scale(0.5)';
+    btn.style.opacity = '0.3';
+    setTimeout(() => {
+      btn.style.transform = '';
+      btn.style.opacity = '';
+    }, 300);
+
+    // Check if done
+    if (fishCount >= fishTarget) {
+      fishDone = true;
+      setTimeout(() => {
+        playSound('tada');
+        document.getElementById('fishCat').textContent = '😻';
+        document.getElementById('fishPrompt').innerHTML = '🎉 Yay! You counted to ' + fishTarget + '! 🎉';
+
+        // Burst celebration
+        const overlay = document.getElementById('fishOverlay');
+        for (let i = 0; i < 8; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['⭐', '🐟', '🎉', '💖', '✨'][Math.floor(Math.random() * 5)];
+          spark.style.left = '50%';
+          spark.style.top = '40%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * i) / 8;
+          const dist = 80 + Math.random() * 60;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          overlay.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+
+        // Also feed the cat!
+        needs.hunger = Math.min(MAX_NEED, needs.hunger + 1);
+        needs.love = Math.min(MAX_NEED, needs.love + 1);
+        renderNeeds();
+        saveState();
+
+        // Auto-start next round after a pause
+        setTimeout(() => {
+          if (!document.getElementById('fishOverlay').classList.contains('hidden')) {
+            startFishRound();
+          }
+        }, 2500);
+      }, 400);
+    }
+  }
+
+  function closeFishGame() {
+    document.getElementById('fishOverlay').classList.add('hidden');
+  }
+
+  // ===== SURPRISE EGGS =====
+  const eggContents = [
+    // Animals
+    { emoji: '🐶', label: 'Puppy! 🐶' },
+    { emoji: '🐰', label: 'Bunny! 🐰' },
+    { emoji: '🦋', label: 'Butterfly! 🦋' },
+    { emoji: '🐸', label: 'Froggy! 🐸' },
+    { emoji: '🦄', label: 'Unicorn! 🦄' },
+    { emoji: '🐻', label: 'Bear! 🐻' },
+    { emoji: '🐥', label: 'Chicky! 🐥' },
+    { emoji: '🐙', label: 'Octopus! 🐙' },
+    // Colors / shapes
+    { emoji: '❤️', label: 'Red Heart! ❤️' },
+    { emoji: '💛', label: 'Yellow Heart! 💛' },
+    { emoji: '💚', label: 'Green Heart! 💚' },
+    { emoji: '💜', label: 'Purple Heart! 💜' },
+    { emoji: '🧡', label: 'Orange Heart! 🧡' },
+    { emoji: '⭐', label: 'Star! ⭐' },
+    { emoji: '🌈', label: 'Rainbow! 🌈' },
+    { emoji: '🌸', label: 'Flower! 🌸' },
+    { emoji: '👑', label: 'Crown! 👑' },
+    { emoji: '💎', label: 'Diamond! 💎' },
+  ];
+  const eggColors = ['🥚', '🪺'];
+  const eggDecoColors = ['#ff8ec4', '#c9a0dc', '#4dc9f6', '#ffcc66', '#7ed6a0', '#ff9966'];
+  let eggsOpened = 0;
+
+  function openEggs() {
+    document.getElementById('eggOverlay').classList.remove('hidden');
+    setupEggs();
+  }
+
+  function setupEggs() {
+    eggsOpened = 0;
+    document.getElementById('eggNewBtn').style.display = 'none';
+    document.getElementById('eggRevealArea').innerHTML = '';
+    const grid = document.getElementById('eggGrid');
+    grid.innerHTML = '';
+
+    // Shuffle and pick 3 egg contents
+    const shuffled = [...eggContents].sort(() => Math.random() - 0.5);
+    const picks = shuffled.slice(0, 3);
+
+    picks.forEach((content, i) => {
+      const egg = document.createElement('div');
+      egg.className = 'egg-item';
+      egg.textContent = '🥚';
+      egg.dataset.index = i;
+      egg.dataset.content = JSON.stringify(content);
+      egg.dataset.taps = '0';
+      egg.style.filter = 'hue-rotate(' + (i * 90) + 'deg)';
+      egg.onclick = () => tapEgg(egg);
+      grid.appendChild(egg);
+    });
+  }
+
+  function tapEgg(egg) {
+    if (egg.dataset.opened === 'true') return;
+    let taps = parseInt(egg.dataset.taps) + 1;
+    egg.dataset.taps = taps;
+
+    if (taps < 3) {
+      // Shake!
+      playSound('pop');
+      egg.classList.remove('shaking');
+      void egg.offsetWidth;
+      egg.classList.add('shaking');
+    } else {
+      // Crack open!
+      egg.dataset.opened = 'true';
+      eggsOpened++;
+      playSound('crack');
+      egg.classList.remove('shaking');
+      egg.classList.add('cracking');
+
+      const content = JSON.parse(egg.dataset.content);
+
+      setTimeout(() => {
+        egg.style.display = 'none';
+        // Show reveal
+        const reveal = document.createElement('div');
+        reveal.className = 'egg-reveal';
+        reveal.textContent = content.emoji;
+        reveal.style.position = 'relative';
+        egg.parentElement.insertBefore(reveal, egg);
+
+        playSound('tada');
+
+        // Show label in reveal area
+        const area = document.getElementById('eggRevealArea');
+        const label = document.createElement('div');
+        label.className = 'egg-label';
+        label.textContent = content.label;
+        label.style.opacity = '0';
+        area.appendChild(label);
+        setTimeout(() => { label.style.opacity = '1'; label.style.transition = 'opacity 0.5s'; }, 100);
+
+        // Celebration burst from the egg position
+        for (let j = 0; j < 6; j++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['✨', '⭐', '💖', content.emoji][Math.floor(Math.random() * 4)];
+          spark.style.left = '50%';
+          spark.style.top = '30%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * j) / 6;
+          const dist = 60 + Math.random() * 40;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          document.getElementById('eggOverlay').appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+
+        // If all 3 opened, show "More Eggs" button
+        if (eggsOpened >= 3) {
+          setTimeout(() => {
+            document.getElementById('eggNewBtn').style.display = 'inline-block';
+            // Bonus love for opening all eggs!
+            needs.love = Math.min(MAX_NEED, needs.love + 1);
+            renderNeeds();
+            saveState();
+          }, 800);
+        }
+      }, 600);
+    }
+  }
+
+  function closeEggs() {
+    document.getElementById('eggOverlay').classList.add('hidden');
+  }
+
   // Save/load state
   function saveState() {
-    localStorage.setItem('lunaCatState', JSON.stringify({ needs, isSleeping, catName }));
+    localStorage.setItem('lunaCatState', JSON.stringify({ needs, isSleeping, catName, currentAccessory }));
   }
 
   function loadState() {
@@ -813,6 +1534,10 @@
           document.getElementById('catNameDisplay').textContent = catName + ' 💕';
         }
         if (saved.isSleeping) setSleeping(true);
+        if (saved.currentAccessory) {
+          currentAccessory = saved.currentAccessory;
+          updateCatAccessory();
+        }
       }
     } catch(e) {}
   }
