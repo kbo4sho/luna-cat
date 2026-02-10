@@ -683,6 +683,274 @@
     transform: scale(0.95);
     background: var(--purple-light);
   }
+
+  /* ===== BUBBLE POP GAME ===== */
+  .bubble-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #e0f4ff 0%, #c8e8ff 30%, #f0e0ff 70%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 900;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .bubble-overlay.hidden { display: none; }
+  .bubble-title {
+    font-size: 26px;
+    color: var(--pink-deep);
+    z-index: 2;
+    margin-top: 10px;
+  }
+  .bubble-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+    z-index: 2;
+    margin: 6px 0;
+  }
+  .bubble-field {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    animation: bubbleFloat var(--speed) linear forwards;
+    box-shadow: inset -4px -4px 12px rgba(255,255,255,0.6), 0 4px 12px rgba(0,0,0,0.1);
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  .bubble .bubble-text {
+    font-size: 36px;
+    font-weight: bold;
+    pointer-events: none;
+  }
+  @keyframes bubbleFloat {
+    0% { transform: translateY(110vh) scale(0.8); opacity: 0.9; }
+    5% { opacity: 1; transform: translateY(100vh) scale(1); }
+    95% { opacity: 1; }
+    100% { transform: translateY(-120px) scale(1); opacity: 0; }
+  }
+  .bubble.popped {
+    animation: bubblePop 0.4s ease forwards !important;
+  }
+  @keyframes bubblePop {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.5); opacity: 0.6; }
+    100% { transform: scale(0); opacity: 0; }
+  }
+  .bubble-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin: 10px 0 20px;
+    z-index: 2;
+  }
+  .bubble-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+
+  /* ===== DANCE PARTY ===== */
+  .dance-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #ff8ec4 0%, #c9a0dc 30%, #4dc9f6 60%, #ffcc66 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 10px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .dance-overlay.hidden { display: none; }
+  .dance-title {
+    font-size: 32px;
+    color: white;
+    text-shadow: 0 3px 8px rgba(0,0,0,0.2);
+    z-index: 2;
+    animation: danceTitle 0.5s ease infinite alternate;
+  }
+  @keyframes danceTitle {
+    0% { transform: scale(1) rotate(-2deg); }
+    100% { transform: scale(1.05) rotate(2deg); }
+  }
+  .dance-cat {
+    font-size: 140px;
+    line-height: 1;
+    z-index: 2;
+    animation: danceCat 0.4s ease infinite alternate;
+  }
+  @keyframes danceCat {
+    0% { transform: translateX(-15px) rotate(-8deg) scale(1); }
+    50% { transform: translateX(0) rotate(0deg) scale(1.1); }
+    100% { transform: translateX(15px) rotate(8deg) scale(1); }
+  }
+  .dance-floor {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 2;
+    max-width: 400px;
+  }
+  .dance-emoji {
+    font-size: 50px;
+    animation: danceEmoji 0.6s ease infinite alternate;
+    cursor: pointer;
+  }
+  .dance-emoji:nth-child(2n) { animation-delay: 0.15s; }
+  .dance-emoji:nth-child(3n) { animation-delay: 0.3s; }
+  @keyframes danceEmoji {
+    0% { transform: translateY(0) rotate(-10deg); }
+    100% { transform: translateY(-20px) rotate(10deg); }
+  }
+  .dance-disco {
+    position: absolute;
+    font-size: 40px;
+    pointer-events: none;
+    animation: discoFloat 3s linear infinite;
+    opacity: 0.6;
+    z-index: 1;
+  }
+  @keyframes discoFloat {
+    0% { transform: translateY(110vh) rotate(0deg); opacity: 0.4; }
+    50% { opacity: 0.7; }
+    100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+  }
+  .dance-close {
+    padding: 14px 32px;
+    font-size: 24px;
+    border-radius: 30px;
+    border: 3px solid white;
+    background: rgba(255,255,255,0.9);
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    margin-top: 10px;
+  }
+  .dance-close:active {
+    transform: scale(0.95);
+  }
+
+  /* ===== ANIMAL FRIENDS ===== */
+  .animal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #c8f7c5 0%, #e0f4ff 40%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+  }
+  .animal-overlay.hidden { display: none; }
+  .animal-title {
+    font-size: 26px;
+    color: var(--pink-deep);
+  }
+  .animal-scene {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 160px;
+  }
+  .animal-cat {
+    font-size: 100px;
+    line-height: 1;
+    animation: catBounce 1.5s ease infinite;
+  }
+  .animal-visitor {
+    font-size: 100px;
+    line-height: 1;
+    opacity: 0;
+    transition: all 0.6s ease;
+  }
+  .animal-visitor.arrived {
+    opacity: 1;
+    animation: animalArrive 0.6s ease;
+  }
+  @keyframes animalArrive {
+    0% { transform: translateX(100px) scale(0.3); opacity: 0; }
+    60% { transform: translateX(-10px) scale(1.1); opacity: 1; }
+    100% { transform: translateX(0) scale(1); opacity: 1; }
+  }
+  .animal-speech {
+    background: white;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 3px solid var(--pink);
+    min-height: 50px;
+    text-align: center;
+    max-width: 300px;
+  }
+  .animal-grid {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .animal-btn {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 4px solid #7ed6a0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(126, 214, 160, 0.3);
+  }
+  .animal-btn:active {
+    transform: scale(0.85);
+    background: #e8f8e0;
+  }
+  .animal-btn.visited {
+    opacity: 0.4;
+    border-style: dashed;
+  }
+  .animal-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .animal-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
 </style>
 </head>
 <body>
@@ -734,6 +1002,34 @@
     <button class="egg-new-btn" id="eggNewBtn" onclick="setupEggs()" style="display:none;">🥚 More Eggs!</button>
     <button class="egg-close" onclick="closeEggs()">🔙 Back</button>
   </div>
+</div>
+
+<!-- Bubble pop game overlay -->
+<div class="bubble-overlay hidden" id="bubbleOverlay">
+  <div class="bubble-title">🫧 Pop the Bubbles! 🫧</div>
+  <div class="bubble-score" id="bubbleScore">⭐ 0</div>
+  <div class="bubble-field" id="bubbleField"></div>
+  <button class="bubble-close" onclick="closeBubbles()">🔙 Back</button>
+</div>
+
+<!-- Dance party overlay -->
+<div class="dance-overlay hidden" id="danceOverlay">
+  <div class="dance-title">🪩 Dance Party! 🪩</div>
+  <div class="dance-cat" id="danceCat">😸</div>
+  <div class="dance-floor" id="danceFloor"></div>
+  <button class="dance-close" onclick="closeDance()">🔙 Done!</button>
+</div>
+
+<!-- Animal friends overlay -->
+<div class="animal-overlay hidden" id="animalOverlay">
+  <div class="animal-title">🐾 Animal Friends! 🐾</div>
+  <div class="animal-scene">
+    <div class="animal-cat">😺</div>
+    <div class="animal-visitor" id="animalVisitor"></div>
+  </div>
+  <div class="animal-speech" id="animalSpeech">Tap an animal to visit! 👇</div>
+  <div class="animal-grid" id="animalGrid"></div>
+  <button class="animal-close" onclick="closeAnimals()">🔙 Back</button>
 </div>
 
 <!-- Header -->
@@ -808,6 +1104,18 @@
   <button class="action-btn" onclick="openEggs()" style="border-color: #c9a0dc;">
     <span>🥚</span>
     <span class="label">Eggs!</span>
+  </button>
+  <button class="action-btn" onclick="openBubbles()" style="border-color: #4dc9f6;">
+    <span>🫧</span>
+    <span class="label">Bubbles</span>
+  </button>
+  <button class="action-btn" onclick="openDance()" style="border-color: #ffcc66;">
+    <span>🪩</span>
+    <span class="label">Dance</span>
+  </button>
+  <button class="action-btn" onclick="openAnimals()" style="border-color: #7ed6a0;">
+    <span>🐾</span>
+    <span class="label">Friends</span>
   </button>
 </div>
 
@@ -1540,6 +1848,361 @@
         }
       }
     } catch(e) {}
+  }
+
+  // ===== BUBBLE POP GAME =====
+  let bubbleInterval = null;
+  let bubbleScore = 0;
+  const bubbleContents = [
+    'A', 'B', 'C', 'D', 'E',
+    '1', '2', '3', '4', '5',
+    '🐱', '🐟', '⭐', '🌈', '💖', '🦋', '🌸'
+  ];
+  const bubbleColors = [
+    'rgba(255,142,196,0.35)', 'rgba(201,160,220,0.35)', 'rgba(77,201,246,0.35)',
+    'rgba(255,204,102,0.35)', 'rgba(126,214,160,0.35)', 'rgba(255,153,102,0.35)'
+  ];
+
+  function openBubbles() {
+    bubbleScore = 0;
+    document.getElementById('bubbleScore').textContent = '⭐ 0';
+    document.getElementById('bubbleOverlay').classList.remove('hidden');
+    document.getElementById('bubbleField').innerHTML = '';
+    playSound('happy');
+    spawnBubble();
+    bubbleInterval = setInterval(spawnBubble, 1400);
+  }
+
+  function spawnBubble() {
+    const field = document.getElementById('bubbleField');
+    if (!field || document.getElementById('bubbleOverlay').classList.contains('hidden')) {
+      clearInterval(bubbleInterval);
+      return;
+    }
+    // Limit bubbles on screen
+    if (field.children.length > 10) return;
+
+    const bubble = document.createElement('div');
+    bubble.className = 'bubble';
+    const size = 80 + Math.random() * 30;
+    bubble.style.width = size + 'px';
+    bubble.style.height = size + 'px';
+    bubble.style.left = (Math.random() * (100 - 25)) + '%';
+    bubble.style.background = bubbleColors[Math.floor(Math.random() * bubbleColors.length)];
+    const speed = 5 + Math.random() * 4;
+    bubble.style.setProperty('--speed', speed + 's');
+
+    const content = bubbleContents[Math.floor(Math.random() * bubbleContents.length)];
+    const textEl = document.createElement('span');
+    textEl.className = 'bubble-text';
+    textEl.textContent = content;
+    bubble.appendChild(textEl);
+
+    bubble.onclick = (e) => {
+      e.stopPropagation();
+      popBubble(bubble, content);
+    };
+    bubble.ontouchstart = (e) => {
+      e.stopPropagation();
+      // Don't prevent default — let click also fire naturally
+    };
+
+    field.appendChild(bubble);
+
+    // Auto-remove when animation ends
+    setTimeout(() => {
+      if (bubble.parentElement) bubble.remove();
+    }, speed * 1000);
+  }
+
+  function popBubble(bubble, content) {
+    if (bubble.classList.contains('popped')) return;
+    bubble.classList.add('popped');
+    playSound('pop');
+    bubbleScore++;
+    document.getElementById('bubbleScore').textContent = '⭐ ' + bubbleScore;
+
+    // Celebration at milestones
+    if (bubbleScore % 5 === 0) {
+      playSound('tada');
+      // Burst
+      const rect = bubble.getBoundingClientRect();
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = ['⭐', '✨', '💖', '🌈', '🫧'][Math.floor(Math.random() * 5)];
+        spark.style.left = rect.left + rect.width/2 + 'px';
+        spark.style.top = rect.top + rect.height/2 + 'px';
+        spark.style.position = 'fixed';
+        spark.style.zIndex = '999';
+        const angle = (Math.PI * 2 * i) / 6;
+        const dist = 50 + Math.random() * 40;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+    }
+
+    setTimeout(() => bubble.remove(), 400);
+  }
+
+  function closeBubbles() {
+    clearInterval(bubbleInterval);
+    document.getElementById('bubbleOverlay').classList.add('hidden');
+    document.getElementById('bubbleField').innerHTML = '';
+    // Reward for playing
+    if (bubbleScore > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      if (bubbleScore >= 5) needs.energy = Math.min(MAX_NEED, needs.energy + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🫧');
+      showSpeech('Pop pop! 🫧✨');
+    }
+  }
+
+  // ===== DANCE PARTY =====
+  let danceActive = false;
+  let danceDiscoInterval = null;
+  let danceMusicInterval = null;
+  const danceEmojis = ['💃', '🕺', '🎵', '🎶', '🌟', '⭐', '🪩', '🎉', '💖', '🌈'];
+
+  function openDance() {
+    danceActive = true;
+    document.getElementById('danceOverlay').classList.remove('hidden');
+    playSound('happy');
+
+    // Create dancing emoji friends on the floor
+    const floor = document.getElementById('danceFloor');
+    floor.innerHTML = '';
+    const dancers = ['💃', '🕺', '🐱', '🎵', '⭐', '🌈'];
+    dancers.forEach(emoji => {
+      const el = document.createElement('div');
+      el.className = 'dance-emoji';
+      el.textContent = emoji;
+      el.onclick = () => {
+        playSound('pop');
+        el.style.fontSize = '70px';
+        setTimeout(() => { el.style.fontSize = '50px'; }, 300);
+        // Burst from the tapped emoji
+        const rect = el.getBoundingClientRect();
+        for (let i = 0; i < 4; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = danceEmojis[Math.floor(Math.random() * danceEmojis.length)];
+          spark.style.left = rect.left + rect.width/2 + 'px';
+          spark.style.top = rect.top + rect.height/2 + 'px';
+          spark.style.position = 'fixed';
+          spark.style.zIndex = '999';
+          const angle = (Math.PI * 2 * i) / 4;
+          const dist = 40 + Math.random() * 40;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          document.body.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+      };
+      floor.appendChild(el);
+    });
+
+    // Floating disco emojis
+    spawnDiscoEmojis();
+    danceDiscoInterval = setInterval(spawnDiscoEmojis, 2000);
+
+    // Play dance beats
+    startDanceMusic();
+  }
+
+  function spawnDiscoEmojis() {
+    if (!danceActive) return;
+    const overlay = document.getElementById('danceOverlay');
+    const emojis = ['🪩', '✨', '⭐', '🌈', '💖', '🎵', '🎶', '💃', '🕺'];
+    for (let i = 0; i < 3; i++) {
+      const el = document.createElement('div');
+      el.className = 'dance-disco';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      el.style.left = Math.random() * 100 + '%';
+      el.style.animationDelay = Math.random() * 1 + 's';
+      el.style.fontSize = (30 + Math.random() * 30) + 'px';
+      overlay.appendChild(el);
+      setTimeout(() => el.remove(), 3500);
+    }
+  }
+
+  function startDanceMusic() {
+    // Play repeating fun beat pattern
+    let beat = 0;
+    const beatPattern = [523, 659, 784, 659, 523, 784, 659, 523]; // C E G E C G E C
+    danceMusicInterval = setInterval(() => {
+      if (!danceActive) { clearInterval(danceMusicInterval); return; }
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'triangle';
+        const freq = beatPattern[beat % beatPattern.length];
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.08, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.15);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.15);
+        beat++;
+      } catch(e) {}
+    }, 250);
+  }
+
+  function closeDance() {
+    danceActive = false;
+    clearInterval(danceDiscoInterval);
+    clearInterval(danceMusicInterval);
+    document.getElementById('danceOverlay').classList.add('hidden');
+    // Bonus happiness
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    needs.energy = Math.max(0, needs.energy - 1);
+    renderNeeds();
+    saveState();
+    showReaction('🪩');
+    showSpeech('That was fun! 💃');
+    emojiBurst(['🪩', '🎵', '💃', '✨', '🌈'], 8);
+  }
+
+  // ===== ANIMAL FRIENDS =====
+  const animalFriends = [
+    { emoji: '🐶', name: 'Puppy', sound: 'Woof woof! 🐶', greeting: 'Hi kitty! Let\'s play!' },
+    { emoji: '🐰', name: 'Bunny', sound: 'Hop hop! 🐰', greeting: 'I brought carrots!' },
+    { emoji: '🐸', name: 'Froggy', sound: 'Ribbit ribbit! 🐸', greeting: 'Jump with me!' },
+    { emoji: '🦆', name: 'Ducky', sound: 'Quack quack! 🦆', greeting: 'Let\'s swim!' },
+    { emoji: '🐻', name: 'Bear', sound: 'Grrrr! 🐻', greeting: 'Big bear hug!' },
+    { emoji: '🐥', name: 'Chicky', sound: 'Peep peep! 🐥', greeting: 'Cheep cheep!' },
+    { emoji: '🦋', name: 'Butterfly', sound: 'Flutter flutter! 🦋', greeting: 'So pretty!' },
+    { emoji: '🐷', name: 'Piggy', sound: 'Oink oink! 🐷', greeting: 'Mud is fun!' },
+  ];
+  let visitedAnimals = [];
+
+  function openAnimals() {
+    visitedAnimals = [];
+    document.getElementById('animalOverlay').classList.remove('hidden');
+    document.getElementById('animalVisitor').classList.remove('arrived');
+    document.getElementById('animalVisitor').textContent = '';
+    document.getElementById('animalSpeech').textContent = 'Tap an animal to visit! 👇';
+    playSound('happy');
+
+    const grid = document.getElementById('animalGrid');
+    grid.innerHTML = '';
+    // Pick 6 random animals
+    const shuffled = [...animalFriends].sort(() => Math.random() - 0.5);
+    const picks = shuffled.slice(0, 6);
+    picks.forEach(animal => {
+      const btn = document.createElement('div');
+      btn.className = 'animal-btn';
+      btn.textContent = animal.emoji;
+      btn.dataset.name = animal.name;
+      btn.onclick = () => visitAnimal(animal, btn);
+      grid.appendChild(btn);
+    });
+  }
+
+  function visitAnimal(animal, btn) {
+    if (btn.classList.contains('visited')) return;
+    btn.classList.add('visited');
+    visitedAnimals.push(animal.name);
+
+    // Play animal arrival sound
+    playSound('pop');
+
+    // Show the visitor arriving
+    const visitor = document.getElementById('animalVisitor');
+    visitor.textContent = animal.emoji;
+    visitor.classList.remove('arrived');
+    void visitor.offsetWidth;
+    visitor.classList.add('arrived');
+
+    // Show the sound/speech
+    const speech = document.getElementById('animalSpeech');
+    speech.textContent = animal.sound;
+
+    // Play a unique tone for each animal
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      // Different pitch per animal name length for variety
+      const baseFreq = 300 + (animal.name.length * 50);
+      osc.frequency.setValueAtTime(baseFreq, ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(baseFreq + 200, ctx.currentTime + 0.1);
+      osc.frequency.linearRampToValueAtTime(baseFreq + 100, ctx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.3);
+    } catch(e) {}
+
+    // After a beat, show the greeting
+    setTimeout(() => {
+      speech.textContent = animal.greeting + ' ' + animal.emoji;
+    }, 1200);
+
+    // Celebration burst
+    const overlay = document.getElementById('animalOverlay');
+    for (let i = 0; i < 5; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'emoji-burst';
+      spark.textContent = [animal.emoji, '💕', '⭐', '✨'][Math.floor(Math.random() * 4)];
+      spark.style.left = '50%';
+      spark.style.top = '25%';
+      spark.style.position = 'absolute';
+      const angle = (Math.PI * 2 * i) / 5;
+      const dist = 60 + Math.random() * 40;
+      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+      overlay.appendChild(spark);
+      setTimeout(() => spark.remove(), 1200);
+    }
+
+    // If all visited
+    if (visitedAnimals.length >= 6) {
+      setTimeout(() => {
+        playSound('tada');
+        speech.textContent = '🎉 All friends visited! 🎉';
+        // Big celebration
+        for (let i = 0; i < 10; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['🎉', '⭐', '💖', '✨', '🌈'][Math.floor(Math.random() * 5)];
+          spark.style.left = '50%';
+          spark.style.top = '40%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * i) / 10;
+          const dist = 80 + Math.random() * 60;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          overlay.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+      }, 1500);
+    }
+  }
+
+  function closeAnimals() {
+    document.getElementById('animalOverlay').classList.add('hidden');
+    if (visitedAnimals.length > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🐾');
+      showSpeech('Friends are fun! 🐾');
+      emojiBurst(['🐶', '🐰', '🐸', '🦋', '💕'], 6);
+    }
   }
 
   // Init
