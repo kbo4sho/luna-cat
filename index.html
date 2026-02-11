@@ -951,6 +951,301 @@
     transform: scale(0.95);
     background: var(--pink-light);
   }
+
+  /* ===== COLOR MATCH GAME ===== */
+  .color-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #ffe4f0 0%, #f0e0ff 50%, #e0f4ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 14px;
+    padding: 20px;
+  }
+  .color-overlay.hidden { display: none; }
+  .color-title {
+    font-size: 26px;
+    color: var(--pink-deep);
+  }
+  .color-cat-ask {
+    font-size: 100px;
+    line-height: 1;
+    animation: catBounce 1.5s ease infinite;
+  }
+  .color-prompt {
+    font-size: 28px;
+    color: var(--pink-deep);
+    text-align: center;
+  }
+  .color-target {
+    font-size: 80px;
+    animation: colorPulse 1s ease infinite alternate;
+  }
+  @keyframes colorPulse {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+  }
+  .color-grid {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .color-btn {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 5px solid white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+  .color-btn:active {
+    transform: scale(0.85);
+  }
+  .color-btn.correct {
+    animation: colorCorrect 0.6s ease;
+    border-color: #7ed6a0;
+  }
+  .color-btn.wrong {
+    animation: colorWrong 0.4s ease;
+  }
+  @keyframes colorCorrect {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); }
+  }
+  @keyframes colorWrong {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+  .color-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+  }
+  .color-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 6px;
+  }
+  .color-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+
+  /* ===== BATH TIME ===== */
+  .bath-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #e0f4ff 0%, #c8e8ff 40%, #a8d8ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .bath-overlay.hidden { display: none; }
+  .bath-title {
+    font-size: 28px;
+    color: #3a8fd4;
+    z-index: 2;
+  }
+  .bath-scene {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .bath-cat {
+    font-size: 120px;
+    line-height: 1;
+    cursor: pointer;
+    transition: transform 0.2s;
+    z-index: 3;
+  }
+  .bath-cat:active { transform: scale(0.92); }
+  .bath-tub {
+    font-size: 80px;
+    margin-top: -30px;
+    z-index: 1;
+  }
+  .bath-items {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 2;
+    max-width: 400px;
+  }
+  .bath-item {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    border: 4px solid #4dc9f6;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(77,201,246,0.3);
+  }
+  .bath-item:active {
+    transform: scale(0.85);
+    background: #e0f4ff;
+  }
+  .bath-speech {
+    font-size: 24px;
+    color: #3a8fd4;
+    text-align: center;
+    min-height: 36px;
+    z-index: 2;
+  }
+  .bath-progress {
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+  .bath-bubble-bg {
+    position: absolute;
+    font-size: 30px;
+    pointer-events: none;
+    animation: bathBubbleFloat 4s ease-out forwards;
+    opacity: 0.5;
+    z-index: 1;
+  }
+  @keyframes bathBubbleFloat {
+    0% { transform: translateY(0) scale(0.5); opacity: 0.6; }
+    100% { transform: translateY(-60vh) scale(1.2); opacity: 0; }
+  }
+  .bath-splash {
+    position: absolute;
+    font-size: 40px;
+    pointer-events: none;
+    animation: splashAnim 0.8s ease-out forwards;
+    z-index: 5;
+  }
+  @keyframes splashAnim {
+    0% { transform: scale(0.3) translateY(0); opacity: 1; }
+    100% { transform: scale(1.2) translateY(-60px); opacity: 0; }
+  }
+  .bath-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid #4dc9f6;
+    background: white;
+    color: #3a8fd4;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .bath-close:active {
+    transform: scale(0.95);
+    background: #e0f4ff;
+  }
+
+  /* ===== PEEK-A-BOO ===== */
+  .peekaboo-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 50%, #f0e0ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 16px;
+    padding: 20px;
+  }
+  .peekaboo-overlay.hidden { display: none; }
+  .peekaboo-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .peekaboo-prompt {
+    font-size: 24px;
+    color: var(--pink-dark);
+    text-align: center;
+    min-height: 36px;
+  }
+  .peekaboo-grid {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .peekaboo-spot {
+    width: 110px;
+    height: 110px;
+    border-radius: 24px;
+    border: 4px solid var(--pink);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 70px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 16px rgba(232,93,161,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+  .peekaboo-spot:active {
+    transform: scale(0.9);
+  }
+  .peekaboo-spot.found {
+    border-color: #7ed6a0;
+    background: #e8f8e0;
+    animation: peekabooFound 0.6s ease;
+  }
+  .peekaboo-spot.wrong-peek {
+    animation: colorWrong 0.4s ease;
+  }
+  @keyframes peekabooFound {
+    0% { transform: scale(1); }
+    40% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+  .peekaboo-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+  }
+  .peekaboo-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .peekaboo-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
 </style>
 </head>
 <body>
@@ -1030,6 +1325,39 @@
   <div class="animal-speech" id="animalSpeech">Tap an animal to visit! 👇</div>
   <div class="animal-grid" id="animalGrid"></div>
   <button class="animal-close" onclick="closeAnimals()">🔙 Back</button>
+</div>
+
+<!-- Color match game overlay -->
+<div class="color-overlay hidden" id="colorOverlay">
+  <div class="color-title">🎨 Color Match! 🎨</div>
+  <div class="color-cat-ask">😺</div>
+  <div class="color-prompt" id="colorPrompt">Find the color!</div>
+  <div class="color-target" id="colorTarget"></div>
+  <div class="color-grid" id="colorGrid"></div>
+  <div class="color-score" id="colorScore">⭐ 0</div>
+  <button class="color-close" onclick="closeColors()">🔙 Back</button>
+</div>
+
+<!-- Bath time overlay -->
+<div class="bath-overlay hidden" id="bathOverlay">
+  <div class="bath-title">🛁 Bath Time! 🫧</div>
+  <div class="bath-scene" id="bathScene">
+    <div class="bath-cat" id="bathCat" onclick="splashCat()">😺</div>
+    <div class="bath-tub">🛁</div>
+  </div>
+  <div class="bath-speech" id="bathSpeech">Tap items to wash kitty! 🫧</div>
+  <div class="bath-progress" id="bathProgress"></div>
+  <div class="bath-items" id="bathItems"></div>
+  <button class="bath-close" onclick="closeBath()">🔙 Back</button>
+</div>
+
+<!-- Peek-a-boo overlay -->
+<div class="peekaboo-overlay hidden" id="peekabooOverlay">
+  <div class="peekaboo-title">🙈 Peek-a-Boo! 🐱</div>
+  <div class="peekaboo-prompt" id="peekabooPrompt">Where's the kitty? Tap to find! 👇</div>
+  <div class="peekaboo-grid" id="peekabooGrid"></div>
+  <div class="peekaboo-score" id="peekabooScore">⭐ 0</div>
+  <button class="peekaboo-close" onclick="closePeekaboo()">🔙 Back</button>
 </div>
 
 <!-- Header -->
@@ -1116,6 +1444,18 @@
   <button class="action-btn" onclick="openAnimals()" style="border-color: #7ed6a0;">
     <span>🐾</span>
     <span class="label">Friends</span>
+  </button>
+  <button class="action-btn" onclick="openColors()" style="border-color: #c9a0dc;">
+    <span>🎨</span>
+    <span class="label">Colors</span>
+  </button>
+  <button class="action-btn" onclick="openBath()" style="border-color: #4dc9f6;">
+    <span>🛁</span>
+    <span class="label">Bath</span>
+  </button>
+  <button class="action-btn" onclick="openPeekaboo()" style="border-color: #ffcc66;">
+    <span>🙈</span>
+    <span class="label">Peek!</span>
   </button>
 </div>
 
@@ -2202,6 +2542,328 @@
       showReaction('🐾');
       showSpeech('Friends are fun! 🐾');
       emojiBurst(['🐶', '🐰', '🐸', '🦋', '💕'], 6);
+    }
+  }
+
+  // ===== COLOR MATCH GAME =====
+  const colorData = [
+    { name: 'Red', emoji: '❤️', bg: '#ff4444' },
+    { name: 'Blue', emoji: '💙', bg: '#4488ff' },
+    { name: 'Yellow', emoji: '💛', bg: '#ffcc00' },
+    { name: 'Green', emoji: '💚', bg: '#44cc44' },
+    { name: 'Pink', emoji: '🩷', bg: '#ff8ec4' },
+    { name: 'Purple', emoji: '💜', bg: '#aa66cc' },
+    { name: 'Orange', emoji: '🧡', bg: '#ff8800' },
+  ];
+  let colorScore = 0;
+  let colorAnswer = null;
+  let colorLocked = false;
+
+  function openColors() {
+    colorScore = 0;
+    document.getElementById('colorScore').textContent = '⭐ 0';
+    document.getElementById('colorOverlay').classList.remove('hidden');
+    playSound('happy');
+    startColorRound();
+  }
+
+  function startColorRound() {
+    colorLocked = false;
+    const shuffled = [...colorData].sort(() => Math.random() - 0.5);
+    const choices = shuffled.slice(0, 4);
+    colorAnswer = choices[Math.floor(Math.random() * choices.length)];
+
+    document.getElementById('colorPrompt').textContent = 'Find ' + colorAnswer.name + '!';
+    document.getElementById('colorTarget').textContent = colorAnswer.emoji;
+
+    const grid = document.getElementById('colorGrid');
+    grid.innerHTML = '';
+    choices.forEach(c => {
+      const btn = document.createElement('div');
+      btn.className = 'color-btn';
+      btn.style.background = c.bg;
+      btn.textContent = c.emoji;
+      btn.onclick = () => pickColor(c, btn);
+      grid.appendChild(btn);
+    });
+  }
+
+  function pickColor(color, btn) {
+    if (colorLocked) return;
+    if (color.name === colorAnswer.name) {
+      colorLocked = true;
+      btn.classList.add('correct');
+      playSound('tada');
+      colorScore++;
+      document.getElementById('colorScore').textContent = '⭐ ' + colorScore;
+      document.getElementById('colorPrompt').textContent = '🎉 Yes! ' + color.name + '! 🎉';
+
+      // Celebration burst
+      const overlay = document.getElementById('colorOverlay');
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = [color.emoji, '⭐', '✨', '🎉'][Math.floor(Math.random() * 4)];
+        spark.style.left = '50%';
+        spark.style.top = '40%';
+        spark.style.position = 'absolute';
+        const angle = (Math.PI * 2 * i) / 6;
+        const dist = 70 + Math.random() * 50;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+
+      setTimeout(startColorRound, 1800);
+    } else {
+      btn.classList.add('wrong');
+      playSound('pop');
+      setTimeout(() => btn.classList.remove('wrong'), 400);
+    }
+  }
+
+  function closeColors() {
+    document.getElementById('colorOverlay').classList.add('hidden');
+    if (colorScore > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🎨');
+      showSpeech('Colors are fun! 🎨');
+    }
+  }
+
+  // ===== BATH TIME =====
+  let bathSteps = 0;
+  let bathBubbleTimer = null;
+  const bathActions = [
+    { emoji: '🧽', label: 'Scrub scrub! 🧽', sound: 'brush' },
+    { emoji: '🧴', label: 'Shampoo! 🧴', sound: 'pet' },
+    { emoji: '🫧', label: 'Bubbles! 🫧', sound: 'pop' },
+    { emoji: '🦆', label: 'Rubber ducky! 🦆', sound: 'happy' },
+    { emoji: '💧', label: 'Rinse! 💧', sound: 'feed' },
+    { emoji: '🌊', label: 'Splash! 🌊', sound: 'play' },
+  ];
+
+  function openBath() {
+    bathSteps = 0;
+    document.getElementById('bathOverlay').classList.remove('hidden');
+    document.getElementById('bathCat').textContent = '🙀';
+    document.getElementById('bathSpeech').textContent = 'Tap items to wash kitty! 🫧';
+    playSound('happy');
+
+    // Progress dots
+    const prog = document.getElementById('bathProgress');
+    prog.innerHTML = '';
+    for (let i = 0; i < 5; i++) {
+      const dot = document.createElement('span');
+      dot.textContent = '🫧';
+      dot.style.fontSize = '24px';
+      dot.style.opacity = '0.3';
+      dot.dataset.index = i;
+      prog.appendChild(dot);
+    }
+
+    // Bath items
+    const items = document.getElementById('bathItems');
+    items.innerHTML = '';
+    const shuffled = [...bathActions].sort(() => Math.random() - 0.5);
+    shuffled.forEach(action => {
+      const btn = document.createElement('div');
+      btn.className = 'bath-item';
+      btn.textContent = action.emoji;
+      btn.onclick = () => doBathAction(action, btn);
+      items.appendChild(btn);
+    });
+
+    // Ambient bubbles
+    bathBubbleTimer = setInterval(spawnBathBubble, 800);
+  }
+
+  function spawnBathBubble() {
+    const overlay = document.getElementById('bathOverlay');
+    if (overlay.classList.contains('hidden')) { clearInterval(bathBubbleTimer); return; }
+    const b = document.createElement('div');
+    b.className = 'bath-bubble-bg';
+    b.textContent = '🫧';
+    b.style.left = (Math.random() * 90) + '%';
+    b.style.bottom = '10%';
+    b.style.fontSize = (20 + Math.random() * 25) + 'px';
+    overlay.appendChild(b);
+    setTimeout(() => b.remove(), 4000);
+  }
+
+  function splashCat() {
+    playSound('play');
+    const scene = document.getElementById('bathScene');
+    for (let i = 0; i < 5; i++) {
+      const s = document.createElement('div');
+      s.className = 'bath-splash';
+      s.textContent = ['💧', '🫧', '💦'][Math.floor(Math.random() * 3)];
+      s.style.left = (30 + Math.random() * 40) + '%';
+      s.style.top = (20 + Math.random() * 30) + '%';
+      scene.appendChild(s);
+      setTimeout(() => s.remove(), 800);
+    }
+  }
+
+  function doBathAction(action, btn) {
+    if (bathSteps >= 5) return;
+    playSound(action.sound);
+    document.getElementById('bathSpeech').textContent = action.label;
+
+    // Splash effect
+    splashCat();
+
+    // Progress
+    bathSteps++;
+    const dots = document.getElementById('bathProgress').children;
+    if (dots[bathSteps - 1]) {
+      dots[bathSteps - 1].style.opacity = '1';
+      dots[bathSteps - 1].style.transition = 'opacity 0.3s';
+    }
+
+    // Animate button
+    btn.style.transform = 'scale(0.7)';
+    btn.style.opacity = '0.4';
+    setTimeout(() => { btn.style.transform = ''; btn.style.opacity = ''; }, 400);
+
+    // Cat reactions
+    const catFaces = ['😺', '😸', '🙀', '😹'];
+    document.getElementById('bathCat').textContent = catFaces[Math.floor(Math.random() * catFaces.length)];
+
+    if (bathSteps >= 5) {
+      setTimeout(() => {
+        playSound('tada');
+        document.getElementById('bathCat').textContent = '😻';
+        document.getElementById('bathSpeech').textContent = '✨ So clean and sparkly! ✨';
+
+        // Big celebration
+        const overlay = document.getElementById('bathOverlay');
+        for (let i = 0; i < 10; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['✨', '🫧', '💧', '⭐', '🌈'][Math.floor(Math.random() * 5)];
+          spark.style.left = '50%';
+          spark.style.top = '35%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * i) / 10;
+          const dist = 80 + Math.random() * 60;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          overlay.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+
+        needs.clean = MAX_NEED;
+        needs.love = Math.min(MAX_NEED, needs.love + 1);
+        renderNeeds();
+        saveState();
+      }, 500);
+    }
+  }
+
+  function closeBath() {
+    clearInterval(bathBubbleTimer);
+    document.getElementById('bathOverlay').classList.add('hidden');
+    if (bathSteps > 0) {
+      showReaction('🫧');
+      showSpeech('Squeaky clean! 🛁✨');
+      emojiBurst(['🫧', '💧', '✨', '🛁'], 6);
+    }
+  }
+
+  // ===== PEEK-A-BOO =====
+  const hideSpots = ['🌳', '📦', '🎁', '🌻', '☁️', '🏠', '⛺', '🧸', '🎪'];
+  let peekScore = 0;
+  let peekLocked = false;
+
+  function openPeekaboo() {
+    peekScore = 0;
+    document.getElementById('peekabooScore').textContent = '⭐ 0';
+    document.getElementById('peekabooOverlay').classList.remove('hidden');
+    playSound('happy');
+    startPeekRound();
+  }
+
+  function startPeekRound() {
+    peekLocked = false;
+    document.getElementById('peekabooPrompt').textContent = 'Where\'s the kitty? 🐱👀';
+
+    const grid = document.getElementById('peekabooGrid');
+    grid.innerHTML = '';
+
+    const count = Math.min(3 + Math.floor(peekScore / 3), 6); // starts at 3, grows to 6
+    const shuffledSpots = [...hideSpots].sort(() => Math.random() - 0.5).slice(0, count);
+    const catIndex = Math.floor(Math.random() * count);
+
+    shuffledSpots.forEach((spot, i) => {
+      const el = document.createElement('div');
+      el.className = 'peekaboo-spot';
+      el.textContent = spot;
+      el.dataset.hasCat = (i === catIndex) ? 'true' : 'false';
+      el.onclick = () => peekTap(el, spot);
+      grid.appendChild(el);
+    });
+  }
+
+  function peekTap(el, spot) {
+    if (peekLocked) return;
+    if (el.classList.contains('found')) return;
+
+    if (el.dataset.hasCat === 'true') {
+      peekLocked = true;
+      playSound('tada');
+      el.classList.add('found');
+      el.textContent = '😸';
+      peekScore++;
+      document.getElementById('peekabooScore').textContent = '⭐ ' + peekScore;
+      document.getElementById('peekabooPrompt').textContent = '🎉 You found kitty! 🎉';
+
+      // Celebration
+      const overlay = document.getElementById('peekabooOverlay');
+      for (let i = 0; i < 8; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = ['😸', '⭐', '✨', '💖', '🎉'][Math.floor(Math.random() * 5)];
+        spark.style.left = '50%';
+        spark.style.top = '45%';
+        spark.style.position = 'absolute';
+        const angle = (Math.PI * 2 * i) / 8;
+        const dist = 70 + Math.random() * 50;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+
+      setTimeout(startPeekRound, 2000);
+    } else {
+      playSound('pop');
+      el.classList.add('wrong-peek');
+      // Briefly show it's empty
+      const original = el.textContent;
+      el.textContent = '🫣';
+      setTimeout(() => {
+        el.textContent = original;
+        el.classList.remove('wrong-peek');
+      }, 600);
+    }
+  }
+
+  function closePeekaboo() {
+    document.getElementById('peekabooOverlay').classList.add('hidden');
+    if (peekScore > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🙈');
+      showSpeech('Peek-a-boo! 🙈😸');
+      emojiBurst(['🙈', '😸', '✨', '💖'], 6);
     }
   }
 

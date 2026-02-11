@@ -24,17 +24,24 @@
         "Animal friends: other animals visit (teaches animal names/sounds)"
       ],
       "summary": "Added 3 new features: (1) Bubble Pop — colorful translucent bubbles float up with letters (A-E), numbers (1-5), and fun emoji inside. Tap to pop them with satisfying sound + burst effects. Every 5 pops triggers a celebration. Teaches letter/number recognition through play. (2) Dance Party — cat dances with emoji friends on a rainbow background with floating disco balls, musical beat sounds, and tap-to-burst effects on each dancer. Pure joy and sensory delight. (3) Animal Friends — 6 random animals visit the cat. Each tap brings an animal with its unique sound (woof, ribbit, quack, etc.) and greeting. Teaches animal names and sounds. Celebration when all friends are visited."
+    },
+    {
+      "date": "2026-02-11",
+      "ideas": [
+        "Color matching mini-game: tap the color the cat asks for (teaches colors)",
+        "Cat bath time: splash animations, rubber ducky, water sounds",
+        "Peek-a-boo: cat hides behind objects, tap to find it (object permanence)"
+      ],
+      "summary": "Added 3 new features: (1) Color Match — cat shows a color heart and asks Luna to find it among 4 choices. Correct picks celebrate with bursts + score. Wrong picks wobble gently. Teaches color names and recognition. (2) Bath Time — interactive bath scene with 6 wash items (sponge, shampoo, bubbles, rubber ducky, rinse, splash). Tap items to wash the cat with splash effects and floating bubbles. 5 steps to complete a bath = sparkly clean cat + max cleanliness. (3) Peek-a-Boo — kitty hides behind 3-6 objects (trees, boxes, clouds). Tap to find! Wrong spots show a shy emoji, correct spot reveals the happy cat. Difficulty increases as you score more. Teaches object permanence."
     }
   ],
   "ideaPool": [
-    "Color matching mini-game: tap the color the cat asks for (teaches colors)",
     "Shape recognition: cat plays with different shaped toys, name the shape",
     "ABC letters: cat finds letters around the house, tap to learn the letter sound",
     "Day/night cycle: background changes based on time, teaches time of day",
     "Cat mood expressions: more varied emoji faces with labeled emotions (teaches feelings)",
     "Mini sticker collection: earn stickers for good care streaks",
     "Weather effects: rain/sun/snow on background (teaches weather words)",
-    "Cat bath time: splash animations, rubber ducky, water sounds",
     "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
     "Cat wardrobe: unlock new cat colors/patterns as rewards",
     "Lullaby mode: gentle music and stars when putting cat to sleep",
@@ -46,7 +53,6 @@
     "Memory card game: flip cards to match cat-themed pairs",
     "Rainbow bridge: trace rainbow arcs for the cat to walk across",
     "Seasons mode: spring/summer/fall/winter backgrounds with themed activities",
-    "Music maker: tap different items to make musical sounds, play simple tunes",
-    "Peek-a-boo: cat hides behind objects, tap to find it (object permanence)"
+    "Music maker: tap different items to make musical sounds, play simple tunes"
   ]
 }
