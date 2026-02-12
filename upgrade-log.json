@@ -33,10 +33,18 @@
         "Peek-a-boo: cat hides behind objects, tap to find it (object permanence)"
       ],
       "summary": "Added 3 new features: (1) Color Match — cat shows a color heart and asks Luna to find it among 4 choices. Correct picks celebrate with bursts + score. Wrong picks wobble gently. Teaches color names and recognition. (2) Bath Time — interactive bath scene with 6 wash items (sponge, shampoo, bubbles, rubber ducky, rinse, splash). Tap items to wash the cat with splash effects and floating bubbles. 5 steps to complete a bath = sparkly clean cat + max cleanliness. (3) Peek-a-Boo — kitty hides behind 3-6 objects (trees, boxes, clouds). Tap to find! Wrong spots show a shy emoji, correct spot reveals the happy cat. Difficulty increases as you score more. Teaches object permanence."
+    },
+    {
+      "date": "2026-02-12",
+      "ideas": [
+        "Lullaby mode: gentle music and stars when putting cat to sleep",
+        "Touch trail sparkles: draw sparkle trails with finger",
+        "Shape recognition: cat plays with different shaped toys, name the shape"
+      ],
+      "summary": "Added 3 new features: (1) Lullaby Mode — dark starry night scene with twinkling stars and a gentle Twinkle Twinkle Little Star melody. Cat gradually falls asleep after 4 seconds, restoring energy and love. Calming, soothing experience. (2) Touch Trail Sparkles — dragging a finger anywhere on screen leaves a trail of colorful sparkle emoji (hearts, stars, butterflies, flowers). Pure sensory delight, works on every screen. Throttled for performance. (3) Shape Recognition — cat asks Luna to find shapes (circle, star, heart, diamond, moon, triangle, square, flower) from 4 choices. Correct picks celebrate with bursts. Teaches shape names through play."
     }
   ],
   "ideaPool": [
-    "Shape recognition: cat plays with different shaped toys, name the shape",
     "ABC letters: cat finds letters around the house, tap to learn the letter sound",
     "Day/night cycle: background changes based on time, teaches time of day",
     "Cat mood expressions: more varied emoji faces with labeled emotions (teaches feelings)",
@@ -44,15 +52,18 @@
     "Weather effects: rain/sun/snow on background (teaches weather words)",
     "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
     "Cat wardrobe: unlock new cat colors/patterns as rewards",
-    "Lullaby mode: gentle music and stars when putting cat to sleep",
     "Feeding variety: multiple food types with names (teaches food vocabulary)",
     "Happy meter celebration: confetti + special animation when cat is at max happiness",
-    "Touch trail sparkles: draw sparkle trails with finger",
     "Sound board: cat makes different sounds based on mood",
     "Simple puzzle: 2-4 piece jigsaw of the cat",
     "Memory card game: flip cards to match cat-themed pairs",
     "Rainbow bridge: trace rainbow arcs for the cat to walk across",
     "Seasons mode: spring/summer/fall/winter backgrounds with themed activities",
-    "Music maker: tap different items to make musical sounds, play simple tunes"
+    "Music maker: tap different items to make musical sounds, play simple tunes",
+    "Counting stars: tap stars as they appear, count to 10",
+    "Animal parade: animals march across screen, tap to make them dance",
+    "Magic wand: wave wand to change cat's color/sparkle effects",
+    "Tea party: serve tea and treats to cat and friends",
+    "Painting easel: finger-paint with big color buttons"
   ]
 }

@@ -1246,6 +1246,174 @@
     transform: scale(0.95);
     background: var(--pink-light);
   }
+
+  /* ===== LULLABY MODE ===== */
+  .lullaby-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #1a1a3e 0%, #2d1b4e 40%, #1a1a3e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 16px;
+    padding: 20px;
+    overflow: hidden;
+    transition: background 1s ease;
+  }
+  .lullaby-overlay.hidden { display: none; }
+  .lullaby-cat {
+    font-size: 140px;
+    line-height: 1;
+    z-index: 2;
+    animation: lullabyCat 3s ease-in-out infinite;
+  }
+  @keyframes lullabyCat {
+    0%, 100% { transform: scale(1) rotate(0deg); }
+    50% { transform: scale(0.96) rotate(-3deg); }
+  }
+  .lullaby-text {
+    font-size: 28px;
+    color: #c8b0ff;
+    z-index: 2;
+    text-align: center;
+    animation: lullabyPulse 3s ease-in-out infinite;
+  }
+  @keyframes lullabyPulse {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+  }
+  .lullaby-star {
+    position: absolute;
+    pointer-events: none;
+    animation: lullabyStar var(--dur) ease-in-out infinite;
+    z-index: 1;
+  }
+  @keyframes lullabyStar {
+    0%, 100% { opacity: 0.2; transform: scale(0.8); }
+    50% { opacity: 1; transform: scale(1.2); }
+  }
+  .lullaby-moon {
+    font-size: 80px;
+    z-index: 2;
+    animation: lullabyMoon 4s ease-in-out infinite;
+  }
+  @keyframes lullabyMoon {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+  .lullaby-close {
+    padding: 14px 32px;
+    font-size: 24px;
+    border-radius: 30px;
+    border: 3px solid #c8b0ff;
+    background: rgba(255,255,255,0.1);
+    color: #c8b0ff;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    margin-top: 10px;
+  }
+  .lullaby-close:active {
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ===== TOUCH TRAIL SPARKLES ===== */
+  .trail-sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 950;
+    animation: trailFade 1.2s ease-out forwards;
+  }
+  @keyframes trailFade {
+    0% { opacity: 1; transform: scale(1) rotate(0deg); }
+    100% { opacity: 0; transform: scale(0.3) rotate(180deg) translateY(-40px); }
+  }
+
+  /* ===== SHAPE RECOGNITION ===== */
+  .shape-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 50%, #f0e0ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 14px;
+    padding: 20px;
+  }
+  .shape-overlay.hidden { display: none; }
+  .shape-title {
+    font-size: 26px;
+    color: var(--pink-deep);
+  }
+  .shape-cat {
+    font-size: 100px;
+    line-height: 1;
+    animation: catBounce 1.5s ease infinite;
+  }
+  .shape-prompt {
+    font-size: 28px;
+    color: var(--pink-deep);
+    text-align: center;
+  }
+  .shape-target {
+    font-size: 90px;
+    animation: colorPulse 1s ease infinite alternate;
+  }
+  .shape-grid {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .shape-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 24px;
+    border: 5px solid var(--pink);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 16px rgba(232,93,161,0.2);
+  }
+  .shape-btn:active {
+    transform: scale(0.85);
+  }
+  .shape-btn.correct {
+    animation: colorCorrect 0.6s ease;
+    border-color: #7ed6a0;
+    background: #e8f8e0;
+  }
+  .shape-btn.wrong {
+    animation: colorWrong 0.4s ease;
+  }
+  .shape-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+  }
+  .shape-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .shape-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
 </style>
 </head>
 <body>
@@ -1360,6 +1528,25 @@
   <button class="peekaboo-close" onclick="closePeekaboo()">🔙 Back</button>
 </div>
 
+<!-- Lullaby mode overlay -->
+<div class="lullaby-overlay hidden" id="lullabyOverlay">
+  <div class="lullaby-moon">🌙</div>
+  <div class="lullaby-cat" id="lullabyCat">😺</div>
+  <div class="lullaby-text" id="lullabyText">💤 Sweet dreams... 🌙</div>
+  <button class="lullaby-close" onclick="closeLullaby()">☀️ Wake Up</button>
+</div>
+
+<!-- Shape recognition overlay -->
+<div class="shape-overlay hidden" id="shapeOverlay">
+  <div class="shape-title">🔷 Shape Time! 🔶</div>
+  <div class="shape-cat">😺</div>
+  <div class="shape-prompt" id="shapePrompt">Find the shape!</div>
+  <div class="shape-target" id="shapeTarget"></div>
+  <div class="shape-grid" id="shapeGrid"></div>
+  <div class="shape-score" id="shapeScore">⭐ 0</div>
+  <button class="shape-close" onclick="closeShapes()">🔙 Back</button>
+</div>
+
 <!-- Header -->
 <div class="header">
   <h1>Luna's Kitty 🐱💕</h1>
@@ -1456,6 +1643,14 @@
   <button class="action-btn" onclick="openPeekaboo()" style="border-color: #ffcc66;">
     <span>🙈</span>
     <span class="label">Peek!</span>
+  </button>
+  <button class="action-btn" onclick="openLullaby()" style="border-color: #c8b0ff;">
+    <span>🌙</span>
+    <span class="label">Lullaby</span>
+  </button>
+  <button class="action-btn" onclick="openShapes()" style="border-color: #ffcc66;">
+    <span>🔷</span>
+    <span class="label">Shapes</span>
   </button>
 </div>
 
@@ -2864,6 +3059,229 @@
       showReaction('🙈');
       showSpeech('Peek-a-boo! 🙈😸');
       emojiBurst(['🙈', '😸', '✨', '💖'], 6);
+    }
+  }
+
+  // ===== LULLABY MODE =====
+  let lullabyActive = false;
+  let lullabyMusicInterval = null;
+  let lullabyStarInterval = null;
+
+  function openLullaby() {
+    lullabyActive = true;
+    const overlay = document.getElementById('lullabyOverlay');
+    overlay.classList.remove('hidden');
+    document.getElementById('lullabyCat').textContent = '😺';
+    document.getElementById('lullabyText').textContent = '💤 Sweet dreams... 🌙';
+
+    // Create twinkling stars
+    spawnLullabyStars();
+    lullabyStarInterval = setInterval(spawnLullabyStars, 3000);
+
+    // Start lullaby music (gentle melody)
+    startLullabyMusic();
+
+    // Cat gradually falls asleep
+    setTimeout(() => {
+      if (lullabyActive) {
+        document.getElementById('lullabyCat').textContent = '😴';
+        document.getElementById('lullabyText').textContent = '💤 Zzzzz... 🌙⭐';
+        // Put the actual cat to sleep too
+        isSleeping = true;
+        needs.energy = Math.min(MAX_NEED, needs.energy + 2);
+        needs.love = Math.min(MAX_NEED, needs.love + 1);
+        renderNeeds();
+        saveState();
+      }
+    }, 4000);
+  }
+
+  function spawnLullabyStars() {
+    if (!lullabyActive) return;
+    const overlay = document.getElementById('lullabyOverlay');
+    const stars = ['⭐', '🌟', '✨', '💫'];
+    for (let i = 0; i < 5; i++) {
+      const star = document.createElement('div');
+      star.className = 'lullaby-star';
+      star.textContent = stars[Math.floor(Math.random() * stars.length)];
+      star.style.left = (Math.random() * 90 + 5) + '%';
+      star.style.top = (Math.random() * 70 + 5) + '%';
+      star.style.fontSize = (20 + Math.random() * 30) + 'px';
+      star.style.setProperty('--dur', (2 + Math.random() * 3) + 's');
+      star.style.animationDelay = (Math.random() * 2) + 's';
+      overlay.appendChild(star);
+      // Remove after a while to prevent buildup
+      setTimeout(() => star.remove(), 8000);
+    }
+  }
+
+  function startLullabyMusic() {
+    // Gentle lullaby: Twinkle Twinkle Little Star melody
+    const notes = [
+      262, 262, 392, 392, 440, 440, 392, 0,
+      349, 349, 330, 330, 294, 294, 262, 0,
+      392, 392, 349, 349, 330, 330, 294, 0,
+      392, 392, 349, 349, 330, 330, 294, 0
+    ];
+    let noteIndex = 0;
+    lullabyMusicInterval = setInterval(() => {
+      if (!lullabyActive) { clearInterval(lullabyMusicInterval); return; }
+      const freq = notes[noteIndex % notes.length];
+      noteIndex++;
+      if (freq === 0) return; // rest
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.06, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.5);
+      } catch(e) {}
+    }, 500);
+  }
+
+  function closeLullaby() {
+    lullabyActive = false;
+    clearInterval(lullabyMusicInterval);
+    clearInterval(lullabyStarInterval);
+    document.getElementById('lullabyOverlay').classList.add('hidden');
+    // Remove any lingering stars
+    document.querySelectorAll('.lullaby-star').forEach(s => s.remove());
+    setSleeping(true);
+    showReaction('🌙');
+    showSpeech('Night night! 🌙💤');
+    emojiBurst(['🌙', '⭐', '💤', '✨'], 6);
+    playSound('nap');
+  }
+
+  // ===== TOUCH TRAIL SPARKLES =====
+  let trailEnabled = true;
+  const trailEmojis = ['✨', '💖', '⭐', '🌟', '💕', '🩷', '🌸', '💫', '🦋'];
+  const trailColors = ['#ff8ec4', '#c9a0dc', '#4dc9f6', '#ffcc66', '#7ed6a0', '#ff9966'];
+  let lastTrailTime = 0;
+
+  document.addEventListener('touchmove', (e) => {
+    if (!trailEnabled) return;
+    const now = Date.now();
+    if (now - lastTrailTime < 50) return; // throttle
+    lastTrailTime = now;
+    const touch = e.touches[0];
+    spawnTrailSparkle(touch.clientX, touch.clientY);
+  }, { passive: true });
+
+  document.addEventListener('mousemove', (e) => {
+    if (!trailEnabled) return;
+    if (e.buttons === 0) return; // only when mouse button held
+    const now = Date.now();
+    if (now - lastTrailTime < 50) return;
+    lastTrailTime = now;
+    spawnTrailSparkle(e.clientX, e.clientY);
+  });
+
+  function spawnTrailSparkle(x, y) {
+    const el = document.createElement('div');
+    el.className = 'trail-sparkle';
+    el.textContent = trailEmojis[Math.floor(Math.random() * trailEmojis.length)];
+    el.style.left = (x - 12) + 'px';
+    el.style.top = (y - 12) + 'px';
+    el.style.fontSize = (18 + Math.random() * 16) + 'px';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1200);
+  }
+
+  // ===== SHAPE RECOGNITION =====
+  const shapeData = [
+    { name: 'Circle', emoji: '🔴', altEmoji: '⭕' },
+    { name: 'Star', emoji: '⭐', altEmoji: '🌟' },
+    { name: 'Heart', emoji: '❤️', altEmoji: '💖' },
+    { name: 'Diamond', emoji: '💎', altEmoji: '🔷' },
+    { name: 'Moon', emoji: '🌙', altEmoji: '🌛' },
+    { name: 'Triangle', emoji: '🔺', altEmoji: '📐' },
+    { name: 'Square', emoji: '🟧', altEmoji: '⬜' },
+    { name: 'Flower', emoji: '🌸', altEmoji: '🌺' },
+  ];
+  let shapeScore = 0;
+  let shapeAnswer = null;
+  let shapeLocked = false;
+
+  function openShapes() {
+    shapeScore = 0;
+    document.getElementById('shapeScore').textContent = '⭐ 0';
+    document.getElementById('shapeOverlay').classList.remove('hidden');
+    playSound('happy');
+    startShapeRound();
+  }
+
+  function startShapeRound() {
+    shapeLocked = false;
+    const shuffled = [...shapeData].sort(() => Math.random() - 0.5);
+    const choices = shuffled.slice(0, 4);
+    shapeAnswer = choices[Math.floor(Math.random() * choices.length)];
+
+    document.getElementById('shapePrompt').textContent = 'Find the ' + shapeAnswer.name + '!';
+    document.getElementById('shapeTarget').textContent = shapeAnswer.emoji;
+
+    const grid = document.getElementById('shapeGrid');
+    grid.innerHTML = '';
+    choices.forEach(s => {
+      const btn = document.createElement('div');
+      btn.className = 'shape-btn';
+      btn.textContent = s.emoji;
+      btn.onclick = () => pickShape(s, btn);
+      grid.appendChild(btn);
+    });
+  }
+
+  function pickShape(shape, btn) {
+    if (shapeLocked) return;
+    if (shape.name === shapeAnswer.name) {
+      shapeLocked = true;
+      btn.classList.add('correct');
+      playSound('tada');
+      shapeScore++;
+      document.getElementById('shapeScore').textContent = '⭐ ' + shapeScore;
+      document.getElementById('shapePrompt').textContent = '🎉 Yes! ' + shape.name + '! 🎉';
+
+      // Celebration
+      const overlay = document.getElementById('shapeOverlay');
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = [shape.emoji, '⭐', '✨', '🎉'][Math.floor(Math.random() * 4)];
+        spark.style.left = '50%';
+        spark.style.top = '40%';
+        spark.style.position = 'absolute';
+        const angle = (Math.PI * 2 * i) / 6;
+        const dist = 70 + Math.random() * 50;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+
+      setTimeout(startShapeRound, 1800);
+    } else {
+      btn.classList.add('wrong');
+      playSound('pop');
+      setTimeout(() => btn.classList.remove('wrong'), 400);
+    }
+  }
+
+  function closeShapes() {
+    document.getElementById('shapeOverlay').classList.add('hidden');
+    if (shapeScore > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🔷');
+      showSpeech('Shapes are fun! 🔶');
+      emojiBurst(['🔴', '⭐', '💎', '🔺', '✨'], 6);
     }
   }
 
