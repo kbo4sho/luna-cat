@@ -22,16 +22,17 @@
   body {
     background: linear-gradient(180deg, #ffe4f0 0%, #ffd0e8 40%, #ffc0dd 100%);
     font-family: 'Arial Rounded MT Bold', 'Nunito', sans-serif;
-    height: 100vh;
-    height: 100dvh;
-    overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
-    padding: 20px 10px;
+    padding: 16px 10px;
     user-select: none;
     -webkit-user-select: none;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* Floating hearts background */
@@ -86,14 +87,14 @@
     gap: 4px;
   }
   .need-icon {
-    font-size: 22px;
+    font-size: 26px;
   }
   .need-hearts {
     display: flex;
     gap: 2px;
   }
   .need-heart {
-    font-size: 16px;
+    font-size: 18px;
     transition: all 0.3s ease;
   }
   .need-heart.empty {
@@ -103,13 +104,13 @@
 
   /* Cat area */
   .cat-area {
-    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
     z-index: 10;
-    min-height: 200px;
+    min-height: 180px;
+    padding: 10px 0;
   }
 
   .cat-container {
@@ -241,18 +242,19 @@
 
   /* Action buttons */
   .actions {
-    display: flex;
-    gap: 12px;
+    display: grid;
+    grid-template-columns: repeat(5, 72px);
+    gap: 10px;
     justify-content: center;
-    flex-wrap: wrap;
     z-index: 10;
-    padding: 10px 0 20px;
+    padding: 10px 0 24px;
+    width: 100%;
     max-width: 500px;
   }
 
   .action-btn {
-    width: 80px;
-    height: 80px;
+    width: 72px;
+    height: 72px;
     border-radius: 50%;
     border: 4px solid var(--pink);
     background: var(--white);
@@ -260,7 +262,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    font-size: 36px;
+    font-size: 32px;
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 4px 12px rgba(232, 93, 161, 0.3);
@@ -272,14 +274,52 @@
     background: var(--pink-light);
   }
   .action-btn .label {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--pink-dark);
     font-weight: bold;
-    margin-top: 2px;
+    margin-top: 1px;
   }
   .action-btn.disabled {
     opacity: 0.4;
     pointer-events: none;
+  }
+
+  /* Responsive: iPhone-sized screens */
+  @media (max-width: 420px) {
+    .actions {
+      grid-template-columns: repeat(4, 68px);
+      gap: 8px;
+    }
+    .action-btn {
+      width: 68px;
+      height: 68px;
+      font-size: 28px;
+    }
+    .cat {
+      font-size: 110px;
+    }
+    .cat-area {
+      min-height: 140px;
+    }
+    .header h1 {
+      font-size: 24px;
+    }
+  }
+
+  /* iPad portrait */
+  @media (min-width: 700px) and (max-width: 1100px) {
+    .actions {
+      grid-template-columns: repeat(5, 80px);
+      gap: 14px;
+    }
+    .action-btn {
+      width: 80px;
+      height: 80px;
+      font-size: 36px;
+    }
+    .action-btn .label {
+      font-size: 12px;
+    }
   }
 
   /* Sparkle effect on tap */
