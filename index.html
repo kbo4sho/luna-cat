@@ -1332,6 +1332,260 @@
     100% { opacity: 0; transform: scale(0.3) rotate(180deg) translateY(-40px); }
   }
 
+  /* ===== TEA PARTY ===== */
+  .tea-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 40%, #f0e0ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+  }
+  .tea-overlay.hidden { display: none; }
+  .tea-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .tea-table {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    gap: 6px;
+    min-height: 140px;
+    position: relative;
+  }
+  .tea-guest {
+    font-size: 80px;
+    line-height: 1;
+    transition: all 0.4s ease;
+    cursor: pointer;
+  }
+  .tea-guest:active { transform: scale(0.9); }
+  .tea-guest.happy { animation: catBounce 0.5s ease 2; }
+  .tea-speech {
+    font-size: 24px;
+    color: var(--pink-deep);
+    text-align: center;
+    min-height: 36px;
+  }
+  .tea-items {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .tea-item {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    border: 4px solid var(--pink);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 44px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(232,93,161,0.3);
+  }
+  .tea-item:active {
+    transform: scale(0.85);
+    background: var(--pink-light);
+  }
+  .tea-item.served {
+    opacity: 0.35;
+    pointer-events: none;
+    border-style: dashed;
+  }
+  .tea-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .tea-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+
+  /* ===== MAGIC WAND ===== */
+  .wand-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #1a1a3e 0%, #2d1b4e 30%, #4a2070 60%, #1a1a3e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 14px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .wand-overlay.hidden { display: none; }
+  .wand-title {
+    font-size: 28px;
+    color: #f0c8ff;
+    text-shadow: 0 0 20px rgba(200,100,255,0.6);
+    z-index: 2;
+  }
+  .wand-cat {
+    font-size: 140px;
+    line-height: 1;
+    z-index: 2;
+    transition: all 0.5s ease;
+  }
+  .wand-cat.transform {
+    animation: wandTransform 0.8s ease;
+  }
+  @keyframes wandTransform {
+    0% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+    30% { transform: scale(1.3) rotate(10deg); filter: brightness(2) hue-rotate(90deg); }
+    60% { transform: scale(0.8) rotate(-10deg); filter: brightness(1.5) hue-rotate(180deg); }
+    100% { transform: scale(1) rotate(0deg); filter: brightness(1); }
+  }
+  .wand-speech {
+    font-size: 24px;
+    color: #e0c0ff;
+    text-align: center;
+    min-height: 36px;
+    z-index: 2;
+  }
+  .wand-spells {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 420px;
+    z-index: 2;
+  }
+  .wand-spell {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 4px solid #c8b0ff;
+    background: rgba(255,255,255,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 16px rgba(200,176,255,0.3);
+  }
+  .wand-spell:active {
+    transform: scale(0.85);
+    background: rgba(255,255,255,0.2);
+    box-shadow: 0 0 30px rgba(200,176,255,0.6);
+  }
+  .wand-magic-burst {
+    position: absolute;
+    font-size: 40px;
+    pointer-events: none;
+    animation: wandBurst 1.5s ease-out forwards;
+    z-index: 1;
+  }
+  @keyframes wandBurst {
+    0% { transform: scale(0) rotate(0deg); opacity: 1; }
+    50% { opacity: 1; }
+    100% { transform: scale(1.5) rotate(360deg) translateY(-80px); opacity: 0; }
+  }
+  .wand-close {
+    padding: 14px 32px;
+    font-size: 24px;
+    border-radius: 30px;
+    border: 3px solid #c8b0ff;
+    background: rgba(255,255,255,0.1);
+    color: #e0c0ff;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .wand-close:active {
+    transform: scale(0.95);
+    background: rgba(255,255,255,0.2);
+  }
+
+  /* ===== STICKER COLLECTION ===== */
+  .sticker-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #ffe4f0 0%, #f0e0ff 50%, #e0f4ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .sticker-overlay.hidden { display: none; }
+  .sticker-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .sticker-subtitle {
+    font-size: 18px;
+    color: var(--pink-dark);
+    text-align: center;
+  }
+  .sticker-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    max-width: 400px;
+    padding: 10px;
+  }
+  .sticker-slot {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;
+    border: 4px dashed var(--pink);
+    background: rgba(255,255,255,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 46px;
+    transition: all 0.3s ease;
+  }
+  .sticker-slot.earned {
+    border-style: solid;
+    background: white;
+    box-shadow: 0 4px 12px rgba(232,93,161,0.2);
+  }
+  .sticker-slot.locked {
+    opacity: 0.3;
+  }
+  .sticker-slot.locked::after {
+    content: '🔒';
+    font-size: 24px;
+  }
+  .sticker-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 8px;
+  }
+  .sticker-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light);
+  }
+
   /* ===== SHAPE RECOGNITION ===== */
   .shape-overlay {
     position: fixed;
@@ -1536,6 +1790,32 @@
   <button class="lullaby-close" onclick="closeLullaby()">☀️ Wake Up</button>
 </div>
 
+<!-- Tea party overlay -->
+<div class="tea-overlay hidden" id="teaOverlay">
+  <div class="tea-title">🫖 Tea Party! 🧁</div>
+  <div class="tea-table" id="teaTable"></div>
+  <div class="tea-speech" id="teaSpeech">Serve tea and treats! 🫖</div>
+  <div class="tea-items" id="teaItems"></div>
+  <button class="tea-close" onclick="closeTea()">🔙 Back</button>
+</div>
+
+<!-- Magic wand overlay -->
+<div class="wand-overlay hidden" id="wandOverlay">
+  <div class="wand-title">🪄 Magic Wand! ✨</div>
+  <div class="wand-cat" id="wandCat">🐱</div>
+  <div class="wand-speech" id="wandSpeech">Cast a spell! 🪄</div>
+  <div class="wand-spells" id="wandSpells"></div>
+  <button class="wand-close" onclick="closeWand()">🔙 Back</button>
+</div>
+
+<!-- Sticker collection overlay -->
+<div class="sticker-overlay hidden" id="stickerOverlay">
+  <div class="sticker-title">🌟 Sticker Book! 🌟</div>
+  <div class="sticker-subtitle" id="stickerSubtitle">Take care of kitty to earn stickers!</div>
+  <div class="sticker-grid" id="stickerGrid"></div>
+  <button class="sticker-close" onclick="closeStickers()">🔙 Back</button>
+</div>
+
 <!-- Shape recognition overlay -->
 <div class="shape-overlay hidden" id="shapeOverlay">
   <div class="shape-title">🔷 Shape Time! 🔶</div>
@@ -1651,6 +1931,18 @@
   <button class="action-btn" onclick="openShapes()" style="border-color: #ffcc66;">
     <span>🔷</span>
     <span class="label">Shapes</span>
+  </button>
+  <button class="action-btn" onclick="openTea()" style="border-color: #ffcc66;">
+    <span>🫖</span>
+    <span class="label">Tea!</span>
+  </button>
+  <button class="action-btn" onclick="openWand()" style="border-color: #c8b0ff;">
+    <span>🪄</span>
+    <span class="label">Magic</span>
+  </button>
+  <button class="action-btn" onclick="openStickers()" style="border-color: #7ed6a0;">
+    <span>🌟</span>
+    <span class="label">Stickers</span>
   </button>
 </div>
 
@@ -2008,6 +2300,12 @@
     
     if (action !== 'nap') {
       setCatAnim(anims[action], action === 'play' ? 1500 : 1200);
+    }
+
+    // Chance to earn sticker when doing well
+    const totalCheck = needs.hunger + needs.love + needs.energy + needs.clean;
+    if (totalCheck >= MAX_NEED * 3 && Math.random() < 0.2) {
+      setTimeout(() => awardSticker(), 2000);
     }
 
     // Check if all needs are high — super happy!
@@ -3285,9 +3583,335 @@
     }
   }
 
+  // ===== TEA PARTY =====
+  const teaGuests = [
+    { emoji: '🐱', name: 'Kitty' },
+    { emoji: '🐰', name: 'Bunny' },
+    { emoji: '🐻', name: 'Bear' },
+    { emoji: '🦋', name: 'Butterfly' },
+  ];
+  const teaTreats = [
+    { emoji: '🫖', label: 'Tea time! 🫖', reaction: 'Sip sip!' },
+    { emoji: '🧁', label: 'Cupcake! 🧁', reaction: 'Yummy!' },
+    { emoji: '🍪', label: 'Cookie! 🍪', reaction: 'Nom nom!' },
+    { emoji: '🍰', label: 'Cake! 🍰', reaction: 'So tasty!' },
+    { emoji: '🍓', label: 'Strawberry! 🍓', reaction: 'Sweet!' },
+    { emoji: '🧃', label: 'Juice! 🧃', reaction: 'Slurp!' },
+  ];
+  let teaServed = 0;
+
+  function openTea() {
+    teaServed = 0;
+    document.getElementById('teaOverlay').classList.remove('hidden');
+    document.getElementById('teaSpeech').textContent = 'Serve tea and treats! 🫖';
+    playSound('happy');
+
+    // Set up guests
+    const table = document.getElementById('teaTable');
+    table.innerHTML = '';
+    teaGuests.forEach(g => {
+      const el = document.createElement('div');
+      el.className = 'tea-guest';
+      el.textContent = g.emoji;
+      el.onclick = () => {
+        playSound('pop');
+        el.classList.remove('happy');
+        void el.offsetWidth;
+        el.classList.add('happy');
+      };
+      table.appendChild(el);
+    });
+
+    // Set up treats
+    const items = document.getElementById('teaItems');
+    items.innerHTML = '';
+    teaTreats.forEach(t => {
+      const btn = document.createElement('div');
+      btn.className = 'tea-item';
+      btn.textContent = t.emoji;
+      btn.onclick = () => serveTreat(t, btn);
+      items.appendChild(btn);
+    });
+  }
+
+  function serveTreat(treat, btn) {
+    if (btn.classList.contains('served')) return;
+    btn.classList.add('served');
+    teaServed++;
+    playSound('count');
+
+    document.getElementById('teaSpeech').textContent = treat.label;
+
+    // Guests react
+    const guests = document.querySelectorAll('.tea-guest');
+    guests.forEach(g => {
+      g.classList.remove('happy');
+      void g.offsetWidth;
+      g.classList.add('happy');
+    });
+
+    // Burst from treat
+    const overlay = document.getElementById('teaOverlay');
+    for (let i = 0; i < 5; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'emoji-burst';
+      spark.textContent = [treat.emoji, '✨', '💖', '⭐'][Math.floor(Math.random() * 4)];
+      spark.style.left = '50%';
+      spark.style.top = '35%';
+      spark.style.position = 'absolute';
+      const angle = (Math.PI * 2 * i) / 5;
+      const dist = 60 + Math.random() * 40;
+      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+      overlay.appendChild(spark);
+      setTimeout(() => spark.remove(), 1200);
+    }
+
+    // After a beat, show reaction
+    setTimeout(() => {
+      document.getElementById('teaSpeech').textContent = treat.reaction + ' ' + ['😋', '😸', '🥰', '💕'][Math.floor(Math.random() * 4)];
+    }, 800);
+
+    // All served?
+    if (teaServed >= teaTreats.length) {
+      setTimeout(() => {
+        playSound('tada');
+        document.getElementById('teaSpeech').textContent = '🎉 What a lovely tea party! 🎉';
+        for (let i = 0; i < 10; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['🫖', '🧁', '🍪', '⭐', '✨', '💖'][Math.floor(Math.random() * 6)];
+          spark.style.left = '50%';
+          spark.style.top = '30%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * i) / 10;
+          const dist = 80 + Math.random() * 60;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          overlay.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+        needs.hunger = Math.min(MAX_NEED, needs.hunger + 1);
+        needs.love = Math.min(MAX_NEED, needs.love + 1);
+        renderNeeds();
+        saveState();
+        awardSticker();
+      }, 1000);
+    }
+  }
+
+  function closeTea() {
+    document.getElementById('teaOverlay').classList.add('hidden');
+    if (teaServed > 0) {
+      showReaction('🫖');
+      showSpeech('Tea was lovely! 🫖💕');
+      emojiBurst(['🫖', '🧁', '🍪', '💖', '✨'], 6);
+    }
+  }
+
+  // ===== MAGIC WAND =====
+  const wandSpells = [
+    { emoji: '🌈', name: 'Rainbow', catEmoji: '😻', speech: '✨ Rainbow kitty! 🌈', burst: ['🌈', '✨', '⭐', '💖'] },
+    { emoji: '❄️', name: 'Snow', catEmoji: '🐱', speech: '❄️ Brrr! Snow kitty! ❄️', burst: ['❄️', '🌨️', '⭐', '✨'] },
+    { emoji: '🔥', name: 'Fire', catEmoji: '😸', speech: '🔥 Fire kitty! So warm! 🔥', burst: ['🔥', '✨', '⭐', '💫'] },
+    { emoji: '🦄', name: 'Unicorn', catEmoji: '😺', speech: '🦄 Unicorn kitty! Magic! 🦄', burst: ['🦄', '✨', '🌈', '💖'] },
+    { emoji: '👑', name: 'Royal', catEmoji: '😸', speech: '👑 Princess kitty! 👑', burst: ['👑', '✨', '💎', '💖'] },
+    { emoji: '🌸', name: 'Flower', catEmoji: '😻', speech: '🌸 Flower kitty! So pretty! 🌸', burst: ['🌸', '🌺', '✨', '💖'] },
+    { emoji: '⭐', name: 'Star', catEmoji: '😺', speech: '⭐ Star kitty! Shine! ⭐', burst: ['⭐', '🌟', '✨', '💫'] },
+    { emoji: '🎀', name: 'Pink', catEmoji: '😻', speech: '🎀 Pretty pink kitty! 🎀', burst: ['🎀', '🩷', '✨', '💖'] },
+  ];
+  let wandLocked = false;
+
+  function openWand() {
+    wandLocked = false;
+    document.getElementById('wandOverlay').classList.remove('hidden');
+    document.getElementById('wandCat').textContent = '🐱';
+    document.getElementById('wandSpeech').textContent = 'Cast a spell! 🪄';
+    playSound('happy');
+
+    const spells = document.getElementById('wandSpells');
+    spells.innerHTML = '';
+    // Pick 6 random spells
+    const shuffled = [...wandSpells].sort(() => Math.random() - 0.5).slice(0, 6);
+    shuffled.forEach(s => {
+      const btn = document.createElement('div');
+      btn.className = 'wand-spell';
+      btn.textContent = s.emoji;
+      btn.onclick = () => castSpell(s);
+      spells.appendChild(btn);
+    });
+
+    // Ambient magic particles
+    spawnWandMagic();
+  }
+
+  function spawnWandMagic() {
+    const overlay = document.getElementById('wandOverlay');
+    if (overlay.classList.contains('hidden')) return;
+    const magicEmoji = ['✨', '⭐', '🌟', '💫', '💖'];
+    for (let i = 0; i < 4; i++) {
+      const el = document.createElement('div');
+      el.className = 'wand-magic-burst';
+      el.textContent = magicEmoji[Math.floor(Math.random() * magicEmoji.length)];
+      el.style.left = (Math.random() * 80 + 10) + '%';
+      el.style.top = (Math.random() * 60 + 20) + '%';
+      el.style.animationDelay = (Math.random() * 0.5) + 's';
+      overlay.appendChild(el);
+      setTimeout(() => el.remove(), 2000);
+    }
+    setTimeout(() => spawnWandMagic(), 2000);
+  }
+
+  function castSpell(spell) {
+    if (wandLocked) return;
+    wandLocked = true;
+
+    // Magic sound — ascending sparkle
+    try {
+      const ctx = getAudioCtx();
+      const notes = [523, 659, 784, 1047];
+      notes.forEach((freq, i) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, ctx.currentTime + i * 0.1);
+        gain.gain.setValueAtTime(0.1, ctx.currentTime + i * 0.1);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.1 + 0.2);
+        osc.start(ctx.currentTime + i * 0.1);
+        osc.stop(ctx.currentTime + i * 0.1 + 0.2);
+      });
+    } catch(e) {}
+
+    // Transform cat
+    const cat = document.getElementById('wandCat');
+    cat.classList.remove('transform');
+    void cat.offsetWidth;
+    cat.classList.add('transform');
+
+    setTimeout(() => {
+      cat.textContent = spell.catEmoji;
+      document.getElementById('wandSpeech').textContent = spell.speech;
+
+      // Big burst
+      const overlay = document.getElementById('wandOverlay');
+      for (let i = 0; i < 12; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = spell.burst[Math.floor(Math.random() * spell.burst.length)];
+        spark.style.left = '50%';
+        spark.style.top = '35%';
+        spark.style.position = 'absolute';
+        spark.style.zIndex = '3';
+        const angle = (Math.PI * 2 * i) / 12;
+        const dist = 80 + Math.random() * 60;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+
+      setTimeout(() => { wandLocked = false; }, 800);
+    }, 400);
+  }
+
+  function closeWand() {
+    document.getElementById('wandOverlay').classList.add('hidden');
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    renderNeeds();
+    saveState();
+    showReaction('🪄');
+    showSpeech('Magic! ✨🪄');
+    emojiBurst(['🪄', '✨', '⭐', '🌈', '💖'], 8);
+    awardSticker();
+  }
+
+  // ===== STICKER COLLECTION =====
+  const allStickers = [
+    '⭐', '🌈', '🦋', '🌸', '💎', '👑', '🦄', '🎀',
+    '🌟', '💖', '🐱', '🎉', '🍭', '🧁', '🎵', '🌺',
+    '💫', '🩷', '🐾', '🌻', '🎪', '🍓', '🪩', '🫧'
+  ];
+  let earnedStickers = [];
+
+  function loadStickers() {
+    try {
+      const saved = JSON.parse(localStorage.getItem('lunaCatStickers'));
+      if (saved && Array.isArray(saved)) earnedStickers = saved;
+    } catch(e) {}
+  }
+
+  function saveStickers() {
+    localStorage.setItem('lunaCatStickers', JSON.stringify(earnedStickers));
+  }
+
+  function awardSticker() {
+    // Find un-earned stickers
+    const available = allStickers.filter(s => !earnedStickers.includes(s));
+    if (available.length === 0) return; // all earned!
+    const newSticker = available[Math.floor(Math.random() * available.length)];
+    earnedStickers.push(newSticker);
+    saveStickers();
+
+    // Show a little notification
+    const notif = document.createElement('div');
+    notif.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:999;font-size:80px;animation:reactionPop 2s ease forwards;pointer-events:none;';
+    notif.textContent = newSticker;
+    document.body.appendChild(notif);
+
+    // Also show "NEW STICKER!" text
+    const txt = document.createElement('div');
+    txt.style.cssText = 'position:fixed;top:calc(50% + 60px);left:50%;transform:translateX(-50%);z-index:999;font-size:22px;color:var(--pink-deep);font-weight:bold;animation:reactionPop 2s ease forwards;pointer-events:none;background:white;padding:8px 16px;border-radius:20px;border:3px solid var(--pink);';
+    txt.textContent = '🌟 New Sticker! 🌟';
+    document.body.appendChild(txt);
+
+    playSound('tada');
+    setTimeout(() => { notif.remove(); txt.remove(); }, 2000);
+  }
+
+  function openStickers() {
+    document.getElementById('stickerOverlay').classList.remove('hidden');
+    playSound('happy');
+    const count = earnedStickers.length;
+    document.getElementById('stickerSubtitle').textContent = count + ' of ' + allStickers.length + ' stickers earned! ✨';
+
+    const grid = document.getElementById('stickerGrid');
+    grid.innerHTML = '';
+    allStickers.forEach(s => {
+      const slot = document.createElement('div');
+      slot.className = 'sticker-slot';
+      if (earnedStickers.includes(s)) {
+        slot.classList.add('earned');
+        slot.textContent = s;
+        slot.onclick = () => {
+          playSound('pop');
+          slot.style.transform = 'scale(1.3)';
+          setTimeout(() => { slot.style.transform = ''; }, 300);
+        };
+      } else {
+        slot.classList.add('locked');
+      }
+      grid.appendChild(slot);
+    });
+  }
+
+  function closeStickers() {
+    document.getElementById('stickerOverlay').classList.add('hidden');
+  }
+
+  // Award stickers on various good-care actions
+  // (We hook into saveState — every 3rd save, chance of sticker)
+  let saveCount = 0;
+  const originalSaveState = saveState;
+
   // Init
   function init() {
     createBgHearts();
+    loadStickers();
     loadState();
     renderNeeds();
     setSleeping(isSleeping);

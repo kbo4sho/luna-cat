@@ -42,13 +42,21 @@
         "Shape recognition: cat plays with different shaped toys, name the shape"
       ],
       "summary": "Added 3 new features: (1) Lullaby Mode — dark starry night scene with twinkling stars and a gentle Twinkle Twinkle Little Star melody. Cat gradually falls asleep after 4 seconds, restoring energy and love. Calming, soothing experience. (2) Touch Trail Sparkles — dragging a finger anywhere on screen leaves a trail of colorful sparkle emoji (hearts, stars, butterflies, flowers). Pure sensory delight, works on every screen. Throttled for performance. (3) Shape Recognition — cat asks Luna to find shapes (circle, star, heart, diamond, moon, triangle, square, flower) from 4 choices. Correct picks celebrate with bursts. Teaches shape names through play."
+    },
+    {
+      "date": "2026-02-13",
+      "ideas": [
+        "Tea party: serve tea and treats to cat and friends",
+        "Magic wand: wave wand to change cat's color/sparkle effects",
+        "Mini sticker collection: earn stickers for good care streaks"
+      ],
+      "summary": "Added 3 new features: (1) Tea Party — serve 6 treats (tea, cupcake, cookie, cake, strawberry, juice) to cat and 3 animal friends. Guests bounce happily when served. Big celebration when all treats served. Teaches social/pretend play. (2) Magic Wand — mystical dark purple scene with 8 spells (rainbow, snow, fire, unicorn, royal, flower, star, pink). Each spell transforms the cat with dramatic animation, ascending sparkle sounds, and themed emoji bursts. Ambient magic particles float around. Pure wonder and delight. (3) Sticker Collection — 24 stickers to earn by taking good care of kitty and completing activities. Sticker book shows earned vs locked stickers. New sticker awards pop up with fanfare. Stickers persist in localStorage. Adds long-term progression and reward loop."
     }
   ],
   "ideaPool": [
     "ABC letters: cat finds letters around the house, tap to learn the letter sound",
     "Day/night cycle: background changes based on time, teaches time of day",
     "Cat mood expressions: more varied emoji faces with labeled emotions (teaches feelings)",
-    "Mini sticker collection: earn stickers for good care streaks",
     "Weather effects: rain/sun/snow on background (teaches weather words)",
     "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
     "Cat wardrobe: unlock new cat colors/patterns as rewards",
@@ -62,8 +70,6 @@
     "Music maker: tap different items to make musical sounds, play simple tunes",
     "Counting stars: tap stars as they appear, count to 10",
     "Animal parade: animals march across screen, tap to make them dance",
-    "Magic wand: wave wand to change cat's color/sparkle effects",
-    "Tea party: serve tea and treats to cat and friends",
     "Painting easel: finger-paint with big color buttons"
   ]
 }
