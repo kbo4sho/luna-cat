@@ -4,7 +4,13 @@
   "audience": {
     "name": "Luna",
     "age": 3,
-    "interests": ["pink", "cats", "sparkles", "princesses", "animals"]
+    "interests": [
+      "pink",
+      "cats",
+      "sparkles",
+      "princesses",
+      "animals"
+    ]
   },
   "upgrades": [
     {
@@ -51,6 +57,15 @@
         "Mini sticker collection: earn stickers for good care streaks"
       ],
       "summary": "Added 3 new features: (1) Tea Party — serve 6 treats (tea, cupcake, cookie, cake, strawberry, juice) to cat and 3 animal friends. Guests bounce happily when served. Big celebration when all treats served. Teaches social/pretend play. (2) Magic Wand — mystical dark purple scene with 8 spells (rainbow, snow, fire, unicorn, royal, flower, star, pink). Each spell transforms the cat with dramatic animation, ascending sparkle sounds, and themed emoji bursts. Ambient magic particles float around. Pure wonder and delight. (3) Sticker Collection — 24 stickers to earn by taking good care of kitty and completing activities. Sticker book shows earned vs locked stickers. New sticker awards pop up with fanfare. Stickers persist in localStorage. Adds long-term progression and reward loop."
+    },
+    {
+      "date": "2026-02-14",
+      "ideas": [
+        "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
+        "Animal parade: animals march across screen, tap to make them dance",
+        "Painting easel: finger-paint with big color buttons"
+      ],
+      "summary": "Added 3 new features: (1) Garden — 5 planting pots with seed selection (tulip, sunflower, rose, cherry blossom, hibiscus, strawberry) and watering can. Plant seeds, water them to grow through 3 stages (sprout → leaves → bloom). Full garden triggers celebration + sticker. Teaches patience and nature. (2) Animal Parade — animals (elephant, lion, penguin, unicorn, etc.) march across the screen. Tap any animal to make it dance with musical notes bursting out and a fun tone. Every 5 dances triggers a celebration. Pure joy. (3) Painting Easel — finger-paint canvas with 9 colors, clear button, and emoji stamp button that places random cat-themed stamps. Full touch drawing on iPad. Creative free play."
     }
   ],
   "ideaPool": [
@@ -58,7 +73,6 @@
     "Day/night cycle: background changes based on time, teaches time of day",
     "Cat mood expressions: more varied emoji faces with labeled emotions (teaches feelings)",
     "Weather effects: rain/sun/snow on background (teaches weather words)",
-    "Garden scene: plant flowers with the cat, watch them grow (patience/nature)",
     "Cat wardrobe: unlock new cat colors/patterns as rewards",
     "Feeding variety: multiple food types with names (teaches food vocabulary)",
     "Happy meter celebration: confetti + special animation when cat is at max happiness",
@@ -68,8 +82,6 @@
     "Rainbow bridge: trace rainbow arcs for the cat to walk across",
     "Seasons mode: spring/summer/fall/winter backgrounds with themed activities",
     "Music maker: tap different items to make musical sounds, play simple tunes",
-    "Counting stars: tap stars as they appear, count to 10",
-    "Animal parade: animals march across screen, tap to make them dance",
-    "Painting easel: finger-paint with big color buttons"
+    "Counting stars: tap stars as they appear, count to 10"
   ]
 }

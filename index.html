@@ -1626,6 +1626,291 @@
     background: var(--pink-light);
   }
 
+  /* ===== GARDEN ===== */
+  .garden-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #87CEEB 0%, #c8f7c5 50%, #8B6914 95%, #6B4A0A 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .garden-overlay.hidden { display: none; }
+  .garden-title {
+    font-size: 28px;
+    color: #2e7d32;
+    position: absolute;
+    top: 20px;
+  }
+  .garden-sun {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    font-size: 60px;
+    animation: lullabyMoon 4s ease-in-out infinite;
+  }
+  .garden-cat {
+    font-size: 80px;
+    position: absolute;
+    bottom: 15%;
+    right: 10%;
+    z-index: 2;
+    animation: catBounce 2s ease infinite;
+  }
+  .garden-plots {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+    z-index: 2;
+    margin-bottom: 10px;
+  }
+  .garden-plot {
+    width: 90px;
+    height: 110px;
+    border-radius: 20px;
+    border: 4px solid #8B6914;
+    background: linear-gradient(180deg, transparent 50%, #6B4A0A 50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding-bottom: 8px;
+    font-size: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: visible;
+  }
+  .garden-plot:active { transform: scale(0.9); }
+  .garden-plot .plant {
+    transition: all 0.5s ease;
+    line-height: 1;
+  }
+  .garden-plot .plant.growing {
+    animation: plantGrow 0.6s ease;
+  }
+  @keyframes plantGrow {
+    0% { transform: scale(0.3) translateY(10px); }
+    60% { transform: scale(1.2) translateY(-5px); }
+    100% { transform: scale(1) translateY(0); }
+  }
+  .garden-plot .water-drop {
+    position: absolute;
+    font-size: 24px;
+    pointer-events: none;
+    animation: waterFall 0.8s ease-out forwards;
+  }
+  @keyframes waterFall {
+    0% { opacity: 1; transform: translateY(-20px); }
+    100% { opacity: 0; transform: translateY(20px); }
+  }
+  .garden-speech {
+    font-size: 24px;
+    color: #2e7d32;
+    text-align: center;
+    min-height: 36px;
+    z-index: 2;
+  }
+  .garden-tools {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    z-index: 2;
+    margin-bottom: 10px;
+  }
+  .garden-tool {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #7ed6a0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 42px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(126,214,160,0.3);
+  }
+  .garden-tool:active { transform: scale(0.85); background: #e8f8e0; }
+  .garden-tool.selected { border-color: #2e7d32; background: #e8f8e0; box-shadow: 0 0 0 3px #2e7d32; }
+  .garden-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid #7ed6a0;
+    background: white;
+    color: #2e7d32;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .garden-close:active { transform: scale(0.95); background: #e8f8e0; }
+
+  /* ===== ANIMAL PARADE ===== */
+  .parade-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #e0f4ff 0%, #c8f7c5 60%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 12px;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .parade-overlay.hidden { display: none; }
+  .parade-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+    z-index: 2;
+  }
+  .parade-road {
+    width: 100%;
+    max-width: 500px;
+    height: 200px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    border-radius: 20px;
+    background: linear-gradient(180deg, transparent 0%, #c8f7c5 40%, #a8d88c 100%);
+  }
+  .parade-animal {
+    position: absolute;
+    font-size: 70px;
+    cursor: pointer;
+    animation: paradeWalk var(--speed) linear forwards;
+    transition: transform 0.2s;
+    z-index: 2;
+  }
+  .parade-animal:active { transform: scale(0.85); }
+  .parade-animal.dancing {
+    animation: paradeDance 0.4s ease 4 !important;
+  }
+  @keyframes paradeWalk {
+    0% { left: -100px; }
+    100% { left: calc(100% + 100px); }
+  }
+  @keyframes paradeDance {
+    0% { transform: translateY(0) rotate(-10deg); }
+    25% { transform: translateY(-20px) rotate(10deg); }
+    50% { transform: translateY(0) rotate(-10deg); }
+    75% { transform: translateY(-15px) rotate(5deg); }
+    100% { transform: translateY(0) rotate(0deg); }
+  }
+  .parade-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+    z-index: 2;
+  }
+  .parade-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .parade-close:active { transform: scale(0.95); background: var(--pink-light); }
+  .parade-note {
+    position: absolute;
+    font-size: 30px;
+    pointer-events: none;
+    animation: paradeNote 1s ease-out forwards;
+    z-index: 3;
+  }
+  @keyframes paradeNote {
+    0% { opacity: 1; transform: translateY(0) scale(0.5); }
+    100% { opacity: 0; transform: translateY(-60px) scale(1.2) rotate(20deg); }
+  }
+
+  /* ===== PAINTING EASEL ===== */
+  .paint-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 50%, #f0e0ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 900;
+    gap: 10px;
+    padding: 16px;
+  }
+  .paint-overlay.hidden { display: none; }
+  .paint-title {
+    font-size: 26px;
+    color: var(--pink-deep);
+  }
+  .paint-canvas-wrap {
+    background: white;
+    border-radius: 16px;
+    border: 5px solid var(--pink);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+    touch-action: none;
+  }
+  .paint-canvas-wrap canvas {
+    display: block;
+  }
+  .paint-colors {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .paint-color {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    border: 4px solid white;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+  }
+  .paint-color:active { transform: scale(0.85); }
+  .paint-color.selected { border-color: #333; box-shadow: 0 0 0 3px #333, 0 3px 10px rgba(0,0,0,0.2); }
+  .paint-tools {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .paint-tool-btn {
+    padding: 10px 20px;
+    font-size: 24px;
+    border-radius: 20px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .paint-tool-btn:active { transform: scale(0.95); background: var(--pink-light); }
+  .paint-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .paint-close:active { transform: scale(0.95); background: var(--pink-light); }
+
   /* ===== SHAPE RECOGNITION ===== */
   .shape-overlay {
     position: fixed;
@@ -1856,6 +2141,39 @@
   <button class="sticker-close" onclick="closeStickers()">🔙 Back</button>
 </div>
 
+<!-- Garden overlay -->
+<div class="garden-overlay hidden" id="gardenOverlay">
+  <div class="garden-title">🌻 Kitty's Garden! 🌱</div>
+  <div class="garden-sun">☀️</div>
+  <div class="garden-cat">😺</div>
+  <div class="garden-speech" id="gardenSpeech">Pick a seed, then tap a pot! 🌱</div>
+  <div class="garden-plots" id="gardenPlots"></div>
+  <div class="garden-tools" id="gardenTools"></div>
+  <button class="garden-close" onclick="closeGarden()">🔙 Back</button>
+</div>
+
+<!-- Animal parade overlay -->
+<div class="parade-overlay hidden" id="paradeOverlay">
+  <div class="parade-title">🎪 Animal Parade! 🎶</div>
+  <div class="parade-score" id="paradeScore">💃 Tap animals to dance! 💃</div>
+  <div class="parade-road" id="paradeRoad"></div>
+  <button class="parade-close" onclick="closeParade()">🔙 Back</button>
+</div>
+
+<!-- Painting easel overlay -->
+<div class="paint-overlay hidden" id="paintOverlay">
+  <div class="paint-title">🎨 Painting Time! 🖌️</div>
+  <div class="paint-canvas-wrap" id="paintCanvasWrap">
+    <canvas id="paintCanvas" width="340" height="300"></canvas>
+  </div>
+  <div class="paint-colors" id="paintColors"></div>
+  <div class="paint-tools">
+    <button class="paint-tool-btn" onclick="paintClear()">🗑️ New</button>
+    <button class="paint-tool-btn" onclick="paintStamp()">🐱 Stamp</button>
+  </div>
+  <button class="paint-close" onclick="closePaint()">🔙 Back</button>
+</div>
+
 <!-- Shape recognition overlay -->
 <div class="shape-overlay hidden" id="shapeOverlay">
   <div class="shape-title">🔷 Shape Time! 🔶</div>
@@ -1983,6 +2301,18 @@
   <button class="action-btn" onclick="openStickers()" style="border-color: #7ed6a0;">
     <span>🌟</span>
     <span class="label">Stickers</span>
+  </button>
+  <button class="action-btn" onclick="openGarden()" style="border-color: #7ed6a0;">
+    <span>🌻</span>
+    <span class="label">Garden</span>
+  </button>
+  <button class="action-btn" onclick="openParade()" style="border-color: #ffcc66;">
+    <span>🎪</span>
+    <span class="label">Parade</span>
+  </button>
+  <button class="action-btn" onclick="openPaint()" style="border-color: #c9a0dc;">
+    <span>🖌️</span>
+    <span class="label">Paint</span>
   </button>
 </div>
 
@@ -3941,6 +4271,467 @@
 
   function closeStickers() {
     document.getElementById('stickerOverlay').classList.add('hidden');
+  }
+
+  // ===== GARDEN =====
+  const gardenSeeds = [
+    { emoji: '🌷', name: 'Tulip', stages: ['🌱', '🌿', '🌷'] },
+    { emoji: '🌻', name: 'Sunflower', stages: ['🌱', '🌿', '🌻'] },
+    { emoji: '🌹', name: 'Rose', stages: ['🌱', '🌿', '🌹'] },
+    { emoji: '🌸', name: 'Cherry Blossom', stages: ['🌱', '🌿', '🌸'] },
+    { emoji: '🌺', name: 'Hibiscus', stages: ['🌱', '🌿', '🌺'] },
+    { emoji: '🍓', name: 'Strawberry', stages: ['🌱', '🌿', '🍓'] },
+  ];
+  let gardenSelectedSeed = null;
+  let gardenPlots = []; // {seedIndex, stage}
+
+  function openGarden() {
+    gardenSelectedSeed = null;
+    gardenPlots = Array(5).fill(null);
+    document.getElementById('gardenOverlay').classList.remove('hidden');
+    document.getElementById('gardenSpeech').textContent = 'Pick a seed, then tap a pot! 🌱';
+    playSound('happy');
+
+    // Seed tools
+    const tools = document.getElementById('gardenTools');
+    tools.innerHTML = '';
+    // Pick 4 random seeds
+    const shuffled = [...gardenSeeds].sort(() => Math.random() - 0.5).slice(0, 4);
+    shuffled.forEach((seed, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'garden-tool';
+      btn.textContent = seed.emoji;
+      btn.onclick = () => {
+        gardenSelectedSeed = seed;
+        document.querySelectorAll('.garden-tool').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        playSound('pop');
+        document.getElementById('gardenSpeech').textContent = 'Now tap a pot! 🌱';
+      };
+      tools.appendChild(btn);
+    });
+
+    // Water can
+    const waterBtn = document.createElement('div');
+    waterBtn.className = 'garden-tool';
+    waterBtn.textContent = '💧';
+    waterBtn.onclick = () => {
+      gardenSelectedSeed = 'water';
+      document.querySelectorAll('.garden-tool').forEach(b => b.classList.remove('selected'));
+      waterBtn.classList.add('selected');
+      playSound('pop');
+      document.getElementById('gardenSpeech').textContent = 'Tap a plant to water it! 💧';
+    };
+    tools.appendChild(waterBtn);
+
+    // Render plots
+    renderGardenPlots();
+  }
+
+  function renderGardenPlots() {
+    const container = document.getElementById('gardenPlots');
+    container.innerHTML = '';
+    gardenPlots.forEach((plot, i) => {
+      const el = document.createElement('div');
+      el.className = 'garden-plot';
+      const plant = document.createElement('div');
+      plant.className = 'plant';
+      if (plot) {
+        plant.textContent = plot.stages[plot.stage];
+        plant.style.fontSize = (40 + plot.stage * 10) + 'px';
+      } else {
+        plant.textContent = '';
+        plant.style.fontSize = '40px';
+      }
+      el.appendChild(plant);
+      el.onclick = () => tapGardenPlot(i, plant);
+      container.appendChild(el);
+    });
+  }
+
+  function tapGardenPlot(index, plantEl) {
+    if (!gardenSelectedSeed) {
+      document.getElementById('gardenSpeech').textContent = 'Pick a seed first! 👇';
+      playSound('pop');
+      return;
+    }
+
+    if (gardenSelectedSeed === 'water') {
+      // Water the plant
+      if (!gardenPlots[index]) {
+        document.getElementById('gardenSpeech').textContent = 'Nothing to water here! 🌱';
+        return;
+      }
+      const plot = gardenPlots[index];
+      if (plot.stage >= plot.stages.length - 1) {
+        document.getElementById('gardenSpeech').textContent = 'Already bloomed! ' + plot.stages[plot.stage] + '✨';
+        playSound('happy');
+        return;
+      }
+      plot.stage++;
+      playSound('feed');
+
+      // Water drop effect
+      const plotEl = plantEl.parentElement;
+      for (let i = 0; i < 3; i++) {
+        const drop = document.createElement('div');
+        drop.className = 'water-drop';
+        drop.textContent = '💧';
+        drop.style.left = (20 + Math.random() * 50) + '%';
+        drop.style.top = '20%';
+        drop.style.animationDelay = (i * 0.15) + 's';
+        plotEl.appendChild(drop);
+        setTimeout(() => drop.remove(), 800);
+      }
+
+      // Grow animation
+      plantEl.textContent = plot.stages[plot.stage];
+      plantEl.style.fontSize = (40 + plot.stage * 10) + 'px';
+      plantEl.classList.remove('growing');
+      void plantEl.offsetWidth;
+      plantEl.classList.add('growing');
+
+      if (plot.stage >= plot.stages.length - 1) {
+        document.getElementById('gardenSpeech').textContent = '🎉 ' + plot.stages[plot.stage] + ' bloomed! 🎉';
+        playSound('tada');
+
+        // Check if all plots are fully grown
+        const allGrown = gardenPlots.filter(p => p && p.stage >= p.stages.length - 1).length;
+        const allPlanted = gardenPlots.filter(p => p).length;
+        if (allGrown >= 3 && allGrown === allPlanted) {
+          setTimeout(() => {
+            document.getElementById('gardenSpeech').textContent = '🌈 Beautiful garden! 🌈';
+            const overlay = document.getElementById('gardenOverlay');
+            for (let i = 0; i < 10; i++) {
+              const spark = document.createElement('div');
+              spark.className = 'emoji-burst';
+              spark.textContent = ['🌸', '🌻', '🌷', '✨', '🌈', '💖'][Math.floor(Math.random() * 6)];
+              spark.style.left = '50%';
+              spark.style.top = '50%';
+              spark.style.position = 'absolute';
+              const angle = (Math.PI * 2 * i) / 10;
+              const dist = 80 + Math.random() * 60;
+              spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+              spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+              spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+              overlay.appendChild(spark);
+              setTimeout(() => spark.remove(), 1200);
+            }
+            awardSticker();
+          }, 1000);
+        }
+
+        // Burst
+        const overlay = document.getElementById('gardenOverlay');
+        for (let i = 0; i < 6; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = [plot.stages[plot.stage], '✨', '💖', '⭐'][Math.floor(Math.random() * 4)];
+          spark.style.left = '50%';
+          spark.style.top = '60%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * i) / 6;
+          const dist = 60 + Math.random() * 40;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          overlay.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+      } else {
+        document.getElementById('gardenSpeech').textContent = 'Growing! ' + plot.stages[plot.stage] + ' 💧';
+      }
+    } else {
+      // Plant a seed
+      if (gardenPlots[index]) {
+        document.getElementById('gardenSpeech').textContent = 'Already planted here! 🌱';
+        playSound('pop');
+        return;
+      }
+      gardenPlots[index] = { stages: gardenSelectedSeed.stages, stage: 0 };
+      playSound('count');
+      plantEl.textContent = gardenSelectedSeed.stages[0];
+      plantEl.style.fontSize = '40px';
+      plantEl.classList.remove('growing');
+      void plantEl.offsetWidth;
+      plantEl.classList.add('growing');
+      document.getElementById('gardenSpeech').textContent = 'Planted! Now water it! 💧';
+    }
+  }
+
+  function closeGarden() {
+    document.getElementById('gardenOverlay').classList.add('hidden');
+    const planted = gardenPlots.filter(p => p).length;
+    if (planted > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🌻');
+      showSpeech('Pretty garden! 🌻');
+      emojiBurst(['🌸', '🌷', '🌻', '✨', '💖'], 6);
+    }
+  }
+
+  // ===== ANIMAL PARADE =====
+  const paradeAnimals = [
+    { emoji: '🐘', sound: 'Stomp stomp!' },
+    { emoji: '🦁', sound: 'Roar!' },
+    { emoji: '🐻', sound: 'Grrrr!' },
+    { emoji: '🐧', sound: 'Waddle waddle!' },
+    { emoji: '🐶', sound: 'Woof woof!' },
+    { emoji: '🐰', sound: 'Hop hop!' },
+    { emoji: '🦋', sound: 'Flutter!' },
+    { emoji: '🐸', sound: 'Ribbit!' },
+    { emoji: '🦄', sound: 'Magical!' },
+    { emoji: '🐷', sound: 'Oink oink!' },
+    { emoji: '🐥', sound: 'Cheep cheep!' },
+    { emoji: '🦆', sound: 'Quack quack!' },
+  ];
+  let paradeInterval = null;
+  let paradeDances = 0;
+
+  function openParade() {
+    paradeDances = 0;
+    document.getElementById('paradeScore').textContent = '💃 Tap animals to dance! 💃';
+    document.getElementById('paradeOverlay').classList.remove('hidden');
+    document.getElementById('paradeRoad').innerHTML = '';
+    playSound('happy');
+    spawnParadeAnimal();
+    paradeInterval = setInterval(spawnParadeAnimal, 2200);
+  }
+
+  function spawnParadeAnimal() {
+    const road = document.getElementById('paradeRoad');
+    if (!road || document.getElementById('paradeOverlay').classList.contains('hidden')) {
+      clearInterval(paradeInterval);
+      return;
+    }
+    if (road.children.length > 6) return;
+
+    const animal = paradeAnimals[Math.floor(Math.random() * paradeAnimals.length)];
+    const el = document.createElement('div');
+    el.className = 'parade-animal';
+    el.textContent = animal.emoji;
+    const yPos = 40 + Math.random() * 100;
+    el.style.top = yPos + 'px';
+    const speed = 6 + Math.random() * 4;
+    el.style.setProperty('--speed', speed + 's');
+
+    el.onclick = (e) => {
+      e.stopPropagation();
+      if (el.classList.contains('dancing')) return;
+      el.classList.add('dancing');
+      playSound('pop');
+      paradeDances++;
+      document.getElementById('paradeScore').textContent = '💃 ' + paradeDances + ' dances!';
+
+      // Musical notes burst
+      const rect = el.getBoundingClientRect();
+      const notes = ['🎵', '🎶', '⭐', '✨', '💃'];
+      for (let i = 0; i < 4; i++) {
+        const note = document.createElement('div');
+        note.className = 'parade-note';
+        note.textContent = notes[Math.floor(Math.random() * notes.length)];
+        note.style.left = rect.left + rect.width/2 + (Math.random() * 40 - 20) + 'px';
+        note.style.top = rect.top + 'px';
+        note.style.position = 'fixed';
+        note.style.zIndex = '999';
+        document.body.appendChild(note);
+        setTimeout(() => note.remove(), 1000);
+      }
+
+      // Play a fun note
+      try {
+        const ctx = getAudioCtx();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'triangle';
+        const freqs = [523, 587, 659, 698, 784, 880];
+        osc.frequency.setValueAtTime(freqs[Math.floor(Math.random() * freqs.length)], ctx.currentTime);
+        gain.gain.setValueAtTime(0.12, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.2);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.2);
+      } catch(e) {}
+
+      // Milestone celebration
+      if (paradeDances % 5 === 0) {
+        playSound('tada');
+        for (let i = 0; i < 8; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['🎉', '🎵', '💃', '⭐', '✨'][Math.floor(Math.random() * 5)];
+          spark.style.left = '50%';
+          spark.style.top = '50%';
+          spark.style.position = 'fixed';
+          spark.style.zIndex = '999';
+          const angle = (Math.PI * 2 * i) / 8;
+          const dist = 80 + Math.random() * 60;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          document.body.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+      }
+
+      setTimeout(() => el.classList.remove('dancing'), 1600);
+    };
+
+    road.appendChild(el);
+    setTimeout(() => { if (el.parentElement) el.remove(); }, speed * 1000);
+  }
+
+  function closeParade() {
+    clearInterval(paradeInterval);
+    document.getElementById('paradeOverlay').classList.add('hidden');
+    document.getElementById('paradeRoad').innerHTML = '';
+    if (paradeDances > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🎪');
+      showSpeech('Fun parade! 🎪🎶');
+      emojiBurst(['🐘', '🦁', '🎵', '💃', '✨'], 6);
+    }
+  }
+
+  // ===== PAINTING EASEL =====
+  const paintColorList = [
+    '#ff4444', '#ff8ec4', '#ff8800', '#ffcc00',
+    '#44cc44', '#4488ff', '#aa66cc', '#ffffff', '#333333'
+  ];
+  let paintCurrentColor = '#ff8ec4';
+  let paintDrawing = false;
+  let paintLastX = 0, paintLastY = 0;
+
+  function openPaint() {
+    document.getElementById('paintOverlay').classList.remove('hidden');
+    playSound('happy');
+
+    // Size canvas to fit
+    const wrap = document.getElementById('paintCanvasWrap');
+    const canvas = document.getElementById('paintCanvas');
+    const w = Math.min(340, window.innerWidth - 40);
+    const h = Math.min(300, window.innerHeight * 0.35);
+    canvas.width = w;
+    canvas.height = h;
+    wrap.style.width = w + 'px';
+    wrap.style.height = h + 'px';
+
+    // Clear canvas white
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, w, h);
+
+    // Color buttons
+    const colors = document.getElementById('paintColors');
+    colors.innerHTML = '';
+    paintColorList.forEach((c, i) => {
+      const btn = document.createElement('div');
+      btn.className = 'paint-color' + (c === paintCurrentColor ? ' selected' : '');
+      btn.style.background = c;
+      if (c === '#ffffff') btn.style.border = '4px solid #ccc';
+      btn.onclick = () => {
+        paintCurrentColor = c;
+        document.querySelectorAll('.paint-color').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        playSound('pop');
+      };
+      colors.appendChild(btn);
+    });
+
+    // Touch/mouse drawing
+    canvas.addEventListener('touchstart', paintStart, { passive: false });
+    canvas.addEventListener('touchmove', paintMove, { passive: false });
+    canvas.addEventListener('touchend', paintEnd);
+    canvas.addEventListener('mousedown', paintStartMouse);
+    canvas.addEventListener('mousemove', paintMoveMouse);
+    canvas.addEventListener('mouseup', paintEnd);
+  }
+
+  function paintGetXY(e, canvas) {
+    const rect = canvas.getBoundingClientRect();
+    if (e.touches) {
+      return { x: e.touches[0].clientX - rect.left, y: e.touches[0].clientY - rect.top };
+    }
+    return { x: e.clientX - rect.left, y: e.clientY - rect.top };
+  }
+
+  function paintStart(e) {
+    e.preventDefault();
+    paintDrawing = true;
+    const canvas = document.getElementById('paintCanvas');
+    const pos = paintGetXY(e, canvas);
+    paintLastX = pos.x;
+    paintLastY = pos.y;
+  }
+  function paintStartMouse(e) {
+    paintDrawing = true;
+    const canvas = document.getElementById('paintCanvas');
+    const pos = paintGetXY(e, canvas);
+    paintLastX = pos.x;
+    paintLastY = pos.y;
+  }
+  function paintMove(e) {
+    e.preventDefault();
+    if (!paintDrawing) return;
+    const canvas = document.getElementById('paintCanvas');
+    const ctx = canvas.getContext('2d');
+    const pos = paintGetXY(e, canvas);
+    ctx.strokeStyle = paintCurrentColor;
+    ctx.lineWidth = 8;
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.beginPath();
+    ctx.moveTo(paintLastX, paintLastY);
+    ctx.lineTo(pos.x, pos.y);
+    ctx.stroke();
+    paintLastX = pos.x;
+    paintLastY = pos.y;
+  }
+  function paintMoveMouse(e) {
+    if (!paintDrawing) return;
+    paintMove(e);
+  }
+  function paintEnd() {
+    paintDrawing = false;
+  }
+
+  function paintClear() {
+    const canvas = document.getElementById('paintCanvas');
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#ffffff';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    playSound('pop');
+  }
+
+  function paintStamp() {
+    const canvas = document.getElementById('paintCanvas');
+    const ctx = canvas.getContext('2d');
+    const stamps = ['🐱', '🌸', '⭐', '💖', '🦋', '🌈', '🐟', '🌻'];
+    const stamp = stamps[Math.floor(Math.random() * stamps.length)];
+    const x = 40 + Math.random() * (canvas.width - 80);
+    const y = 40 + Math.random() * (canvas.height - 80);
+    ctx.font = '50px serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(stamp, x, y);
+    playSound('count');
+  }
+
+  function closePaint() {
+    paintDrawing = false;
+    document.getElementById('paintOverlay').classList.add('hidden');
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    renderNeeds();
+    saveState();
+    showReaction('🎨');
+    showSpeech('Pretty painting! 🎨');
+    emojiBurst(['🎨', '🖌️', '✨', '💖', '🌈'], 6);
+    awardSticker();
   }
 
   // Award stickers on various good-care actions
