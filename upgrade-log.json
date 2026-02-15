@@ -66,6 +66,15 @@
         "Painting easel: finger-paint with big color buttons"
       ],
       "summary": "Added 3 new features: (1) Garden — 5 planting pots with seed selection (tulip, sunflower, rose, cherry blossom, hibiscus, strawberry) and watering can. Plant seeds, water them to grow through 3 stages (sprout → leaves → bloom). Full garden triggers celebration + sticker. Teaches patience and nature. (2) Animal Parade — animals (elephant, lion, penguin, unicorn, etc.) march across the screen. Tap any animal to make it dance with musical notes bursting out and a fun tone. Every 5 dances triggers a celebration. Pure joy. (3) Painting Easel — finger-paint canvas with 9 colors, clear button, and emoji stamp button that places random cat-themed stamps. Full touch drawing on iPad. Creative free play."
+    },
+    {
+      "date": "2026-02-15",
+      "ideas": [
+        "Memory card game: flip cards to match cat-themed pairs",
+        "Music maker: tap different items to make musical sounds, play simple tunes",
+        "Counting stars: tap stars as they appear, count to 10"
+      ],
+      "summary": "Added 3 new features: (1) Memory Match — 4 pairs of emoji cards (8 total) in a 4x2 grid. Tap to flip, find matching pairs. Wrong guesses flip back gently. Matched pairs stay revealed with celebration bursts. Completing all pairs awards a sticker. Teaches memory and visual matching. (2) Music Maker — 8 instrument buttons (drum, piano, bell, guitar, trumpet, shaker, high note, low note) each play unique synthesized sounds with pitch variation. Cat bounces along. Musical notes float up on each tap. Every 8 notes triggers a celebration. Encourages rhythm and cause-effect learning. (3) Counting Stars — stars appear on a dark night sky background. Tap to collect them and count to 10. Number words shown (One!, Two!...). Halfway celebration at 5, big finale at 10 with sticker reward. Teaches counting to 10."
     }
   ],
   "ideaPool": [
@@ -78,10 +87,14 @@
     "Happy meter celebration: confetti + special animation when cat is at max happiness",
     "Sound board: cat makes different sounds based on mood",
     "Simple puzzle: 2-4 piece jigsaw of the cat",
-    "Memory card game: flip cards to match cat-themed pairs",
     "Rainbow bridge: trace rainbow arcs for the cat to walk across",
     "Seasons mode: spring/summer/fall/winter backgrounds with themed activities",
-    "Music maker: tap different items to make musical sounds, play simple tunes",
-    "Counting stars: tap stars as they appear, count to 10"
+    "Treasure hunt: find hidden items around a scene by tapping",
+    "Simon says: follow the pattern of colors/sounds (memory sequencing)",
+    "Balloon pop: tap rising balloons, each one counts up",
+    "Emotion faces: match the emoji to the feeling word/scenario",
+    "Build a snowman: drag-and-tap to stack snowman parts",
+    "Animal sounds quiz: hear a sound, pick which animal makes it",
+    "Sorting game: sort items by color or size into bins"
   ]
 }
