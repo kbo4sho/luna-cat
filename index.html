@@ -2139,6 +2139,208 @@
   }
   .stars-close:active { transform: scale(0.95); background: rgba(255,255,255,0.2); }
 
+  /* ===== TREASURE HUNT ===== */
+  .treasure-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #87CEEB 0%, #c8f7c5 40%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 14px;
+    padding: 20px;
+  }
+  .treasure-overlay.hidden { display: none; }
+  .treasure-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .treasure-prompt {
+    font-size: 24px;
+    color: var(--pink-dark);
+    text-align: center;
+    min-height: 36px;
+  }
+  .treasure-scene {
+    display: grid;
+    grid-template-columns: repeat(4, 85px);
+    gap: 12px;
+    justify-content: center;
+  }
+  .treasure-spot {
+    width: 85px;
+    height: 85px;
+    border-radius: 20px;
+    border: 4px solid var(--pink);
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 4px 12px rgba(232,93,161,0.2);
+  }
+  .treasure-spot:active { transform: scale(0.9); }
+  .treasure-spot.found {
+    border-color: #7ed6a0;
+    background: #e8f8e0;
+    animation: colorCorrect 0.6s ease;
+  }
+  .treasure-spot.empty-tap {
+    animation: colorWrong 0.4s ease;
+  }
+  .treasure-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+  }
+  .treasure-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .treasure-close:active { transform: scale(0.95); background: var(--pink-light); }
+
+  /* ===== ANIMAL SOUNDS QUIZ ===== */
+  .soundquiz-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #c8f7c5 0%, #e0f4ff 40%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 900;
+    gap: 14px;
+    padding: 20px;
+  }
+  .soundquiz-overlay.hidden { display: none; }
+  .soundquiz-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+  }
+  .soundquiz-speaker {
+    font-size: 100px;
+    cursor: pointer;
+    animation: colorPulse 1.5s ease infinite alternate;
+    transition: transform 0.2s;
+  }
+  .soundquiz-speaker:active { transform: scale(0.85); }
+  .soundquiz-prompt {
+    font-size: 24px;
+    color: var(--pink-dark);
+    text-align: center;
+  }
+  .soundquiz-grid {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+  }
+  .soundquiz-btn {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 5px solid #7ed6a0;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 54px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 6px 16px rgba(126,214,160,0.3);
+  }
+  .soundquiz-btn:active { transform: scale(0.85); }
+  .soundquiz-btn.correct { animation: colorCorrect 0.6s ease; border-color: #2e7d32; background: #e8f8e0; }
+  .soundquiz-btn.wrong { animation: colorWrong 0.4s ease; }
+  .soundquiz-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+  }
+  .soundquiz-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .soundquiz-close:active { transform: scale(0.95); background: var(--pink-light); }
+
+  /* ===== BALLOON POP ===== */
+  .balloon-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #87CEEB 0%, #e0f4ff 40%, #ffe4f0 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 900;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .balloon-overlay.hidden { display: none; }
+  .balloon-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+    z-index: 2;
+  }
+  .balloon-count {
+    font-size: 60px;
+    color: var(--pink-deep);
+    font-weight: bold;
+    z-index: 2;
+    transition: transform 0.2s;
+  }
+  .balloon-count.bump { animation: colorCorrect 0.3s ease; }
+  .balloon-field {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .balloon {
+    position: absolute;
+    font-size: 70px;
+    cursor: pointer;
+    animation: bubbleFloat var(--speed) linear forwards;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.15s;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  }
+  .balloon:active { transform: scale(0.85); }
+  .balloon.popped {
+    animation: bubblePop 0.4s ease forwards !important;
+  }
+  .balloon-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    margin: 10px 0 20px;
+  }
+  .balloon-close:active { transform: scale(0.95); background: var(--pink-light); }
+
   /* ===== SHAPE RECOGNITION ===== */
   .shape-overlay {
     position: fixed;
@@ -2438,6 +2640,33 @@
   <button class="shape-close" onclick="closeShapes()">🔙 Back</button>
 </div>
 
+<!-- Treasure hunt overlay -->
+<div class="treasure-overlay hidden" id="treasureOverlay">
+  <div class="treasure-title">🗺️ Treasure Hunt! 💎</div>
+  <div class="treasure-prompt" id="treasurePrompt">Find the hidden treasures! 👀</div>
+  <div class="treasure-scene" id="treasureScene"></div>
+  <div class="treasure-score" id="treasureScore">💎 0 found</div>
+  <button class="treasure-close" onclick="closeTreasure()">🔙 Back</button>
+</div>
+
+<!-- Animal sounds quiz overlay -->
+<div class="soundquiz-overlay hidden" id="soundquizOverlay">
+  <div class="soundquiz-title">🔊 Who Said That? 🐾</div>
+  <div class="soundquiz-speaker" id="soundquizSpeaker" onclick="replaySoundQuiz()">🔊</div>
+  <div class="soundquiz-prompt" id="soundquizPrompt">Which animal makes this sound?</div>
+  <div class="soundquiz-grid" id="soundquizGrid"></div>
+  <div class="soundquiz-score" id="soundquizScore">⭐ 0</div>
+  <button class="soundquiz-close" onclick="closeSoundQuiz()">🔙 Back</button>
+</div>
+
+<!-- Balloon pop overlay -->
+<div class="balloon-overlay hidden" id="balloonOverlay">
+  <div class="balloon-title">🎈 Pop the Balloons! 🎈</div>
+  <div class="balloon-count" id="balloonCount">0</div>
+  <div class="balloon-field" id="balloonField"></div>
+  <button class="balloon-close" onclick="closeBalloons()">🔙 Back</button>
+</div>
+
 <!-- Header -->
 <div class="header">
   <h1>Luna's Kitty 🐱💕</h1>
@@ -2578,6 +2807,18 @@
   <button class="action-btn" onclick="openStars()" style="border-color: #c8b0ff;">
     <span>🌟</span>
     <span class="label">Stars</span>
+  </button>
+  <button class="action-btn" onclick="openTreasure()" style="border-color: #ffcc66;">
+    <span>🗺️</span>
+    <span class="label">Hunt!</span>
+  </button>
+  <button class="action-btn" onclick="openSoundQuiz()" style="border-color: #7ed6a0;">
+    <span>🔊</span>
+    <span class="label">Sounds</span>
+  </button>
+  <button class="action-btn" onclick="openBalloons2()" style="border-color: #ff9966;">
+    <span>🎈</span>
+    <span class="label">Balloons</span>
   </button>
 </div>
 
@@ -5382,6 +5623,473 @@
       showReaction('🌟');
       showSpeech('Great counting! 🌟');
       emojiBurst(['⭐', '🌟', '✨', '💖'], 6);
+    }
+  }
+
+  // ===== TREASURE HUNT =====
+  const treasureItems = ['💎', '👑', '⭐', '🌈', '🦋', '🌸', '🎀', '💖', '🍭', '🧁'];
+  const hideObjects = ['🌳', '🪨', '🌻', '☁️', '🏠', '🧸', '📦', '🎁', '⛺', '🌾', '🪵', '🍄'];
+  let treasureFound = 0;
+  let treasureTotal = 0;
+
+  function openTreasure() {
+    treasureFound = 0;
+    document.getElementById('treasureOverlay').classList.remove('hidden');
+    playSound('happy');
+    startTreasureRound();
+  }
+
+  function startTreasureRound() {
+    treasureFound = 0;
+    const scene = document.getElementById('treasureScene');
+    scene.innerHTML = '';
+    
+    // 12 spots (4x3 grid), 3-4 have hidden treasure
+    const spots = 12;
+    treasureTotal = 3 + Math.floor(Math.random() * 2); // 3 or 4
+    const treasurePositions = new Set();
+    while (treasurePositions.size < treasureTotal) {
+      treasurePositions.add(Math.floor(Math.random() * spots));
+    }
+    
+    const shuffledHides = [...hideObjects].sort(() => Math.random() - 0.5);
+    const shuffledTreasures = [...treasureItems].sort(() => Math.random() - 0.5);
+    let tIdx = 0;
+
+    document.getElementById('treasurePrompt').textContent = 'Find ' + treasureTotal + ' hidden treasures! 👀💎';
+    document.getElementById('treasureScore').textContent = '💎 0 of ' + treasureTotal + ' found';
+
+    for (let i = 0; i < spots; i++) {
+      const spot = document.createElement('div');
+      spot.className = 'treasure-spot';
+      spot.textContent = shuffledHides[i % shuffledHides.length];
+      
+      if (treasurePositions.has(i)) {
+        spot.dataset.treasure = shuffledTreasures[tIdx++ % shuffledTreasures.length];
+      } else {
+        spot.dataset.treasure = '';
+      }
+      spot.onclick = () => tapTreasureSpot(spot);
+      scene.appendChild(spot);
+    }
+  }
+
+  function tapTreasureSpot(spot) {
+    if (spot.classList.contains('found')) return;
+    
+    if (spot.dataset.treasure) {
+      spot.classList.add('found');
+      spot.textContent = spot.dataset.treasure;
+      treasureFound++;
+      playSound('tada');
+      document.getElementById('treasureScore').textContent = '💎 ' + treasureFound + ' of ' + treasureTotal + ' found';
+      
+      // Burst
+      const overlay = document.getElementById('treasureOverlay');
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = [spot.dataset.treasure, '✨', '⭐', '💖'][Math.floor(Math.random() * 4)];
+        spark.style.left = '50%';
+        spark.style.top = '45%';
+        spark.style.position = 'absolute';
+        const angle = (Math.PI * 2 * i) / 6;
+        const dist = 60 + Math.random() * 40;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+      
+      if (treasureFound >= treasureTotal) {
+        setTimeout(() => {
+          playSound('tada');
+          document.getElementById('treasurePrompt').textContent = '🎉 All treasures found! 🎉💎';
+          for (let i = 0; i < 10; i++) {
+            const spark = document.createElement('div');
+            spark.className = 'emoji-burst';
+            spark.textContent = ['💎', '👑', '⭐', '✨', '🌈', '🎉'][Math.floor(Math.random() * 6)];
+            spark.style.left = '50%';
+            spark.style.top = '40%';
+            spark.style.position = 'absolute';
+            const angle = (Math.PI * 2 * i) / 10;
+            const dist = 80 + Math.random() * 60;
+            spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+            spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+            spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+            overlay.appendChild(spark);
+            setTimeout(() => spark.remove(), 1200);
+          }
+          awardSticker();
+          needs.love = Math.min(MAX_NEED, needs.love + 1);
+          renderNeeds();
+          saveState();
+          // Auto restart after delay
+          setTimeout(() => {
+            if (!document.getElementById('treasureOverlay').classList.contains('hidden')) {
+              startTreasureRound();
+            }
+          }, 2500);
+        }, 500);
+      }
+    } else {
+      spot.classList.add('empty-tap');
+      playSound('pop');
+      const orig = spot.textContent;
+      spot.textContent = '🫣';
+      setTimeout(() => {
+        spot.textContent = orig;
+        spot.classList.remove('empty-tap');
+      }, 500);
+    }
+  }
+
+  function closeTreasure() {
+    document.getElementById('treasureOverlay').classList.add('hidden');
+    if (treasureFound > 0) {
+      showReaction('💎');
+      showSpeech('Great hunting! 💎🗺️');
+      emojiBurst(['💎', '👑', '⭐', '✨', '🌈'], 6);
+    }
+  }
+
+  // ===== ANIMAL SOUNDS QUIZ =====
+  const soundQuizAnimals = [
+    { emoji: '🐶', name: 'Dog', freq: 250, type: 'sawtooth', pattern: 'bark' },
+    { emoji: '🐱', name: 'Cat', freq: 600, type: 'sine', pattern: 'meow' },
+    { emoji: '🐸', name: 'Frog', freq: 200, type: 'square', pattern: 'ribbit' },
+    { emoji: '🐥', name: 'Chick', freq: 1200, type: 'sine', pattern: 'peep' },
+    { emoji: '🐷', name: 'Pig', freq: 180, type: 'sawtooth', pattern: 'oink' },
+    { emoji: '🐮', name: 'Cow', freq: 150, type: 'sawtooth', pattern: 'moo' },
+    { emoji: '🦆', name: 'Duck', freq: 400, type: 'square', pattern: 'quack' },
+    { emoji: '🦁', name: 'Lion', freq: 100, type: 'sawtooth', pattern: 'roar' },
+  ];
+  let sqAnswer = null;
+  let sqScore = 0;
+  let sqLocked = false;
+
+  function openSoundQuiz() {
+    sqScore = 0;
+    document.getElementById('soundquizScore').textContent = '⭐ 0';
+    document.getElementById('soundquizOverlay').classList.remove('hidden');
+    playSound('happy');
+    startSoundQuizRound();
+  }
+
+  function startSoundQuizRound() {
+    sqLocked = false;
+    const shuffled = [...soundQuizAnimals].sort(() => Math.random() - 0.5);
+    const choices = shuffled.slice(0, 3);
+    sqAnswer = choices[Math.floor(Math.random() * choices.length)];
+
+    document.getElementById('soundquizPrompt').textContent = 'Which animal makes this sound? 🔊';
+    document.getElementById('soundquizSpeaker').textContent = '🔊';
+
+    const grid = document.getElementById('soundquizGrid');
+    grid.innerHTML = '';
+    choices.forEach(a => {
+      const btn = document.createElement('div');
+      btn.className = 'soundquiz-btn';
+      btn.textContent = a.emoji;
+      btn.onclick = () => pickSoundQuiz(a, btn);
+      grid.appendChild(btn);
+    });
+
+    // Auto-play the sound
+    setTimeout(() => playAnimalSound(sqAnswer), 400);
+  }
+
+  function playAnimalSound(animal) {
+    try {
+      const ctx = getAudioCtx();
+      switch(animal.pattern) {
+        case 'bark': {
+          // Two short bursts
+          for (let i = 0; i < 2; i++) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(250, ctx.currentTime + i * 0.2);
+            osc.frequency.linearRampToValueAtTime(350, ctx.currentTime + i * 0.2 + 0.08);
+            gain.gain.setValueAtTime(0.12, ctx.currentTime + i * 0.2);
+            gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.2 + 0.12);
+            osc.start(ctx.currentTime + i * 0.2);
+            osc.stop(ctx.currentTime + i * 0.2 + 0.15);
+          }
+          break;
+        }
+        case 'meow': {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(500, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(700, ctx.currentTime + 0.15);
+          osc.frequency.linearRampToValueAtTime(400, ctx.currentTime + 0.4);
+          gain.gain.setValueAtTime(0.12, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+          osc.start(); osc.stop(ctx.currentTime + 0.5);
+          break;
+        }
+        case 'ribbit': {
+          for (let i = 0; i < 2; i++) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(200, ctx.currentTime + i * 0.25);
+            osc.frequency.linearRampToValueAtTime(400, ctx.currentTime + i * 0.25 + 0.05);
+            osc.frequency.linearRampToValueAtTime(150, ctx.currentTime + i * 0.25 + 0.1);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.25);
+            gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.25 + 0.15);
+            osc.start(ctx.currentTime + i * 0.25);
+            osc.stop(ctx.currentTime + i * 0.25 + 0.15);
+          }
+          break;
+        }
+        case 'peep': {
+          for (let i = 0; i < 3; i++) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(1200 + i * 100, ctx.currentTime + i * 0.12);
+            gain.gain.setValueAtTime(0.1, ctx.currentTime + i * 0.12);
+            gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.12 + 0.08);
+            osc.start(ctx.currentTime + i * 0.12);
+            osc.stop(ctx.currentTime + i * 0.12 + 0.1);
+          }
+          break;
+        }
+        case 'oink': {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(180, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(280, ctx.currentTime + 0.1);
+          osc.frequency.linearRampToValueAtTime(160, ctx.currentTime + 0.2);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.3);
+          osc.start(); osc.stop(ctx.currentTime + 0.3);
+          break;
+        }
+        case 'moo': {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(150, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(170, ctx.currentTime + 0.3);
+          osc.frequency.linearRampToValueAtTime(140, ctx.currentTime + 0.6);
+          gain.gain.setValueAtTime(0.1, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.7);
+          osc.start(); osc.stop(ctx.currentTime + 0.7);
+          break;
+        }
+        case 'quack': {
+          for (let i = 0; i < 2; i++) {
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.connect(gain); gain.connect(ctx.destination);
+            osc.type = 'square';
+            osc.frequency.setValueAtTime(400, ctx.currentTime + i * 0.2);
+            osc.frequency.linearRampToValueAtTime(300, ctx.currentTime + i * 0.2 + 0.1);
+            gain.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.2);
+            gain.gain.linearRampToValueAtTime(0, ctx.currentTime + i * 0.2 + 0.12);
+            osc.start(ctx.currentTime + i * 0.2);
+            osc.stop(ctx.currentTime + i * 0.2 + 0.15);
+          }
+          break;
+        }
+        case 'roar': {
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          osc.type = 'sawtooth';
+          osc.frequency.setValueAtTime(100, ctx.currentTime);
+          osc.frequency.linearRampToValueAtTime(200, ctx.currentTime + 0.15);
+          osc.frequency.linearRampToValueAtTime(80, ctx.currentTime + 0.5);
+          gain.gain.setValueAtTime(0.15, ctx.currentTime);
+          gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.6);
+          osc.start(); osc.stop(ctx.currentTime + 0.6);
+          break;
+        }
+      }
+    } catch(e) {}
+    // Animate speaker
+    const speaker = document.getElementById('soundquizSpeaker');
+    speaker.textContent = '📢';
+    setTimeout(() => { speaker.textContent = '🔊'; }, 600);
+  }
+
+  function replaySoundQuiz() {
+    if (sqAnswer) playAnimalSound(sqAnswer);
+  }
+
+  function pickSoundQuiz(animal, btn) {
+    if (sqLocked) return;
+    if (animal.name === sqAnswer.name) {
+      sqLocked = true;
+      btn.classList.add('correct');
+      playSound('tada');
+      sqScore++;
+      document.getElementById('soundquizScore').textContent = '⭐ ' + sqScore;
+      document.getElementById('soundquizPrompt').textContent = '🎉 Yes! ' + animal.emoji + ' ' + animal.name + '! 🎉';
+      document.getElementById('soundquizSpeaker').textContent = animal.emoji;
+
+      const overlay = document.getElementById('soundquizOverlay');
+      for (let i = 0; i < 6; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = [animal.emoji, '⭐', '✨', '🎉'][Math.floor(Math.random() * 4)];
+        spark.style.left = '50%';
+        spark.style.top = '30%';
+        spark.style.position = 'absolute';
+        const angle = (Math.PI * 2 * i) / 6;
+        const dist = 70 + Math.random() * 50;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+
+      setTimeout(startSoundQuizRound, 2000);
+    } else {
+      btn.classList.add('wrong');
+      playSound('pop');
+      setTimeout(() => btn.classList.remove('wrong'), 400);
+    }
+  }
+
+  function closeSoundQuiz() {
+    document.getElementById('soundquizOverlay').classList.add('hidden');
+    if (sqScore > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🔊');
+      showSpeech('Great ears! 🔊🐾');
+      emojiBurst(['🐶', '🐱', '🐸', '🦁', '✨'], 6);
+      if (sqScore >= 3) awardSticker();
+    }
+  }
+
+  // ===== BALLOON POP =====
+  let balloonInterval2 = null;
+  let balloonCount = 0;
+  const balloonEmojis = ['🎈', '🟥', '🟦', '🟨', '🟩', '🟪', '🟧'];
+  const balloonColorEmojis = ['🔴', '🔵', '🟡', '🟢', '🟣', '🟠'];
+
+  function openBalloons2() {
+    balloonCount = 0;
+    document.getElementById('balloonCount').textContent = '0';
+    document.getElementById('balloonOverlay').classList.remove('hidden');
+    document.getElementById('balloonField').innerHTML = '';
+    playSound('happy');
+    spawnBalloon2();
+    balloonInterval2 = setInterval(spawnBalloon2, 1600);
+  }
+
+  function spawnBalloon2() {
+    const field = document.getElementById('balloonField');
+    if (!field || document.getElementById('balloonOverlay').classList.contains('hidden')) {
+      clearInterval(balloonInterval2);
+      return;
+    }
+    if (field.children.length > 8) return;
+
+    const balloon = document.createElement('div');
+    balloon.className = 'balloon';
+    balloon.textContent = '🎈';
+    // Colorize via hue-rotate
+    const hue = Math.floor(Math.random() * 360);
+    balloon.style.filter = 'hue-rotate(' + hue + 'deg) drop-shadow(0 4px 8px rgba(0,0,0,0.15))';
+    balloon.style.left = (5 + Math.random() * 75) + '%';
+    const speed = 5 + Math.random() * 4;
+    balloon.style.setProperty('--speed', speed + 's');
+
+    balloon.onclick = (e) => {
+      e.stopPropagation();
+      popBalloon2(balloon);
+    };
+
+    field.appendChild(balloon);
+    setTimeout(() => { if (balloon.parentElement) balloon.remove(); }, speed * 1000);
+  }
+
+  function popBalloon2(balloon) {
+    if (balloon.classList.contains('popped')) return;
+    balloon.classList.add('popped');
+    balloonCount++;
+    playSound('pop');
+
+    const countEl = document.getElementById('balloonCount');
+    countEl.textContent = balloonCount;
+    countEl.classList.remove('bump');
+    void countEl.offsetWidth;
+    countEl.classList.add('bump');
+
+    // Burst confetti from balloon
+    const rect = balloon.getBoundingClientRect();
+    const confetti = ['🎊', '✨', '⭐', '💖', '🎉'];
+    for (let i = 0; i < 5; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'emoji-burst';
+      spark.textContent = confetti[Math.floor(Math.random() * confetti.length)];
+      spark.style.left = rect.left + rect.width/2 + 'px';
+      spark.style.top = rect.top + rect.height/2 + 'px';
+      spark.style.position = 'fixed';
+      spark.style.zIndex = '999';
+      const angle = (Math.PI * 2 * i) / 5;
+      const dist = 40 + Math.random() * 40;
+      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 1200);
+    }
+
+    // Milestone every 5
+    if (balloonCount % 5 === 0) {
+      playSound('tada');
+      for (let i = 0; i < 8; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = ['🎈', '🎊', '🎉', '⭐', '✨'][Math.floor(Math.random() * 5)];
+        spark.style.left = '50%';
+        spark.style.top = '30%';
+        spark.style.position = 'fixed';
+        spark.style.zIndex = '999';
+        const angle = (Math.PI * 2 * i) / 8;
+        const dist = 80 + Math.random() * 60;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        document.body.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+    }
+
+    setTimeout(() => balloon.remove(), 400);
+  }
+
+  function closeBalloons() {
+    clearInterval(balloonInterval2);
+    document.getElementById('balloonOverlay').classList.add('hidden');
+    document.getElementById('balloonField').innerHTML = '';
+    if (balloonCount > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      if (balloonCount >= 5) needs.energy = Math.min(MAX_NEED, needs.energy + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🎈');
+      showSpeech('Pop pop pop! 🎈🎉');
+      emojiBurst(['🎈', '🎊', '✨', '⭐', '🎉'], 8);
+      if (balloonCount >= 10) awardSticker();
     }
   }
 

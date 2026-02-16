@@ -75,6 +75,15 @@
         "Counting stars: tap stars as they appear, count to 10"
       ],
       "summary": "Added 3 new features: (1) Memory Match — 4 pairs of emoji cards (8 total) in a 4x2 grid. Tap to flip, find matching pairs. Wrong guesses flip back gently. Matched pairs stay revealed with celebration bursts. Completing all pairs awards a sticker. Teaches memory and visual matching. (2) Music Maker — 8 instrument buttons (drum, piano, bell, guitar, trumpet, shaker, high note, low note) each play unique synthesized sounds with pitch variation. Cat bounces along. Musical notes float up on each tap. Every 8 notes triggers a celebration. Encourages rhythm and cause-effect learning. (3) Counting Stars — stars appear on a dark night sky background. Tap to collect them and count to 10. Number words shown (One!, Two!...). Halfway celebration at 5, big finale at 10 with sticker reward. Teaches counting to 10."
+    },
+    {
+      "date": "2026-02-16",
+      "ideas": [
+        "Treasure hunt: find hidden items around a scene by tapping",
+        "Animal sounds quiz: hear a sound, pick which animal makes it",
+        "Balloon pop: tap rising balloons, each one counts up"
+      ],
+      "summary": "Added 3 new features: (1) Treasure Hunt — 12-spot grid (4x3) with 3-4 hidden treasures behind trees, rocks, and other objects. Tap to search — wrong spots show a shy emoji, correct spots reveal gems/crowns/stars with celebrations. Auto-restarts after finding all. Awards sticker. Teaches visual search and persistence. (2) Animal Sounds Quiz — hear a synthesized animal sound (dog bark, cat meow, frog ribbit, lion roar, etc.), then pick which of 3 animals made it. Each animal has a unique Web Audio synthesized sound. Tap the speaker to replay. Correct picks celebrate, wrong picks wobble. Awards sticker at 3 correct. Teaches animal sound recognition and listening skills. (3) Balloon Pop — colorful balloons float up the screen. Tap to pop with confetti burst effects. Count displayed prominently with bump animation on each pop. Milestone celebrations every 5 pops. Awards sticker at 10 pops. Pure sensory fun with counting."
     }
   ],
   "ideaPool": [
@@ -89,12 +98,14 @@
     "Simple puzzle: 2-4 piece jigsaw of the cat",
     "Rainbow bridge: trace rainbow arcs for the cat to walk across",
     "Seasons mode: spring/summer/fall/winter backgrounds with themed activities",
-    "Treasure hunt: find hidden items around a scene by tapping",
     "Simon says: follow the pattern of colors/sounds (memory sequencing)",
-    "Balloon pop: tap rising balloons, each one counts up",
     "Emotion faces: match the emoji to the feeling word/scenario",
     "Build a snowman: drag-and-tap to stack snowman parts",
-    "Animal sounds quiz: hear a sound, pick which animal makes it",
-    "Sorting game: sort items by color or size into bins"
+    "Sorting game: sort items by color or size into bins",
+    "Kitty dress-up runway: cat walks a runway showing off outfits with applause",
+    "Number tracing: trace numbers 1-5 with finger on screen",
+    "Bug catching: tap butterflies and ladybugs in a garden scene",
+    "Ice cream maker: stack scoops by tapping colors (creative + counting)",
+    "Fireworks show: tap the sky to launch colorful fireworks"
   ]
 }
