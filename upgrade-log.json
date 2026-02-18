@@ -107,5 +107,21 @@
     "Bug catching: tap butterflies and ladybugs in a garden scene",
     "Ice cream maker: stack scoops by tapping colors (creative + counting)",
     "Fireworks show: tap the sky to launch colorful fireworks"
+  ],
+  "refinements": [
+    {
+      "date": "2026-02-18",
+      "function": "Feed",
+      "refinements": [
+        "Food menu overlay with 6 foods (Fish, Milk, Chicken, Cupcake, Apple, Sushi)",
+        "Each food labeled with its color (Blue Fish, Pink Cupcake, Red Apple) — teaches color names",
+        "Multi-bite chomp animation (3 squish-stretch frames with repeat sound)",
+        "Food-specific speech reactions and emoji bursts per food type",
+        "Daily variety tracker — feed different foods to earn variety bonus (+love)",
+        "All-6-foods celebration with sticker reward for trying everything",
+        "Variety progress bar shows which foods fed today (greyed → colorful on feed)"
+      ],
+      "summary": "Transformed Feed from a single-tap action into a food-picking experience. 6 foods teach color names (Blue Fish, Red Apple, Pink Cupcake). Multi-bite chomp animation with satisfying repeat sounds. Daily variety tracker encourages trying all foods — feeding 3+ different foods gives love bonus, all 6 triggers celebration + sticker. Each food has unique speech and emoji burst."
+    }
   ]
 }

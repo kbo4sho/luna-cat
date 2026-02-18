@@ -1088,6 +1088,123 @@
     background: var(--pink-light);
   }
 
+  /* ===== FEED MENU ===== */
+  .feed-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #fff0f6 0%, #ffe4f0 50%, #ffd6e8 100%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .feed-overlay.hidden { display: none; }
+  .feed-title {
+    font-size: 2.2em;
+    margin: 10px 0;
+    text-shadow: 0 2px 4px rgba(255,150,200,0.3);
+  }
+  .feed-cat {
+    font-size: 4em;
+    margin: 10px 0;
+    transition: transform 0.15s;
+  }
+  .feed-cat.chomp1 { transform: scaleY(0.8) scaleX(1.1); }
+  .feed-cat.chomp2 { transform: scaleY(1.1) scaleX(0.9); }
+  .feed-cat.chomp3 { transform: scaleY(0.85) scaleX(1.05); }
+  .feed-speech {
+    font-size: 1.4em;
+    text-align: center;
+    min-height: 2em;
+    margin: 5px 0;
+  }
+  .feed-variety {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 1.6em;
+  }
+  .feed-variety-item {
+    opacity: 0.25;
+    filter: grayscale(1);
+    transition: all 0.4s;
+  }
+  .feed-variety-item.fed {
+    opacity: 1;
+    filter: none;
+    animation: feedPop 0.4s ease;
+  }
+  @keyframes feedPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.4); }
+    100% { transform: scale(1); }
+  }
+  .feed-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 12px 0;
+    width: 100%;
+    max-width: 360px;
+  }
+  .feed-food-btn {
+    background: white;
+    border: 3px solid var(--pink-light, #ffb6d9);
+    border-radius: 20px;
+    padding: 16px 8px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 3px 10px rgba(255,150,200,0.2);
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .feed-food-btn:active {
+    transform: scale(0.93);
+    box-shadow: 0 1px 4px rgba(255,150,200,0.3);
+  }
+  .feed-food-btn .food-emoji {
+    font-size: 2.4em;
+  }
+  .feed-food-btn .food-label {
+    font-size: 1em;
+    color: #d4619a;
+  }
+  .feed-close {
+    margin-top: 12px;
+    padding: 14px 36px;
+    font-size: 1.3em;
+    background: var(--pink, #ff8ec4);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(255,150,200,0.3);
+  }
+  .feed-close:active {
+    transform: scale(0.95);
+    background: var(--pink-light, #ffb6d9);
+  }
+  .feed-bonus {
+    font-size: 1.3em;
+    color: #d4619a;
+    animation: feedBonusPop 0.6s ease;
+    margin: 5px 0;
+  }
+  @keyframes feedBonusPop {
+    0% { transform: scale(0); opacity: 0; }
+    50% { transform: scale(1.3); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+
   /* ===== BATH TIME ===== */
   .bath-overlay {
     position: fixed;
@@ -2515,6 +2632,17 @@
   <button class="color-close" onclick="closeColors()">🔙 Back</button>
 </div>
 
+<!-- Feed menu overlay -->
+<div class="feed-overlay hidden" id="feedOverlay">
+  <div class="feed-title">🍽️ Yummy Time! 🐱</div>
+  <div class="feed-cat" id="feedCat">😺</div>
+  <div class="feed-speech" id="feedSpeech">Pick something yummy! 👇</div>
+  <div class="feed-variety" id="feedVariety"></div>
+  <div class="feed-grid" id="feedGrid"></div>
+  <div id="feedBonus"></div>
+  <button class="feed-close" onclick="closeFeedMenu()">🔙 Back</button>
+</div>
+
 <!-- Bath time overlay -->
 <div class="bath-overlay hidden" id="bathOverlay">
   <div class="bath-title">🛁 Bath Time! 🫧</div>
@@ -2708,7 +2836,7 @@
 
 <!-- Actions -->
 <div class="actions">
-  <button class="action-btn" id="btnFeed" onclick="doAction('feed')">
+  <button class="action-btn" id="btnFeed" onclick="openFeedMenu()">
     <span>🐟</span>
     <span class="label">Feed</span>
   </button>
@@ -4016,6 +4144,147 @@
     { emoji: '🌊', label: 'Splash! 🌊', sound: 'play' },
   ];
 
+  // ===== FEED MENU =====
+  const feedFoods = [
+    { emoji: '🐟', label: 'Fish', color: 'Blue', speech: 'Yummy fish! 🐟💙', burst: ['🐟', '💙', '🐟', '💦'] },
+    { emoji: '🥛', label: 'Milk', color: 'White', speech: 'Mmm milky! 🥛🤍', burst: ['🥛', '🤍', '💧', '🥛'] },
+    { emoji: '🍗', label: 'Chicken', color: 'Brown', speech: 'Tasty chicken! 🍗🤎', burst: ['🍗', '🤎', '🍗', '😋'] },
+    { emoji: '🧁', label: 'Cupcake', color: 'Pink', speech: 'Sweet treat! 🧁💖', burst: ['🧁', '💖', '🍰', '✨'] },
+    { emoji: '🍎', label: 'Apple', color: 'Red', speech: 'Crunchy apple! 🍎❤️', burst: ['🍎', '❤️', '🍎', '🌟'] },
+    { emoji: '🍣', label: 'Sushi', color: 'Orange', speech: 'Fancy sushi! 🍣🧡', burst: ['🍣', '🧡', '🍣', '⭐'] },
+  ];
+  let feedVarietyToday = [];
+
+  function loadFeedVariety() {
+    const saved = localStorage.getItem('lunaFeedVariety');
+    const savedDate = localStorage.getItem('lunaFeedVarietyDate');
+    const today = new Date().toDateString();
+    if (saved && savedDate === today) {
+      feedVarietyToday = JSON.parse(saved);
+    } else {
+      feedVarietyToday = [];
+      localStorage.setItem('lunaFeedVarietyDate', today);
+      localStorage.setItem('lunaFeedVariety', '[]');
+    }
+  }
+
+  function saveFeedVariety() {
+    localStorage.setItem('lunaFeedVariety', JSON.stringify(feedVarietyToday));
+    localStorage.setItem('lunaFeedVarietyDate', new Date().toDateString());
+  }
+
+  function renderFeedVariety() {
+    const container = document.getElementById('feedVariety');
+    container.innerHTML = feedFoods.map(f => {
+      const isFed = feedVarietyToday.includes(f.emoji);
+      return `<span class="feed-variety-item ${isFed ? 'fed' : ''}">${f.emoji}</span>`;
+    }).join('');
+  }
+
+  function openFeedMenu() {
+    if (isSleeping) {
+      setSleeping(false);
+      showSpeech('*yawn* 😺');
+      showReaction('😺');
+      playSound('happy');
+      return;
+    }
+    loadFeedVariety();
+    document.getElementById('feedOverlay').classList.remove('hidden');
+    document.getElementById('feedCat').textContent = '😺';
+    document.getElementById('feedSpeech').textContent = 'Pick something yummy! 👇';
+    document.getElementById('feedBonus').innerHTML = '';
+    playSound('happy');
+
+    const grid = document.getElementById('feedGrid');
+    grid.innerHTML = feedFoods.map((f, i) => `
+      <button class="feed-food-btn" onclick="feedKitty(${i})">
+        <span class="food-emoji">${f.emoji}</span>
+        <span class="food-label">${f.color} ${f.label}</span>
+      </button>
+    `).join('');
+
+    renderFeedVariety();
+  }
+
+  function feedKitty(index) {
+    const food = feedFoods[index];
+    const catEl = document.getElementById('feedCat');
+    const speechEl = document.getElementById('feedSpeech');
+
+    // Chomp animation sequence (3 bites)
+    catEl.textContent = '😋';
+    speechEl.textContent = food.speech;
+    playSound('feed');
+
+    catEl.classList.add('chomp1');
+    setTimeout(() => {
+      catEl.classList.remove('chomp1');
+      catEl.classList.add('chomp2');
+      playSound('feed');
+    }, 200);
+    setTimeout(() => {
+      catEl.classList.remove('chomp2');
+      catEl.classList.add('chomp3');
+      playSound('feed');
+    }, 400);
+    setTimeout(() => {
+      catEl.classList.remove('chomp3');
+      catEl.textContent = '😸';
+    }, 600);
+
+    // Emoji burst around the cat
+    emojiBurst(food.burst, 8);
+
+    // Update needs (same as original feed)
+    needs.hunger = Math.min(MAX_NEED, needs.hunger + 2);
+    needs.energy = Math.min(MAX_NEED, needs.energy + 1);
+
+    // Variety tracking
+    const isNew = !feedVarietyToday.includes(food.emoji);
+    if (isNew) {
+      feedVarietyToday.push(food.emoji);
+      saveFeedVariety();
+    }
+    renderFeedVariety();
+
+    // Variety bonus
+    const bonusEl = document.getElementById('feedBonus');
+    if (isNew && feedVarietyToday.length >= 3) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      bonusEl.innerHTML = `<div class="feed-bonus">🌈 Variety bonus! +💕</div>`;
+      setTimeout(() => emojiBurst(['🌈', '⭐', '💕', '✨'], 6), 300);
+    } else if (isNew) {
+      bonusEl.innerHTML = `<div class="feed-bonus">✨ New food today!</div>`;
+    } else {
+      bonusEl.innerHTML = '';
+    }
+
+    // All 6 foods fed = super celebration + sticker
+    if (feedVarietyToday.length >= 6) {
+      setTimeout(() => {
+        speechEl.textContent = '🌈 All foods! Amazing! 🌈';
+        emojiBurst(['🌈', '⭐', '💖', '✨', '👑', '🎉'], 12);
+        playSound('happy');
+        awardSticker();
+      }, 1000);
+    }
+
+    // Sticker chance on good care
+    const totalCheck = needs.hunger + needs.love + needs.energy + needs.clean;
+    if (totalCheck >= MAX_NEED * 3 && Math.random() < 0.15) {
+      setTimeout(() => awardSticker(), 2000);
+    }
+
+    renderNeeds();
+    saveState();
+  }
+
+  function closeFeedMenu() {
+    document.getElementById('feedOverlay').classList.add('hidden');
+  }
+
+  // ===== BATH TIME =====
   function openBath() {
     bathSteps = 0;
     document.getElementById('bathOverlay').classList.remove('hidden');
