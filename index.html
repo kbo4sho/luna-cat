@@ -1089,6 +1089,150 @@
   }
 
   /* ===== FEED MENU ===== */
+  /* ===== PET MENU ===== */
+  .pet-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #fff0f6 0%, #fce4ff 50%, #f0d6ff 100%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .pet-overlay.hidden { display: none; }
+  .pet-title {
+    font-size: 2.2em;
+    margin: 10px 0;
+    text-shadow: 0 2px 4px rgba(200,150,255,0.3);
+  }
+  .pet-scene {
+    position: relative;
+    width: 240px;
+    height: 240px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .pet-cat {
+    font-size: 5em;
+    transition: transform 0.2s;
+    z-index: 1;
+  }
+  .pet-cat.purring {
+    animation: petPurr 0.3s ease infinite;
+  }
+  @keyframes petPurr {
+    0% { transform: scale(1) rotate(0deg); }
+    25% { transform: scale(1.03) rotate(-1deg); }
+    50% { transform: scale(1) rotate(0deg); }
+    75% { transform: scale(1.03) rotate(1deg); }
+    100% { transform: scale(1) rotate(0deg); }
+  }
+  .pet-spot {
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: rgba(255,182,217,0.35);
+    border: 3px dashed rgba(255,140,200,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s, background 0.2s;
+    animation: petSpotPulse 2s ease-in-out infinite;
+    z-index: 2;
+  }
+  .pet-spot:active {
+    transform: scale(0.88);
+    background: rgba(255,140,200,0.5);
+  }
+  .pet-spot.petted {
+    background: rgba(255,140,200,0.5);
+    border-color: rgba(255,100,180,0.7);
+  }
+  @keyframes petSpotPulse {
+    0%, 100% { box-shadow: 0 0 8px rgba(255,150,200,0.3); }
+    50% { box-shadow: 0 0 18px rgba(255,150,200,0.6); }
+  }
+  .pet-spot.head { top: 0; left: 50%; transform: translateX(-50%); }
+  .pet-spot.chin { bottom: 30px; left: 50%; transform: translateX(-50%); }
+  .pet-spot.belly { top: 50%; right: 0; transform: translateY(-50%); }
+  .pet-spot.back { top: 50%; left: 0; transform: translateY(-50%); }
+  .pet-spot.head:active { transform: translateX(-50%) scale(0.88); }
+  .pet-spot.chin:active { transform: translateX(-50%) scale(0.88); }
+  .pet-spot.belly:active { transform: translateY(-50%) scale(0.88); }
+  .pet-spot.back:active { transform: translateY(-50%) scale(0.88); }
+  .pet-speech {
+    font-size: 1.4em;
+    text-align: center;
+    min-height: 2em;
+    margin: 5px 0;
+    color: #9b59b6;
+  }
+  .pet-purr-bar {
+    width: 100%;
+    max-width: 300px;
+    height: 28px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 50px;
+    border: 3px solid rgba(200,150,255,0.4);
+    overflow: hidden;
+    margin: 8px 0;
+    position: relative;
+  }
+  .pet-purr-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #ffb6d9, #d4a0ff, #ff8ec4);
+    border-radius: 50px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .pet-purr-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.1em;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+  }
+  .pet-spots-tracker {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 1.5em;
+  }
+  .pet-spots-tracker span {
+    opacity: 0.3;
+    filter: grayscale(1);
+    transition: all 0.4s;
+  }
+  .pet-spots-tracker span.done {
+    opacity: 1;
+    filter: none;
+    animation: feedPop 0.4s ease;
+  }
+  .pet-close {
+    margin-top: 12px;
+    padding: 14px 36px;
+    font-size: 1.3em;
+    background: #d4a0ff;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(200,150,255,0.3);
+  }
+  .pet-close:active {
+    transform: scale(0.95);
+    background: #c490ee;
+  }
+
   .feed-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
@@ -2633,6 +2777,31 @@
 </div>
 
 <!-- Feed menu overlay -->
+<!-- Pet menu overlay -->
+<div class="pet-overlay hidden" id="petOverlay">
+  <div class="pet-title">🤗 Pet Kitty! 💕</div>
+  <div class="pet-scene">
+    <div class="pet-spot head" onclick="petSpot('head')">👆</div>
+    <div class="pet-spot back" onclick="petSpot('back')">✋</div>
+    <div class="pet-cat" id="petCat">😺</div>
+    <div class="pet-spot belly" onclick="petSpot('belly')">🫳</div>
+    <div class="pet-spot chin" onclick="petSpot('chin')">☝️</div>
+  </div>
+  <div class="pet-speech" id="petSpeech">Tap a spot to pet kitty! 👆</div>
+  <div class="pet-spots-tracker" id="petSpotsTracker">
+    <span data-spot="head">👆</span>
+    <span data-spot="back">✋</span>
+    <span data-spot="belly">🫳</span>
+    <span data-spot="chin">☝️</span>
+  </div>
+  <div class="pet-purr-bar">
+    <div class="pet-purr-fill" id="petPurrFill"></div>
+    <div class="pet-purr-label" id="petPurrLabel">😺 Purr Meter</div>
+  </div>
+  <div id="petBonus"></div>
+  <button class="pet-close" onclick="closePetMenu()">🔙 Back</button>
+</div>
+
 <div class="feed-overlay hidden" id="feedOverlay">
   <div class="feed-title">🍽️ Yummy Time! 🐱</div>
   <div class="feed-cat" id="feedCat">😺</div>
@@ -2840,7 +3009,7 @@
     <span>🐟</span>
     <span class="label">Feed</span>
   </button>
-  <button class="action-btn" id="btnPet" onclick="doAction('pet')">
+  <button class="action-btn" id="btnPet" onclick="openPetMenu()">
     <span>🤗</span>
     <span class="label">Pet</span>
   </button>
@@ -4143,6 +4312,126 @@
     { emoji: '💧', label: 'Rinse! 💧', sound: 'feed' },
     { emoji: '🌊', label: 'Splash! 🌊', sound: 'play' },
   ];
+
+  // ===== PET MENU =====
+  const petSpots = {
+    head: { emoji: '👆', label: 'Head', speeches: ['Head scritches! 😻', 'So nice up here! 💕', 'Purrrr! 🥰', 'More please! 💖'], burst: ['💕', '💖', '😻', '✨'], sound: 'purring' },
+    chin: { emoji: '☝️', label: 'Chin', speeches: ['Chin rubs! 💗', '*loud purr* 😻', 'My favorite! 🥰', 'So cozy! 💕'], burst: ['💗', '🥰', '💕', '💫'], sound: 'purring' },
+    belly: { emoji: '🫳', label: 'Belly', speeches: ['Belly rubs! 🩷', 'Tickles! 😸', 'Hehe! 💕', 'So soft! 🥰'], burst: ['🩷', '😸', '💕', '🌸'], sound: 'purring' },
+    back: { emoji: '✋', label: 'Back', speeches: ['Back strokes! 💜', 'So relaxing! 😌', '*stretch* 💕', 'Ahhh nice! 🥰'], burst: ['💜', '😌', '💕', '🌟'], sound: 'purring' }
+  };
+  let petPurrCount = 0;
+  let petSpotsDone = [];
+  let petCooldown = false;
+
+  function openPetMenu() {
+    if (isSleeping) {
+      setSleeping(false);
+      showSpeech('*yawn* 😺');
+      showReaction('😺');
+      playSound('happy');
+      return;
+    }
+    petPurrCount = 0;
+    petSpotsDone = [];
+    document.getElementById('petOverlay').classList.remove('hidden');
+    document.getElementById('petCat').textContent = '😺';
+    document.getElementById('petSpeech').textContent = 'Tap a spot to pet kitty! 👆';
+    document.getElementById('petPurrFill').style.width = '0%';
+    document.getElementById('petPurrLabel').textContent = '😺 Purr Meter';
+    document.getElementById('petBonus').innerHTML = '';
+    // Reset spot trackers
+    document.querySelectorAll('.pet-spots-tracker span').forEach(el => el.classList.remove('done'));
+    // Reset spot glow
+    document.querySelectorAll('.pet-spot').forEach(el => el.classList.remove('petted'));
+    document.getElementById('petCat').classList.remove('purring');
+    playSound('happy');
+  }
+
+  function petSpot(spot) {
+    if (petCooldown) return;
+    petCooldown = true;
+    setTimeout(() => petCooldown = false, 600);
+
+    const info = petSpots[spot];
+    const catEl = document.getElementById('petCat');
+    const speechEl = document.getElementById('petSpeech');
+
+    // Purr animation
+    catEl.textContent = '😻';
+    catEl.classList.add('purring');
+    setTimeout(() => {
+      catEl.classList.remove('purring');
+      catEl.textContent = '😺';
+    }, 1200);
+
+    // Speech
+    speechEl.textContent = info.speeches[Math.floor(Math.random() * info.speeches.length)];
+
+    // Sound — use existing purring
+    playSound('pet');
+
+    // Emoji burst
+    emojiBurst(info.burst, 6);
+
+    // Update needs
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    renderNeeds();
+
+    // Track spot
+    const isNew = !petSpotsDone.includes(spot);
+    if (isNew) {
+      petSpotsDone.push(spot);
+      // Mark tracker
+      const tracker = document.querySelector(`.pet-spots-tracker span[data-spot="${spot}"]`);
+      if (tracker) tracker.classList.add('done');
+      // Mark spot button
+      const spotEl = document.querySelector(`.pet-spot.${spot}`);
+      if (spotEl) spotEl.classList.add('petted');
+    }
+
+    // Build purr meter
+    petPurrCount++;
+    const purrPct = Math.min(100, (petPurrCount / 8) * 100);
+    document.getElementById('petPurrFill').style.width = purrPct + '%';
+
+    // Update purr label
+    const purrLabel = document.getElementById('petPurrLabel');
+    if (purrPct < 25) purrLabel.textContent = '😺 Purr Meter';
+    else if (purrPct < 50) purrLabel.textContent = '😸 Purring...';
+    else if (purrPct < 75) purrLabel.textContent = '😻 Louder purr!';
+    else if (purrPct < 100) purrLabel.textContent = '🥰 Almost there!';
+
+    // Bonus for petting all 4 spots
+    const bonusEl = document.getElementById('petBonus');
+    if (petSpotsDone.length === 4 && isNew) {
+      needs.love = Math.min(MAX_NEED, needs.love + 2);
+      renderNeeds();
+      bonusEl.innerHTML = '<div style="font-size:1.3em;color:#9b59b6;animation:feedBonusPop 0.6s ease;margin:5px 0">🌈 All spots! Kitty loves you! +💕💕</div>';
+      setTimeout(() => emojiBurst(['🌈', '💕', '💖', '✨', '🥰'], 10), 300);
+      playSound('happy');
+    }
+
+    // Full purr meter = mega celebration
+    if (petPurrCount === 8) {
+      purrLabel.textContent = '💖 MAX PURR! 💖';
+      setTimeout(() => {
+        catEl.textContent = '😻';
+        speechEl.textContent = '🌈 MEGA PURR! I love you SO much! 🌈';
+        emojiBurst(['💖', '💕', '🌈', '✨', '⭐', '🥰', '💗', '🩷'], 14);
+        needs.love = Math.min(MAX_NEED, needs.love + 2);
+        renderNeeds();
+        playSound('happy');
+        awardSticker();
+      }, 400);
+    }
+
+    saveState();
+  }
+
+  function closePetMenu() {
+    document.getElementById('petOverlay').classList.add('hidden');
+  }
 
   // ===== FEED MENU =====
   const feedFoods = [
