@@ -1349,6 +1349,137 @@
     100% { transform: scale(1); opacity: 1; }
   }
 
+  /* ===== PLAY MENU ===== */
+  .play-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #f0fff0 0%, #e8ffe8 30%, #d4ffd4 60%, #c8ffc8 100%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .play-overlay.hidden { display: none; }
+  .play-title {
+    font-size: 2.2em;
+    margin: 10px 0;
+    text-shadow: 0 2px 4px rgba(100,200,100,0.3);
+  }
+  .play-cat {
+    font-size: 4em;
+    margin: 10px 0;
+    transition: transform 0.15s;
+  }
+  .play-cat.pounce1 { transform: translateX(-15px) scaleX(1.1); }
+  .play-cat.pounce2 { transform: translateX(15px) scaleX(0.95); }
+  .play-cat.pounce3 { transform: scale(1.15) rotate(-3deg); }
+  .play-speech {
+    font-size: 1.4em;
+    text-align: center;
+    min-height: 2em;
+    margin: 5px 0;
+    color: #2d8a4e;
+  }
+  .play-variety {
+    display: flex;
+    gap: 8px;
+    margin: 8px 0;
+    font-size: 1.6em;
+  }
+  .play-variety-item {
+    opacity: 0.25;
+    filter: grayscale(1);
+    transition: all 0.4s;
+  }
+  .play-variety-item.played {
+    opacity: 1;
+    filter: none;
+    animation: feedPop 0.4s ease;
+  }
+  .play-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin: 12px 0;
+    width: 100%;
+    max-width: 360px;
+  }
+  .play-toy-btn {
+    background: white;
+    border: 3px solid #a8e6a8;
+    border-radius: 20px;
+    padding: 16px 8px;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.1s, box-shadow 0.2s;
+    box-shadow: 0 3px 10px rgba(100,200,100,0.2);
+    min-height: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .play-toy-btn:active {
+    transform: scale(0.93);
+    box-shadow: 0 1px 4px rgba(100,200,100,0.3);
+  }
+  .play-toy-btn .toy-emoji {
+    font-size: 2.4em;
+  }
+  .play-toy-btn .toy-label {
+    font-size: 1em;
+    color: #2d8a4e;
+  }
+  .play-fun-bar {
+    width: 80%;
+    max-width: 300px;
+    height: 24px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 12px;
+    overflow: hidden;
+    border: 2px solid #a8e6a8;
+    position: relative;
+    margin: 8px 0;
+  }
+  .play-fun-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #66dd88, #44cc66, #22bb44);
+    border-radius: 12px;
+    transition: width 0.5s ease;
+  }
+  .play-fun-label {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #2d6a3e;
+    text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+  }
+  .play-close {
+    margin-top: 12px;
+    padding: 14px 36px;
+    font-size: 1.3em;
+    background: #66dd88;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(100,200,100,0.3);
+  }
+  .play-close:active {
+    transform: scale(0.95);
+    background: #88eea8;
+  }
+
   /* ===== BATH TIME ===== */
   .bath-overlay {
     position: fixed;
@@ -2812,6 +2943,21 @@
   <button class="feed-close" onclick="closeFeedMenu()">🔙 Back</button>
 </div>
 
+<!-- Play menu overlay -->
+<div class="play-overlay hidden" id="playOverlay">
+  <div class="play-title">🧶 Play Time! 🎉</div>
+  <div class="play-cat" id="playCat">😺</div>
+  <div class="play-speech" id="playSpeech">Pick a toy! 👇</div>
+  <div class="play-variety" id="playVariety"></div>
+  <div class="play-grid" id="playGrid"></div>
+  <div class="play-fun-bar">
+    <div class="play-fun-fill" id="playFunFill"></div>
+    <div class="play-fun-label" id="playFunLabel">😺 Fun Meter</div>
+  </div>
+  <div id="playBonus"></div>
+  <button class="play-close" onclick="closePlayMenu()">🔙 Back</button>
+</div>
+
 <!-- Bath time overlay -->
 <div class="bath-overlay hidden" id="bathOverlay">
   <div class="bath-title">🛁 Bath Time! 🫧</div>
@@ -3013,7 +3159,7 @@
     <span>🤗</span>
     <span class="label">Pet</span>
   </button>
-  <button class="action-btn" id="btnPlay" onclick="doAction('play')">
+  <button class="action-btn" id="btnPlay" onclick="openPlayMenu()">
     <span>🧶</span>
     <span class="label">Play</span>
   </button>
@@ -4571,6 +4717,141 @@
 
   function closeFeedMenu() {
     document.getElementById('feedOverlay').classList.add('hidden');
+  }
+
+  // ===== PLAY MENU =====
+  const playToys = [
+    { emoji: '🧶', label: 'Yarn', speech: 'Yarn ball! Chase it! 🧶✨', burst: ['🧶', '✨', '🧶', '💚'], pounce: 'pounce1' },
+    { emoji: '🪶', label: 'Feather', speech: 'Catch the feather! 🪶💨', burst: ['🪶', '💨', '🪶', '🌟'], pounce: 'pounce2' },
+    { emoji: '🔴', label: 'Laser', speech: 'Red dot!! Must catch! 🔴⚡', burst: ['🔴', '⚡', '🔴', '💫'], pounce: 'pounce3' },
+    { emoji: '🐭', label: 'Mouse', speech: 'Squeaky mouse! 🐭💕', burst: ['🐭', '💕', '🐭', '⭐'], pounce: 'pounce1' },
+    { emoji: '🔔', label: 'Bell', speech: 'Jingly bell ball! 🔔🎵', burst: ['🔔', '🎵', '🔔', '🎶'], pounce: 'pounce2' },
+    { emoji: '🎀', label: 'Ribbon', speech: 'Pretty ribbon! 🎀💖', burst: ['🎀', '💖', '🎀', '🌈'], pounce: 'pounce3' },
+  ];
+  let playFunCount = 0;
+  let playToysUsed = [];
+  let playCooldown = false;
+
+  function openPlayMenu() {
+    if (isSleeping) {
+      setSleeping(false);
+      showSpeech('*yawn* 😺');
+      showReaction('😺');
+      playSound('happy');
+      return;
+    }
+    playFunCount = 0;
+    playToysUsed = [];
+    document.getElementById('playOverlay').classList.remove('hidden');
+    document.getElementById('playCat').textContent = '😺';
+    document.getElementById('playSpeech').textContent = 'Pick a toy! 👇';
+    document.getElementById('playFunFill').style.width = '0%';
+    document.getElementById('playFunLabel').textContent = '😺 Fun Meter';
+    document.getElementById('playBonus').innerHTML = '';
+    renderPlayVariety();
+    renderPlayGrid();
+    playSound('happy');
+  }
+
+  function renderPlayVariety() {
+    const container = document.getElementById('playVariety');
+    container.innerHTML = playToys.map(t => {
+      const used = playToysUsed.includes(t.emoji);
+      return `<span class="play-variety-item ${used ? 'played' : ''}">${t.emoji}</span>`;
+    }).join('');
+  }
+
+  function renderPlayGrid() {
+    const grid = document.getElementById('playGrid');
+    grid.innerHTML = playToys.map((t, i) => `
+      <div class="play-toy-btn" onclick="playWithToy(${i})">
+        <span class="toy-emoji">${t.emoji}</span>
+        <span class="toy-label">${t.label}</span>
+      </div>
+    `).join('');
+  }
+
+  function playWithToy(idx) {
+    if (playCooldown) return;
+    playCooldown = true;
+    setTimeout(() => playCooldown = false, 800);
+
+    const toy = playToys[idx];
+    const catEl = document.getElementById('playCat');
+    const speechEl = document.getElementById('playSpeech');
+
+    // Pounce animation
+    catEl.textContent = '😼';
+    catEl.classList.add(toy.pounce);
+    setTimeout(() => {
+      catEl.classList.remove(toy.pounce);
+      catEl.textContent = '😸';
+      setTimeout(() => catEl.textContent = '😺', 800);
+    }, 400);
+
+    // Speech
+    speechEl.textContent = toy.speech;
+
+    // Sound
+    playSound('play');
+
+    // Emoji burst
+    emojiBurst(toy.burst, 6);
+
+    // Update needs
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    needs.energy = Math.max(0, needs.energy - 1);
+    needs.hunger = Math.max(0, needs.hunger - 1);
+    renderNeeds();
+
+    // Track toy variety
+    const isNew = !playToysUsed.includes(toy.emoji);
+    if (isNew) {
+      playToysUsed.push(toy.emoji);
+      renderPlayVariety();
+    }
+
+    // Build fun meter
+    playFunCount++;
+    const funPct = Math.min(100, (playFunCount / 8) * 100);
+    document.getElementById('playFunFill').style.width = funPct + '%';
+
+    // Update fun label
+    const funLabel = document.getElementById('playFunLabel');
+    if (funPct < 25) funLabel.textContent = '😺 Fun Meter';
+    else if (funPct < 50) funLabel.textContent = '😸 Having fun!';
+    else if (funPct < 75) funLabel.textContent = '😻 So much fun!';
+    else if (funPct < 100) funLabel.textContent = '🤩 Almost max fun!';
+
+    // Bonus for using all 6 toys
+    const bonusEl = document.getElementById('playBonus');
+    if (playToysUsed.length === 6 && isNew) {
+      needs.love = Math.min(MAX_NEED, needs.love + 2);
+      renderNeeds();
+      bonusEl.innerHTML = '<div style="font-size:1.3em;color:#2d8a4e;animation:feedBonusPop 0.6s ease;margin:5px 0">🌈 All toys! Kitty had the BEST time! +💕💕</div>';
+      setTimeout(() => emojiBurst(['🌈', '💕', '🧶', '✨', '🎉', '⭐'], 10), 300);
+      playSound('happy');
+    }
+
+    // Full fun meter = mega celebration
+    if (playFunCount === 8) {
+      funLabel.textContent = '🎉 MAX FUN! 🎉';
+      setTimeout(() => {
+        catEl.textContent = '🥳';
+        speechEl.textContent = '🌈 BEST PLAY TIME EVER! 🌈';
+        emojiBurst(['🎉', '🌈', '⭐', '✨', '💕', '🧶', '🪶', '🎀'], 14);
+        needs.love = Math.min(MAX_NEED, needs.love + 2);
+        renderNeeds();
+        playSound('happy');
+        awardSticker();
+      }, 400);
+    }
+
+    saveState();
+  }
+
+  function closePlayMenu() {
+    document.getElementById('playOverlay').classList.add('hidden');
   }
 
   // ===== BATH TIME =====

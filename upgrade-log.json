@@ -135,6 +135,19 @@
         "Purple/lavender aesthetic for the petting screen"
       ],
       "summary": "Transformed Pet from a single-tap action into an interactive petting experience. 4 petting spots (head, chin, belly, back) each with unique reactions and speech. Purr Meter fills over 8 pets — reaching max triggers mega purr celebration + sticker. Petting all 4 spots gives bonus love. Tapping the cat directly still works for quick pets."
+    },
+    {
+      "date": "2026-02-20",
+      "function": "Play",
+      "refinements": [
+        "Toy selection menu with 6 toys (Yarn, Feather, Laser, Mouse, Bell, Ribbon)",
+        "Each toy has unique pounce animation and speech reaction",
+        "Fun Meter builds over 8 plays to mega celebration + sticker",
+        "Toy variety tracker — try all 6 for bonus love + rainbow celebration",
+        "Green/mint aesthetic for the play screen",
+        "Toy-specific emoji bursts per selection"
+      ],
+      "summary": "Transformed Play from a single-tap action into a toy-picking experience. 6 toys with unique pounce animations and reactions. Fun Meter fills over 8 plays for mega celebration + sticker. Using all 6 toys triggers bonus. Green/mint themed overlay."
     }
   ]
 }
