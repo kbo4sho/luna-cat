@@ -1480,6 +1480,80 @@
     background: #88eea8;
   }
 
+  /* ===== BRUSH MENU ===== */
+  .brush-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(135deg, #f0e6ff 0%, #e6d5f5 50%, #f5e0ff 100%);
+    z-index: 100; display: flex; flex-direction: column; align-items: center;
+    justify-content: center; padding: 20px; box-sizing: border-box;
+    overflow-y: auto;
+  }
+  .brush-overlay.hidden { display: none; }
+  .brush-title {
+    font-size: 1.8em; margin-bottom: 8px; text-shadow: 0 2px 8px rgba(180,120,255,0.2);
+  }
+  .brush-cat {
+    font-size: 4em; margin: 8px 0; transition: transform 0.3s;
+  }
+  .brush-cat.stroke1 { animation: brushStroke1 0.4s ease; }
+  .brush-cat.stroke2 { animation: brushStroke2 0.4s ease; }
+  .brush-cat.stroke3 { animation: brushStroke3 0.4s ease; }
+  @keyframes brushStroke1 { 0%,100%{transform:rotate(0)} 50%{transform:rotate(-5deg) scaleY(1.05)} }
+  @keyframes brushStroke2 { 0%,100%{transform:rotate(0)} 50%{transform:rotate(5deg) scaleX(1.05)} }
+  @keyframes brushStroke3 { 0%,100%{transform:scale(1)} 50%{transform:scale(1.1)} }
+  .brush-speech {
+    font-size: 1.3em; color: #7b4fa0; margin: 6px 0; min-height: 1.5em;
+    background: rgba(255,255,255,0.7); padding: 8px 18px; border-radius: 20px;
+    text-align: center;
+  }
+  .brush-variety {
+    display: flex; gap: 6px; justify-content: center; margin: 6px 0;
+  }
+  .brush-variety-item {
+    font-size: 1.5em; opacity: 0.3; transition: opacity 0.3s, transform 0.3s;
+    filter: grayscale(100%);
+  }
+  .brush-variety-item.used {
+    opacity: 1; filter: none; transform: scale(1.1);
+  }
+  .brush-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    max-width: 360px; width: 100%; margin: 8px 0;
+  }
+  .brush-tool-btn {
+    background: rgba(255,255,255,0.85); border: 3px solid #d4b0f0;
+    border-radius: 18px; padding: 14px 8px; text-align: center;
+    cursor: pointer; transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 3px 10px rgba(180,120,255,0.15);
+    min-height: 80px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .brush-tool-btn:active {
+    transform: scale(0.93); box-shadow: 0 1px 5px rgba(180,120,255,0.3);
+  }
+  .brush-tool-btn .tool-emoji { font-size: 2.2em; }
+  .brush-tool-btn .tool-label { font-size: 0.85em; color: #9b6fc0; margin-top: 4px; }
+  .brush-sparkle-bar {
+    width: 80%; max-width: 300px; height: 22px; background: rgba(255,255,255,0.6);
+    border-radius: 50px; overflow: hidden; margin: 8px 0; position: relative;
+    border: 2px solid #d4b0f0;
+  }
+  .brush-sparkle-fill {
+    height: 100%; width: 0%; background: linear-gradient(90deg, #d4b0f0, #f0c0ff, #e0a0f0);
+    border-radius: 50px; transition: width 0.4s ease;
+  }
+  .brush-sparkle-label {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.85em; color: #7b4fa0; font-weight: bold;
+  }
+  .brush-close {
+    margin-top: 12px; padding: 14px 36px; font-size: 1.3em;
+    background: #c090e0; color: white; border: none; border-radius: 50px;
+    cursor: pointer; box-shadow: 0 3px 10px rgba(180,120,255,0.3);
+  }
+  .brush-close:active { transform: scale(0.95); background: #d0a8f0; }
+
   /* ===== BATH TIME ===== */
   .bath-overlay {
     position: fixed;
@@ -2958,6 +3032,21 @@
   <button class="play-close" onclick="closePlayMenu()">🔙 Back</button>
 </div>
 
+<!-- Brush menu overlay -->
+<div class="brush-overlay hidden" id="brushOverlay">
+  <div class="brush-title">✨ Grooming Time! 💎</div>
+  <div class="brush-cat" id="brushCat">😺</div>
+  <div class="brush-speech" id="brushSpeech">Pick a brush tool! 👇</div>
+  <div class="brush-variety" id="brushVariety"></div>
+  <div class="brush-grid" id="brushGrid"></div>
+  <div class="brush-sparkle-bar">
+    <div class="brush-sparkle-fill" id="brushSparkleFill"></div>
+    <div class="brush-sparkle-label" id="brushSparkleLabel">✨ Sparkle Meter</div>
+  </div>
+  <div id="brushBonus"></div>
+  <button class="brush-close" onclick="closeBrushMenu()">🔙 Back</button>
+</div>
+
 <!-- Bath time overlay -->
 <div class="bath-overlay hidden" id="bathOverlay">
   <div class="bath-title">🛁 Bath Time! 🫧</div>
@@ -3163,7 +3252,7 @@
     <span>🧶</span>
     <span class="label">Play</span>
   </button>
-  <button class="action-btn" id="btnBrush" onclick="doAction('brush')">
+  <button class="action-btn" id="btnBrush" onclick="openBrushMenu()">
     <span>🪮</span>
     <span class="label">Brush</span>
   </button>
@@ -4852,6 +4941,131 @@
 
   function closePlayMenu() {
     document.getElementById('playOverlay').classList.add('hidden');
+  }
+
+  // ===== BRUSH MENU =====
+  const brushTools = [
+    { emoji: '🪮', label: 'Comb', speech: 'Nice and neat! 🪮', burst: ['🪮', '✨', '💫'], stroke: 'stroke1' },
+    { emoji: '✨', label: 'Sparkle', speech: 'So sparkly! ✨', burst: ['✨', '⭐', '💎'], stroke: 'stroke2' },
+    { emoji: '🎀', label: 'Bow', speech: 'Pretty bow! 🎀', burst: ['🎀', '💕', '🌸'], stroke: 'stroke3' },
+    { emoji: '💎', label: 'Gems', speech: 'Shiny gems! 💎', burst: ['💎', '✨', '👑'], stroke: 'stroke1' },
+    { emoji: '🌸', label: 'Perfume', speech: 'Smells lovely! 🌸', burst: ['🌸', '🌺', '💐'], stroke: 'stroke2' },
+    { emoji: '👑', label: 'Crown', speech: 'Royal kitty! 👑', burst: ['👑', '💎', '⭐'], stroke: 'stroke3' }
+  ];
+  let brushToolsUsed = [];
+  let brushSparkleCount = 0;
+  let brushCooldown = false;
+
+  function openBrushMenu() {
+    if (isSleeping) { setSleeping(false); showSpeech('*yawn* 😺'); return; }
+    brushToolsUsed = [];
+    brushSparkleCount = 0;
+    brushCooldown = false;
+    document.getElementById('brushOverlay').classList.remove('hidden');
+    document.getElementById('brushCat').textContent = '😺';
+    document.getElementById('brushSpeech').textContent = 'Pick a brush tool! 👇';
+    document.getElementById('brushSparkleFill').style.width = '0%';
+    document.getElementById('brushSparkleLabel').textContent = '✨ Sparkle Meter';
+    document.getElementById('brushBonus').innerHTML = '';
+    renderBrushVariety();
+    renderBrushGrid();
+    playSound('happy');
+  }
+
+  function renderBrushVariety() {
+    const container = document.getElementById('brushVariety');
+    container.innerHTML = brushTools.map(t => {
+      const used = brushToolsUsed.includes(t.emoji);
+      return `<span class="brush-variety-item ${used ? 'used' : ''}">${t.emoji}</span>`;
+    }).join('');
+  }
+
+  function renderBrushGrid() {
+    const grid = document.getElementById('brushGrid');
+    grid.innerHTML = brushTools.map((t, i) => `
+      <div class="brush-tool-btn" onclick="brushWithTool(${i})">
+        <span class="tool-emoji">${t.emoji}</span>
+        <span class="tool-label">${t.label}</span>
+      </div>
+    `).join('');
+  }
+
+  function brushWithTool(idx) {
+    if (brushCooldown) return;
+    brushCooldown = true;
+    setTimeout(() => brushCooldown = false, 800);
+
+    const tool = brushTools[idx];
+    const catEl = document.getElementById('brushCat');
+    const speechEl = document.getElementById('brushSpeech');
+
+    // Brush stroke animation
+    catEl.textContent = '😽';
+    catEl.classList.add(tool.stroke);
+    setTimeout(() => {
+      catEl.classList.remove(tool.stroke);
+      catEl.textContent = '😸';
+      setTimeout(() => catEl.textContent = '😺', 800);
+    }, 400);
+
+    speechEl.textContent = tool.speech;
+    playSound('brush');
+    emojiBurst(tool.burst, 6);
+
+    // Update needs
+    needs.clean = Math.min(MAX_NEED, needs.clean + 1);
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    renderNeeds();
+
+    // Track variety
+    const isNew = !brushToolsUsed.includes(tool.emoji);
+    if (isNew) {
+      brushToolsUsed.push(tool.emoji);
+      renderBrushVariety();
+    }
+
+    // Build sparkle meter
+    brushSparkleCount++;
+    const pct = Math.min(100, (brushSparkleCount / 8) * 100);
+    document.getElementById('brushSparkleFill').style.width = pct + '%';
+
+    const label = document.getElementById('brushSparkleLabel');
+    if (pct < 25) label.textContent = '✨ Sparkle Meter';
+    else if (pct < 50) label.textContent = '💫 Getting shiny!';
+    else if (pct < 75) label.textContent = '💎 So glamorous!';
+    else if (pct < 100) label.textContent = '👑 Almost dazzling!';
+
+    // All 6 tools bonus
+    const bonusEl = document.getElementById('brushBonus');
+    if (brushToolsUsed.length === 6 && isNew) {
+      needs.clean = Math.min(MAX_NEED, needs.clean + 2);
+      needs.love = Math.min(MAX_NEED, needs.love + 2);
+      renderNeeds();
+      bonusEl.innerHTML = '<div style="font-size:1.3em;color:#7b4fa0;animation:feedBonusPop 0.6s ease;margin:5px 0">🌈 All tools! Kitty is GORGEOUS! +💕💕</div>';
+      setTimeout(() => emojiBurst(['🌈', '💕', '✨', '💎', '👑', '🎀'], 10), 300);
+      playSound('happy');
+    }
+
+    // Full sparkle meter = mega celebration
+    if (brushSparkleCount === 8) {
+      label.textContent = '🌟 MAX SPARKLE! 🌟';
+      setTimeout(() => {
+        catEl.textContent = '🤩';
+        speechEl.textContent = '🌈 MOST BEAUTIFUL KITTY EVER! 🌈';
+        emojiBurst(['🌟', '💎', '✨', '👑', '🎀', '🌸', '💕', '⭐'], 14);
+        needs.clean = MAX_NEED;
+        needs.love = Math.min(MAX_NEED, needs.love + 2);
+        renderNeeds();
+        playSound('happy');
+        awardSticker();
+      }, 400);
+    }
+
+    saveState();
+  }
+
+  function closeBrushMenu() {
+    document.getElementById('brushOverlay').classList.add('hidden');
   }
 
   // ===== BATH TIME =====

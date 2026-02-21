@@ -148,6 +148,19 @@
         "Toy-specific emoji bursts per selection"
       ],
       "summary": "Transformed Play from a single-tap action into a toy-picking experience. 6 toys with unique pounce animations and reactions. Fun Meter fills over 8 plays for mega celebration + sticker. Using all 6 toys triggers bonus. Green/mint themed overlay."
+    },
+    {
+      "date": "2026-02-21",
+      "function": "Brush",
+      "refinements": [
+        "Grooming tool selection menu with 6 tools (Comb, Sparkle, Bow, Gems, Perfume, Crown)",
+        "Each tool has unique brush stroke animation and speech reaction",
+        "Sparkle Meter builds over 8 brushes to mega celebration + sticker",
+        "Tool variety tracker — use all 6 for bonus clean + love + rainbow celebration",
+        "Purple/lavender aesthetic for the grooming screen",
+        "Tool-specific emoji bursts per selection"
+      ],
+      "summary": "Transformed Brush from a single-tap action into a grooming tool experience. 6 tools with unique animations and reactions. Sparkle Meter fills over 8 brushes for mega celebration + sticker. Using all 6 tools triggers bonus. Purple/lavender themed overlay."
     }
   ]
 }
