@@ -20,7 +20,7 @@
         "Counting game: feed the cat 1-5 fish, count along with emoji",
         "Surprise eggs: tap to reveal what's inside (shapes, colors, animals)"
       ],
-      "summary": "Added 3 new features: (1) Dress-up mode with 9 accessories (crown, bow, flower, star, butterfly, rainbow, gem, hat, hibiscus) that appear on the cat and persist across sessions. (2) Counting fish mini-game — cat asks for 1-5 fish, Luna taps fish to fill slots, celebrates on completion, auto-starts next round. Teaches counting 1-5. (3) Surprise eggs — 3 colorful eggs that shake when tapped and crack open after 3 taps to reveal animals, colors, or shapes with labels. All features have sound feedback, big touch targets, and emoji celebrations."
+      "summary": "Added 3 new features: (1) Dress-up mode with 9 accessories (crown, bow, flower, star, butterfly, rainbow, gem, hat, hibiscus) that appear on the cat and persist across sessions. (2) Counting fish mini-game \u2014 cat asks for 1-5 fish, Luna taps fish to fill slots, celebrates on completion, auto-starts next round. Teaches counting 1-5. (3) Surprise eggs \u2014 3 colorful eggs that shake when tapped and crack open after 3 taps to reveal animals, colors, or shapes with labels. All features have sound feedback, big touch targets, and emoji celebrations."
     },
     {
       "date": "2026-02-10",
@@ -29,7 +29,7 @@
         "Dance party mode: cat dances when all needs are full, fun music",
         "Animal friends: other animals visit (teaches animal names/sounds)"
       ],
-      "summary": "Added 3 new features: (1) Bubble Pop — colorful translucent bubbles float up with letters (A-E), numbers (1-5), and fun emoji inside. Tap to pop them with satisfying sound + burst effects. Every 5 pops triggers a celebration. Teaches letter/number recognition through play. (2) Dance Party — cat dances with emoji friends on a rainbow background with floating disco balls, musical beat sounds, and tap-to-burst effects on each dancer. Pure joy and sensory delight. (3) Animal Friends — 6 random animals visit the cat. Each tap brings an animal with its unique sound (woof, ribbit, quack, etc.) and greeting. Teaches animal names and sounds. Celebration when all friends are visited."
+      "summary": "Added 3 new features: (1) Bubble Pop \u2014 colorful translucent bubbles float up with letters (A-E), numbers (1-5), and fun emoji inside. Tap to pop them with satisfying sound + burst effects. Every 5 pops triggers a celebration. Teaches letter/number recognition through play. (2) Dance Party \u2014 cat dances with emoji friends on a rainbow background with floating disco balls, musical beat sounds, and tap-to-burst effects on each dancer. Pure joy and sensory delight. (3) Animal Friends \u2014 6 random animals visit the cat. Each tap brings an animal with its unique sound (woof, ribbit, quack, etc.) and greeting. Teaches animal names and sounds. Celebration when all friends are visited."
     },
     {
       "date": "2026-02-11",
@@ -38,7 +38,7 @@
         "Cat bath time: splash animations, rubber ducky, water sounds",
         "Peek-a-boo: cat hides behind objects, tap to find it (object permanence)"
       ],
-      "summary": "Added 3 new features: (1) Color Match — cat shows a color heart and asks Luna to find it among 4 choices. Correct picks celebrate with bursts + score. Wrong picks wobble gently. Teaches color names and recognition. (2) Bath Time — interactive bath scene with 6 wash items (sponge, shampoo, bubbles, rubber ducky, rinse, splash). Tap items to wash the cat with splash effects and floating bubbles. 5 steps to complete a bath = sparkly clean cat + max cleanliness. (3) Peek-a-Boo — kitty hides behind 3-6 objects (trees, boxes, clouds). Tap to find! Wrong spots show a shy emoji, correct spot reveals the happy cat. Difficulty increases as you score more. Teaches object permanence."
+      "summary": "Added 3 new features: (1) Color Match \u2014 cat shows a color heart and asks Luna to find it among 4 choices. Correct picks celebrate with bursts + score. Wrong picks wobble gently. Teaches color names and recognition. (2) Bath Time \u2014 interactive bath scene with 6 wash items (sponge, shampoo, bubbles, rubber ducky, rinse, splash). Tap items to wash the cat with splash effects and floating bubbles. 5 steps to complete a bath = sparkly clean cat + max cleanliness. (3) Peek-a-Boo \u2014 kitty hides behind 3-6 objects (trees, boxes, clouds). Tap to find! Wrong spots show a shy emoji, correct spot reveals the happy cat. Difficulty increases as you score more. Teaches object permanence."
     },
     {
       "date": "2026-02-12",
@@ -47,7 +47,7 @@
         "Touch trail sparkles: draw sparkle trails with finger",
         "Shape recognition: cat plays with different shaped toys, name the shape"
       ],
-      "summary": "Added 3 new features: (1) Lullaby Mode — dark starry night scene with twinkling stars and a gentle Twinkle Twinkle Little Star melody. Cat gradually falls asleep after 4 seconds, restoring energy and love. Calming, soothing experience. (2) Touch Trail Sparkles — dragging a finger anywhere on screen leaves a trail of colorful sparkle emoji (hearts, stars, butterflies, flowers). Pure sensory delight, works on every screen. Throttled for performance. (3) Shape Recognition — cat asks Luna to find shapes (circle, star, heart, diamond, moon, triangle, square, flower) from 4 choices. Correct picks celebrate with bursts. Teaches shape names through play."
+      "summary": "Added 3 new features: (1) Lullaby Mode \u2014 dark starry night scene with twinkling stars and a gentle Twinkle Twinkle Little Star melody. Cat gradually falls asleep after 4 seconds, restoring energy and love. Calming, soothing experience. (2) Touch Trail Sparkles \u2014 dragging a finger anywhere on screen leaves a trail of colorful sparkle emoji (hearts, stars, butterflies, flowers). Pure sensory delight, works on every screen. Throttled for performance. (3) Shape Recognition \u2014 cat asks Luna to find shapes (circle, star, heart, diamond, moon, triangle, square, flower) from 4 choices. Correct picks celebrate with bursts. Teaches shape names through play."
     },
     {
       "date": "2026-02-13",
@@ -56,7 +56,7 @@
         "Magic wand: wave wand to change cat's color/sparkle effects",
         "Mini sticker collection: earn stickers for good care streaks"
       ],
-      "summary": "Added 3 new features: (1) Tea Party — serve 6 treats (tea, cupcake, cookie, cake, strawberry, juice) to cat and 3 animal friends. Guests bounce happily when served. Big celebration when all treats served. Teaches social/pretend play. (2) Magic Wand — mystical dark purple scene with 8 spells (rainbow, snow, fire, unicorn, royal, flower, star, pink). Each spell transforms the cat with dramatic animation, ascending sparkle sounds, and themed emoji bursts. Ambient magic particles float around. Pure wonder and delight. (3) Sticker Collection — 24 stickers to earn by taking good care of kitty and completing activities. Sticker book shows earned vs locked stickers. New sticker awards pop up with fanfare. Stickers persist in localStorage. Adds long-term progression and reward loop."
+      "summary": "Added 3 new features: (1) Tea Party \u2014 serve 6 treats (tea, cupcake, cookie, cake, strawberry, juice) to cat and 3 animal friends. Guests bounce happily when served. Big celebration when all treats served. Teaches social/pretend play. (2) Magic Wand \u2014 mystical dark purple scene with 8 spells (rainbow, snow, fire, unicorn, royal, flower, star, pink). Each spell transforms the cat with dramatic animation, ascending sparkle sounds, and themed emoji bursts. Ambient magic particles float around. Pure wonder and delight. (3) Sticker Collection \u2014 24 stickers to earn by taking good care of kitty and completing activities. Sticker book shows earned vs locked stickers. New sticker awards pop up with fanfare. Stickers persist in localStorage. Adds long-term progression and reward loop."
     },
     {
       "date": "2026-02-14",
@@ -65,7 +65,7 @@
         "Animal parade: animals march across screen, tap to make them dance",
         "Painting easel: finger-paint with big color buttons"
       ],
-      "summary": "Added 3 new features: (1) Garden — 5 planting pots with seed selection (tulip, sunflower, rose, cherry blossom, hibiscus, strawberry) and watering can. Plant seeds, water them to grow through 3 stages (sprout → leaves → bloom). Full garden triggers celebration + sticker. Teaches patience and nature. (2) Animal Parade — animals (elephant, lion, penguin, unicorn, etc.) march across the screen. Tap any animal to make it dance with musical notes bursting out and a fun tone. Every 5 dances triggers a celebration. Pure joy. (3) Painting Easel — finger-paint canvas with 9 colors, clear button, and emoji stamp button that places random cat-themed stamps. Full touch drawing on iPad. Creative free play."
+      "summary": "Added 3 new features: (1) Garden \u2014 5 planting pots with seed selection (tulip, sunflower, rose, cherry blossom, hibiscus, strawberry) and watering can. Plant seeds, water them to grow through 3 stages (sprout \u2192 leaves \u2192 bloom). Full garden triggers celebration + sticker. Teaches patience and nature. (2) Animal Parade \u2014 animals (elephant, lion, penguin, unicorn, etc.) march across the screen. Tap any animal to make it dance with musical notes bursting out and a fun tone. Every 5 dances triggers a celebration. Pure joy. (3) Painting Easel \u2014 finger-paint canvas with 9 colors, clear button, and emoji stamp button that places random cat-themed stamps. Full touch drawing on iPad. Creative free play."
     },
     {
       "date": "2026-02-15",
@@ -74,7 +74,7 @@
         "Music maker: tap different items to make musical sounds, play simple tunes",
         "Counting stars: tap stars as they appear, count to 10"
       ],
-      "summary": "Added 3 new features: (1) Memory Match — 4 pairs of emoji cards (8 total) in a 4x2 grid. Tap to flip, find matching pairs. Wrong guesses flip back gently. Matched pairs stay revealed with celebration bursts. Completing all pairs awards a sticker. Teaches memory and visual matching. (2) Music Maker — 8 instrument buttons (drum, piano, bell, guitar, trumpet, shaker, high note, low note) each play unique synthesized sounds with pitch variation. Cat bounces along. Musical notes float up on each tap. Every 8 notes triggers a celebration. Encourages rhythm and cause-effect learning. (3) Counting Stars — stars appear on a dark night sky background. Tap to collect them and count to 10. Number words shown (One!, Two!...). Halfway celebration at 5, big finale at 10 with sticker reward. Teaches counting to 10."
+      "summary": "Added 3 new features: (1) Memory Match \u2014 4 pairs of emoji cards (8 total) in a 4x2 grid. Tap to flip, find matching pairs. Wrong guesses flip back gently. Matched pairs stay revealed with celebration bursts. Completing all pairs awards a sticker. Teaches memory and visual matching. (2) Music Maker \u2014 8 instrument buttons (drum, piano, bell, guitar, trumpet, shaker, high note, low note) each play unique synthesized sounds with pitch variation. Cat bounces along. Musical notes float up on each tap. Every 8 notes triggers a celebration. Encourages rhythm and cause-effect learning. (3) Counting Stars \u2014 stars appear on a dark night sky background. Tap to collect them and count to 10. Number words shown (One!, Two!...). Halfway celebration at 5, big finale at 10 with sticker reward. Teaches counting to 10."
     },
     {
       "date": "2026-02-16",
@@ -83,7 +83,7 @@
         "Animal sounds quiz: hear a sound, pick which animal makes it",
         "Balloon pop: tap rising balloons, each one counts up"
       ],
-      "summary": "Added 3 new features: (1) Treasure Hunt — 12-spot grid (4x3) with 3-4 hidden treasures behind trees, rocks, and other objects. Tap to search — wrong spots show a shy emoji, correct spots reveal gems/crowns/stars with celebrations. Auto-restarts after finding all. Awards sticker. Teaches visual search and persistence. (2) Animal Sounds Quiz — hear a synthesized animal sound (dog bark, cat meow, frog ribbit, lion roar, etc.), then pick which of 3 animals made it. Each animal has a unique Web Audio synthesized sound. Tap the speaker to replay. Correct picks celebrate, wrong picks wobble. Awards sticker at 3 correct. Teaches animal sound recognition and listening skills. (3) Balloon Pop — colorful balloons float up the screen. Tap to pop with confetti burst effects. Count displayed prominently with bump animation on each pop. Milestone celebrations every 5 pops. Awards sticker at 10 pops. Pure sensory fun with counting."
+      "summary": "Added 3 new features: (1) Treasure Hunt \u2014 12-spot grid (4x3) with 3-4 hidden treasures behind trees, rocks, and other objects. Tap to search \u2014 wrong spots show a shy emoji, correct spots reveal gems/crowns/stars with celebrations. Auto-restarts after finding all. Awards sticker. Teaches visual search and persistence. (2) Animal Sounds Quiz \u2014 hear a synthesized animal sound (dog bark, cat meow, frog ribbit, lion roar, etc.), then pick which of 3 animals made it. Each animal has a unique Web Audio synthesized sound. Tap the speaker to replay. Correct picks celebrate, wrong picks wobble. Awards sticker at 3 correct. Teaches animal sound recognition and listening skills. (3) Balloon Pop \u2014 colorful balloons float up the screen. Tap to pop with confetti burst effects. Count displayed prominently with bump animation on each pop. Milestone celebrations every 5 pops. Awards sticker at 10 pops. Pure sensory fun with counting."
     }
   ],
   "ideaPool": [
@@ -114,27 +114,27 @@
       "function": "Feed",
       "refinements": [
         "Food menu overlay with 6 foods (Fish, Milk, Chicken, Cupcake, Apple, Sushi)",
-        "Each food labeled with its color (Blue Fish, Pink Cupcake, Red Apple) — teaches color names",
+        "Each food labeled with its color (Blue Fish, Pink Cupcake, Red Apple) \u2014 teaches color names",
         "Multi-bite chomp animation (3 squish-stretch frames with repeat sound)",
         "Food-specific speech reactions and emoji bursts per food type",
-        "Daily variety tracker — feed different foods to earn variety bonus (+love)",
+        "Daily variety tracker \u2014 feed different foods to earn variety bonus (+love)",
         "All-6-foods celebration with sticker reward for trying everything",
-        "Variety progress bar shows which foods fed today (greyed → colorful on feed)"
+        "Variety progress bar shows which foods fed today (greyed \u2192 colorful on feed)"
       ],
-      "summary": "Transformed Feed from a single-tap action into a food-picking experience. 6 foods teach color names (Blue Fish, Red Apple, Pink Cupcake). Multi-bite chomp animation with satisfying repeat sounds. Daily variety tracker encourages trying all foods — feeding 3+ different foods gives love bonus, all 6 triggers celebration + sticker. Each food has unique speech and emoji burst."
+      "summary": "Transformed Feed from a single-tap action into a food-picking experience. 6 foods teach color names (Blue Fish, Red Apple, Pink Cupcake). Multi-bite chomp animation with satisfying repeat sounds. Daily variety tracker encourages trying all foods \u2014 feeding 3+ different foods gives love bonus, all 6 triggers celebration + sticker. Each food has unique speech and emoji burst."
     },
     {
       "date": "2026-02-19",
       "function": "Pet",
       "refinements": [
-        "Petting spots overlay with 4 zones: Head, Chin, Belly, Back — each with unique reactions",
+        "Petting spots overlay with 4 zones: Head, Chin, Belly, Back \u2014 each with unique reactions",
         "Spot-specific speech bubbles, emoji bursts, and purr expressions",
-        "Purr Meter — builds with each pet, 8 pets to fill for mega purr celebration + sticker",
-        "Spot tracker showing which areas have been petted (greyed → colorful)",
+        "Purr Meter \u2014 builds with each pet, 8 pets to fill for mega purr celebration + sticker",
+        "Spot tracker showing which areas have been petted (greyed \u2192 colorful)",
         "All-4-spots bonus gives extra love and rainbow celebration",
         "Purple/lavender aesthetic for the petting screen"
       ],
-      "summary": "Transformed Pet from a single-tap action into an interactive petting experience. 4 petting spots (head, chin, belly, back) each with unique reactions and speech. Purr Meter fills over 8 pets — reaching max triggers mega purr celebration + sticker. Petting all 4 spots gives bonus love. Tapping the cat directly still works for quick pets."
+      "summary": "Transformed Pet from a single-tap action into an interactive petting experience. 4 petting spots (head, chin, belly, back) each with unique reactions and speech. Purr Meter fills over 8 pets \u2014 reaching max triggers mega purr celebration + sticker. Petting all 4 spots gives bonus love. Tapping the cat directly still works for quick pets."
     },
     {
       "date": "2026-02-20",
@@ -143,7 +143,7 @@
         "Toy selection menu with 6 toys (Yarn, Feather, Laser, Mouse, Bell, Ribbon)",
         "Each toy has unique pounce animation and speech reaction",
         "Fun Meter builds over 8 plays to mega celebration + sticker",
-        "Toy variety tracker — try all 6 for bonus love + rainbow celebration",
+        "Toy variety tracker \u2014 try all 6 for bonus love + rainbow celebration",
         "Green/mint aesthetic for the play screen",
         "Toy-specific emoji bursts per selection"
       ],
@@ -156,11 +156,24 @@
         "Grooming tool selection menu with 6 tools (Comb, Sparkle, Bow, Gems, Perfume, Crown)",
         "Each tool has unique brush stroke animation and speech reaction",
         "Sparkle Meter builds over 8 brushes to mega celebration + sticker",
-        "Tool variety tracker — use all 6 for bonus clean + love + rainbow celebration",
+        "Tool variety tracker \u2014 use all 6 for bonus clean + love + rainbow celebration",
         "Purple/lavender aesthetic for the grooming screen",
         "Tool-specific emoji bursts per selection"
       ],
       "summary": "Transformed Brush from a single-tap action into a grooming tool experience. 6 tools with unique animations and reactions. Sparkle Meter fills over 8 brushes for mega celebration + sticker. Using all 6 tools triggers bonus. Purple/lavender themed overlay."
+    },
+    {
+      "date": "2026-02-22",
+      "function": "Nap",
+      "refinements": [
+        "Bedtime routine overlay with 6 cozy items: Teddy, Pillow, Warm Milk, Story, Night Light, Lullaby",
+        "Dark indigo night sky theme with twinkling star particles",
+        "Gentle rocking animation \u2014 cat goes \ud83d\ude3a \u2192 \ud83d\ude2a \u2192 \ud83d\ude34",
+        "Dream Meter builds over 8 uses to mega celebration + sticker",
+        "Item variety tracker \u2014 use all 6 for bonus love + rainbow celebration",
+        "Each item has unique speech and emoji bursts"
+      ],
+      "summary": "Transformed Nap from a single-tap action into a bedtime routine experience. 6 cozy items with unique animations and reactions. Dark night sky theme with twinkling stars. Dream Meter fills over 8 uses for mega celebration + sticker. Using all 6 items triggers bonus. Gentle rocking cat animation."
     }
   ]
 }

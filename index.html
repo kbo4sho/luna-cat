@@ -1554,6 +1554,148 @@
   }
   .brush-close:active { transform: scale(0.95); background: #d0a8f0; }
 
+  /* ===== NAP MENU ===== */
+  .nap-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, #1a1a3e 0%, #2d1b69 50%, #0d0d2b 100%);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+  }
+  .nap-overlay.hidden { display: none; }
+  .nap-title {
+    font-size: 2.2em;
+    margin: 10px 0;
+    color: #e8d5ff;
+    text-shadow: 0 2px 8px rgba(123,104,238,0.5);
+  }
+  .nap-cat {
+    font-size: 5em;
+    margin: 10px 0;
+    transition: transform 0.3s;
+  }
+  .nap-cat.rocking {
+    animation: napRock 0.6s ease-in-out;
+  }
+  @keyframes napRock {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(-8deg) scale(1.05); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(8deg) scale(1.05); }
+    100% { transform: rotate(0deg); }
+  }
+  .nap-speech {
+    font-size: 1.4em;
+    text-align: center;
+    min-height: 2em;
+    margin: 5px 0;
+    color: #d4b8ff;
+  }
+  .nap-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 12px 0;
+    width: 100%;
+    max-width: 340px;
+  }
+  .nap-item-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 14px 8px;
+    min-height: 80px;
+    background: rgba(255,255,255,0.12);
+    border: 3px solid rgba(186,160,255,0.3);
+    border-radius: 20px;
+    font-size: 1em;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.12s, background 0.2s;
+  }
+  .nap-item-btn:active {
+    transform: scale(0.92);
+    background: rgba(186,160,255,0.3);
+  }
+  .nap-item-emoji { font-size: 2.2em; }
+  .nap-item-label { font-size: 0.85em; color: #c8b0ff; margin-top: 4px; }
+  .nap-variety {
+    display: flex;
+    gap: 10px;
+    margin: 8px 0;
+    font-size: 1.5em;
+  }
+  .nap-variety span {
+    opacity: 0.25;
+    filter: grayscale(1);
+    transition: all 0.4s;
+  }
+  .nap-variety span.done {
+    opacity: 1;
+    filter: none;
+    animation: feedPop 0.4s ease;
+  }
+  .nap-dream-bar {
+    width: 100%;
+    max-width: 300px;
+    height: 28px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50px;
+    border: 3px solid rgba(123,104,238,0.4);
+    overflow: hidden;
+    margin: 8px 0;
+    position: relative;
+  }
+  .nap-dream-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #7b68ee, #9370db, #ba55d3);
+    border-radius: 50px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+  .nap-dream-label {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.1em;
+    color: #e8d5ff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  }
+  .nap-close {
+    margin-top: 12px;
+    padding: 14px 36px;
+    font-size: 1.3em;
+    background: #7b68ee;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(123,104,238,0.4);
+  }
+  .nap-close:active { transform: scale(0.95); background: #6a5acd; }
+  .nap-stars {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .nap-star {
+    position: absolute;
+    font-size: 1.2em;
+    animation: napTwinkle 2s ease-in-out infinite;
+    opacity: 0.6;
+  }
+  @keyframes napTwinkle {
+    0%, 100% { opacity: 0.3; transform: scale(0.8); }
+    50% { opacity: 0.8; transform: scale(1.1); }
+  }
+
   /* ===== BATH TIME ===== */
   .bath-overlay {
     position: fixed;
@@ -3047,6 +3189,22 @@
   <button class="brush-close" onclick="closeBrushMenu()">🔙 Back</button>
 </div>
 
+<!-- Nap menu overlay -->
+<div class="nap-overlay hidden" id="napOverlay">
+  <div class="nap-stars" id="napStars"></div>
+  <div class="nap-title">🌙 Bedtime! 💤</div>
+  <div class="nap-cat" id="napCat">😺</div>
+  <div class="nap-speech" id="napSpeech">Time for bed! Pick a cozy thing! 👇</div>
+  <div class="nap-variety" id="napVariety"></div>
+  <div class="nap-grid" id="napGrid"></div>
+  <div class="nap-dream-bar">
+    <div class="nap-dream-fill" id="napDreamFill"></div>
+    <div class="nap-dream-label" id="napDreamLabel">💤 Dream Meter</div>
+  </div>
+  <div id="napBonus"></div>
+  <button class="nap-close" onclick="closeNapMenu()">🔙 Back</button>
+</div>
+
 <!-- Bath time overlay -->
 <div class="bath-overlay hidden" id="bathOverlay">
   <div class="bath-title">🛁 Bath Time! 🫧</div>
@@ -3256,7 +3414,7 @@
     <span>🪮</span>
     <span class="label">Brush</span>
   </button>
-  <button class="action-btn" id="btnNap" onclick="doAction('nap')">
+  <button class="action-btn" id="btnNap" onclick="openNapMenu()">
     <span>😴</span>
     <span class="label">Nap</span>
   </button>
@@ -5066,6 +5224,187 @@
 
   function closeBrushMenu() {
     document.getElementById('brushOverlay').classList.add('hidden');
+  }
+
+  // ===== NAP MENU =====
+  const napItems = [
+    { emoji: '🧸', label: 'Teddy', speech: 'Snuggle teddy! 🧸💕', burst: ['🧸', '💕', '🧸', '⭐'] },
+    { emoji: '🛏️', label: 'Pillow', speech: 'Fluffy pillow! 🛏️☁️', burst: ['🛏️', '☁️', '🛏️', '💤'] },
+    { emoji: '🥛', label: 'Warm Milk', speech: 'Warm milky! 🥛💛', burst: ['🥛', '💛', '🥛', '✨'] },
+    { emoji: '📖', label: 'Story', speech: 'Bedtime story! 📖⭐', burst: ['📖', '⭐', '📖', '💫'] },
+    { emoji: '🌟', label: 'Night Light', speech: 'Twinkly light! 🌟✨', burst: ['🌟', '✨', '🌟', '💜'] },
+    { emoji: '🎵', label: 'Lullaby', speech: 'Sweet song! 🎵💜', burst: ['🎵', '💜', '🎵', '🌙'] },
+  ];
+  let napVarietyToday = [];
+  let napDreamCount = 0;
+
+  function loadNapVariety() {
+    const saved = localStorage.getItem('lunaNapVariety');
+    const savedDate = localStorage.getItem('lunaNapVarietyDate');
+    const today = new Date().toDateString();
+    if (saved && savedDate === today) {
+      napVarietyToday = JSON.parse(saved);
+    } else {
+      napVarietyToday = [];
+      localStorage.setItem('lunaNapVarietyDate', today);
+      localStorage.setItem('lunaNapVariety', '[]');
+    }
+    const savedDream = localStorage.getItem('lunaNapDreamCount');
+    napDreamCount = savedDream ? parseInt(savedDream) : 0;
+  }
+
+  function saveNapVariety() {
+    localStorage.setItem('lunaNapVariety', JSON.stringify(napVarietyToday));
+    localStorage.setItem('lunaNapVarietyDate', new Date().toDateString());
+    localStorage.setItem('lunaNapDreamCount', napDreamCount);
+  }
+
+  function renderNapVariety() {
+    const container = document.getElementById('napVariety');
+    container.innerHTML = napItems.map(item => {
+      const isDone = napVarietyToday.includes(item.emoji);
+      return `<span class="${isDone ? 'done' : ''}">${item.emoji}</span>`;
+    }).join('');
+  }
+
+  function renderNapDreamMeter() {
+    const pct = Math.min(100, (napDreamCount / 8) * 100);
+    document.getElementById('napDreamFill').style.width = pct + '%';
+    document.getElementById('napDreamLabel').textContent = napDreamCount >= 8 ? '🌈 Sweet Dreams! 🌈' : '💤 Dream Meter ' + napDreamCount + '/8';
+  }
+
+  function createNapStars() {
+    const container = document.getElementById('napStars');
+    container.innerHTML = '';
+    const stars = ['⭐', '✨', '🌟', '💫'];
+    for (let i = 0; i < 15; i++) {
+      const star = document.createElement('div');
+      star.className = 'nap-star';
+      star.textContent = stars[Math.floor(Math.random() * stars.length)];
+      star.style.left = Math.random() * 90 + 5 + '%';
+      star.style.top = Math.random() * 90 + 5 + '%';
+      star.style.animationDelay = (Math.random() * 3) + 's';
+      star.style.fontSize = (0.8 + Math.random() * 0.8) + 'em';
+      container.appendChild(star);
+    }
+  }
+
+  function openNapMenu() {
+    if (isSleeping) {
+      setSleeping(false);
+      showSpeech('*yawn* 😺');
+      showReaction('😺');
+      playSound('happy');
+      return;
+    }
+    loadNapVariety();
+    createNapStars();
+    document.getElementById('napOverlay').classList.remove('hidden');
+    document.getElementById('napCat').textContent = '😺';
+    document.getElementById('napSpeech').textContent = 'Time for bed! Pick a cozy thing! 👇';
+    document.getElementById('napBonus').innerHTML = '';
+    playSound('happy');
+
+    const grid = document.getElementById('napGrid');
+    grid.innerHTML = napItems.map((item, i) => `
+      <button class="nap-item-btn" onclick="napUseItem(${i})">
+        <span class="nap-item-emoji">${item.emoji}</span>
+        <span class="nap-item-label">${item.label}</span>
+      </button>
+    `).join('');
+
+    renderNapVariety();
+    renderNapDreamMeter();
+  }
+
+  function napUseItem(index) {
+    const item = napItems[index];
+    const catEl = document.getElementById('napCat');
+    const speechEl = document.getElementById('napSpeech');
+
+    // Rocking animation
+    catEl.textContent = '😪';
+    speechEl.textContent = item.speech;
+    playSound('nap');
+
+    catEl.classList.remove('rocking');
+    void catEl.offsetWidth;
+    catEl.classList.add('rocking');
+    setTimeout(() => {
+      catEl.classList.remove('rocking');
+      catEl.textContent = '😴';
+    }, 600);
+
+    // Emoji burst
+    emojiBurst(item.burst, 8);
+
+    // Update needs
+    needs.energy = Math.min(MAX_NEED, needs.energy + 2);
+
+    // Variety tracking
+    const isNew = !napVarietyToday.includes(item.emoji);
+    if (isNew) {
+      napVarietyToday.push(item.emoji);
+    }
+
+    // Dream meter
+    napDreamCount++;
+    saveNapVariety();
+    renderNapVariety();
+    renderNapDreamMeter();
+
+    // Variety bonus
+    const bonusEl = document.getElementById('napBonus');
+    if (isNew && napVarietyToday.length >= 3) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      bonusEl.innerHTML = `<div style="color:#d4b8ff;font-size:1.2em;margin:5px 0;">🌈 Cozy bonus! +💕</div>`;
+      setTimeout(() => emojiBurst(['🌈', '⭐', '💕', '✨'], 6), 300);
+    } else if (isNew) {
+      bonusEl.innerHTML = `<div style="color:#d4b8ff;font-size:1.2em;margin:5px 0;">✨ New bedtime item!</div>`;
+    } else {
+      bonusEl.innerHTML = '';
+    }
+
+    // All 6 items = super celebration + sticker
+    if (napVarietyToday.length >= 6 && isNew) {
+      setTimeout(() => {
+        speechEl.textContent = '🌈 Full bedtime routine! 🌈';
+        emojiBurst(['🌈', '⭐', '💜', '✨', '🌙', '💤'], 12);
+        playSound('happy');
+        awardSticker();
+      }, 1000);
+    }
+
+    // Dream meter full = mega celebration + sticker
+    if (napDreamCount === 8) {
+      setTimeout(() => {
+        speechEl.textContent = '🌙 Sweet dreams! Maximum cozy! 🌙';
+        emojiBurst(['🌙', '💜', '⭐', '✨', '💤', '🧸'], 12);
+        playSound('happy');
+        awardSticker();
+        napDreamCount = 0;
+        saveNapVariety();
+        renderNapDreamMeter();
+      }, 1500);
+    }
+
+    // Put cat to sleep after delay
+    setTimeout(() => {
+      setSleeping(true);
+    }, 800);
+
+    // Sticker chance on good care
+    const totalCheck = needs.hunger + needs.love + needs.energy + needs.clean;
+    if (totalCheck >= MAX_NEED * 3 && Math.random() < 0.15) {
+      setTimeout(() => awardSticker(), 2000);
+    }
+
+    renderNeeds();
+    saveState();
+  }
+
+  function closeNapMenu() {
+    document.getElementById('napOverlay').classList.add('hidden');
   }
 
   // ===== BATH TIME =====
