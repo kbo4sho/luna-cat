@@ -175,5 +175,23 @@
       ],
       "summary": "Transformed Nap from a single-tap action into a bedtime routine experience. 6 cozy items with unique animations and reactions. Dark night sky theme with twinkling stars. Dream Meter fills over 8 uses for mega celebration + sticker. Using all 6 items triggers bonus. Gentle rocking cat animation."
     }
+  ],
+  "features": [
+    {
+      "date": "2026-02-27",
+      "function": "Emotion Recognition Game",
+      "description": "New educational mini-game teaching emotional literacy",
+      "details": [
+        "8 emotions to learn: Happy, Sad, Angry, Sleepy, Scared, Loving, Surprised, Cozy",
+        "Each emotion has unique emoji face + descriptive label ('Kitty is happy!')",
+        "3-choice matching: Luna taps the emotion that matches the description",
+        "Correct matches celebrate with emotion-specific emoji bursts (hearts for loving, lightning for angry, etc.)",
+        "Score tracking with rewards every 5 correct matches",
+        "Teaches: emotional recognition, labeling feelings, empathy building",
+        "Age-appropriate for 3yo with big tap targets and immediate feedback",
+        "Wrong answers wobble gently — no punishment, just encouragement to try again"
+      ],
+      "summary": "Added Emotion Recognition Game — teaches Luna to identify and name 8 different feelings. Kitty shows an emotion and asks 'How do you feel?' Luna taps to match the emoji face with the feeling word (Happy, Sad, Angry, Sleepy, etc.). Each emotion celebrates with themed bursts. Sticker reward every 5 correct. Builds emotional vocabulary and empathy in a playful, low-pressure way. Perfect for 3yo social-emotional learning!"
+    }
   ]
 }
