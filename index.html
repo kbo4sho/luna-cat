@@ -3046,6 +3046,95 @@
     padding: 20px;
   }
   .emotion-overlay.hidden { display: none; }
+
+  /* ===== ABC LETTERS GAME ===== */
+  .abc-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 40%, #f0e0ff 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 900;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .abc-overlay.hidden { display: none; }
+  .abc-title {
+    font-size: 28px;
+    color: var(--pink-deep);
+    z-index: 2;
+  }
+  .abc-cat {
+    font-size: 100px;
+    line-height: 1;
+    z-index: 2;
+    animation: catBounce 1.5s ease infinite;
+  }
+  .abc-prompt {
+    font-size: 24px;
+    color: var(--pink-dark);
+    text-align: center;
+    z-index: 2;
+    min-height: 36px;
+  }
+  .abc-field {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .abc-letter {
+    position: absolute;
+    font-size: 80px;
+    font-weight: bold;
+    cursor: pointer;
+    animation: abcFloat var(--speed) linear forwards;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+    transition: transform 0.15s;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: 4px solid;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+  }
+  .abc-letter:active { transform: scale(0.8); }
+  .abc-letter.collected {
+    animation: abcCollect 0.5s ease forwards !important;
+  }
+  @keyframes abcFloat {
+    0% { transform: translateY(110vh) scale(0.8); opacity: 0.9; }
+    5% { opacity: 1; transform: translateY(100vh) scale(1); }
+    95% { opacity: 1; }
+    100% { transform: translateY(-120px) scale(1); opacity: 0; }
+  }
+  @keyframes abcCollect {
+    0% { transform: scale(1) rotate(0deg); opacity: 1; }
+    50% { transform: scale(1.4) rotate(10deg); opacity: 0.8; }
+    100% { transform: scale(0) rotate(360deg); opacity: 0; }
+  }
+  .abc-score {
+    font-size: 22px;
+    color: var(--pink-dark);
+    z-index: 2;
+  }
+  .abc-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid var(--pink);
+    background: white;
+    color: var(--pink-deep);
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    margin: 10px 0 20px;
+  }
+  .abc-close:active { transform: scale(0.95); background: var(--pink-light); }
   .emotion-title {
     font-size: 28px;
     color: var(--pink-deep);
@@ -3462,6 +3551,16 @@
   <button class="emotion-close" onclick="closeEmotions()">🔙 Back</button>
 </div>
 
+<!-- ABC letters game overlay -->
+<div class="abc-overlay hidden" id="abcOverlay">
+  <div class="abc-title">🔤 ABC Letters! 📝</div>
+  <div class="abc-cat">😺</div>
+  <div class="abc-prompt" id="abcPrompt">Tap the letters! 🔤</div>
+  <div class="abc-score" id="abcScore">⭐ 0 letters</div>
+  <div class="abc-field" id="abcField"></div>
+  <button class="abc-close" onclick="closeABC()">🔙 Back</button>
+</div>
+
 <!-- Header -->
 <div class="header">
   <h1>Luna's Kitty 🐱💕</h1>
@@ -3618,6 +3717,10 @@
   <button class="action-btn" onclick="openEmotions()" style="border-color: #ff8ec4;">
     <span>💖</span>
     <span class="label">Feelings</span>
+  </button>
+  <button class="action-btn" onclick="openABC()" style="border-color: #ffcc66;">
+    <span>🔤</span>
+    <span class="label">ABCs</span>
   </button>
 </div>
 
@@ -7689,6 +7792,193 @@
       saveState();
       showReaction('💖');
       showSpeech('You know feelings! 💖');
+    }
+  }
+
+  // ===== ABC LETTERS GAME =====
+  const abcLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+  const letterColors = ['#ff4444', '#ff8ec4', '#ff8800', '#ffcc00', '#44cc44', '#4488ff', '#aa66cc'];
+  let abcInterval = null;
+  let abcScore = 0;
+  let abcActive = false;
+
+  function openABC() {
+    abcScore = 0;
+    abcActive = true;
+    document.getElementById('abcScore').textContent = '⭐ 0 letters';
+    document.getElementById('abcPrompt').textContent = 'Tap the letters! 🔤';
+    document.getElementById('abcOverlay').classList.remove('hidden');
+    document.getElementById('abcField').innerHTML = '';
+    document.getElementById('abcCat').textContent = '😺';
+    playSound('happy');
+
+    // Spawn letters periodically
+    spawnABCLetter();
+    abcInterval = setInterval(() => {
+      if (!abcActive) return;
+      const field = document.getElementById('abcField');
+      if (field && field.querySelectorAll('.abc-letter:not(.collected)').length < 4) {
+        spawnABCLetter();
+      }
+    }, 2000);
+  }
+
+  function spawnABCLetter() {
+    if (!abcActive) return;
+    const field = document.getElementById('abcField');
+    if (!field) return;
+
+    const letter = abcLetters[Math.floor(Math.random() * abcLetters.length)];
+    const el = document.createElement('div');
+    el.className = 'abc-letter';
+    el.textContent = letter;
+    el.dataset.letter = letter;
+    
+    // Random color
+    const color = letterColors[Math.floor(Math.random() * letterColors.length)];
+    el.style.borderColor = color;
+    el.style.color = color;
+    el.style.left = (5 + Math.random() * 75) + '%';
+    
+    const speed = 6 + Math.random() * 4;
+    el.style.setProperty('--speed', speed + 's');
+
+    el.onclick = (e) => {
+      e.stopPropagation();
+      collectABCLetter(el, letter);
+    };
+
+    field.appendChild(el);
+
+    // Auto-remove when animation ends
+    setTimeout(() => {
+      if (el.parentElement && !el.classList.contains('collected')) {
+        el.remove();
+        if (abcActive) spawnABCLetter();
+      }
+    }, speed * 1000);
+  }
+
+  function collectABCLetter(el, letter) {
+    if (el.classList.contains('collected')) return;
+    el.classList.add('collected');
+
+    abcScore++;
+    playSound('count');
+
+    // Update score
+    document.getElementById('abcScore').textContent = '⭐ ' + abcScore + ' letters';
+
+    // Say the letter name
+    document.getElementById('abcPrompt').textContent = '🔤 ' + letter + '! 🔤';
+
+    // Play letter sound (simple pitch for each letter)
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      // Different pitch for each letter (A=440Hz up to Z)
+      const baseFreq = 440 + (letter.charCodeAt(0) - 65) * 20;
+      osc.frequency.setValueAtTime(baseFreq, ctx.currentTime);
+      osc.frequency.linearRampToValueAtTime(baseFreq + 100, ctx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.12, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.2);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.2);
+    } catch(e) {}
+
+    // Burst effect
+    const rect = el.getBoundingClientRect();
+    for (let i = 0; i < 5; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'emoji-burst';
+      spark.textContent = ['⭐', '✨', '🌟', '💖', '🔤'][Math.floor(Math.random() * 5)];
+      spark.style.left = rect.left + rect.width/2 + 'px';
+      spark.style.top = rect.top + rect.height/2 + 'px';
+      spark.style.position = 'fixed';
+      spark.style.zIndex = '999';
+      const angle = (Math.PI * 2 * i) / 5;
+      const dist = 50 + Math.random() * 40;
+      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+      spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 1200);
+    }
+
+    // Cat reacts every few letters
+    if (abcScore % 3 === 0) {
+      const cat = document.getElementById('abcCat');
+      cat.textContent = ['😸', '😺', '😻', '🥰'][Math.floor(Math.random() * 4)];
+    }
+
+    // Milestone every 5 letters
+    if (abcScore % 5 === 0) {
+      playSound('tada');
+      document.getElementById('abcPrompt').textContent = '🎉 Great job! Keep going! 🎉';
+      const overlay = document.getElementById('abcOverlay');
+      for (let i = 0; i < 8; i++) {
+        const spark = document.createElement('div');
+        spark.className = 'emoji-burst';
+        spark.textContent = ['🔤', '📝', '⭐', '✨', '🌈'][Math.floor(Math.random() * 5)];
+        spark.style.left = '50%';
+        spark.style.top = '30%';
+        spark.style.position = 'absolute';
+        const angle = (Math.PI * 2 * i) / 8;
+        const dist = 80 + Math.random() * 60;
+        spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+        spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+        spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+        overlay.appendChild(spark);
+        setTimeout(() => spark.remove(), 1200);
+      }
+    }
+
+    // Big celebration at 10
+    if (abcScore === 10) {
+      setTimeout(() => {
+        playSound('happy');
+        document.getElementById('abcPrompt').textContent = '🌈 You know so many letters! 🌈';
+        const overlay = document.getElementById('abcOverlay');
+        for (let i = 0; i < 12; i++) {
+          const spark = document.createElement('div');
+          spark.className = 'emoji-burst';
+          spark.textContent = ['🔤', '📝', '⭐', '✨', '🌈', '💖'][Math.floor(Math.random() * 6)];
+          spark.style.left = '50%';
+          spark.style.top = '30%';
+          spark.style.position = 'absolute';
+          const angle = (Math.PI * 2 * i) / 12;
+          const dist = 90 + Math.random() * 70;
+          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
+          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
+          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
+          overlay.appendChild(spark);
+          setTimeout(() => spark.remove(), 1200);
+        }
+        awardSticker();
+      }, 600);
+    }
+
+    setTimeout(() => el.remove(), 500);
+  }
+
+  function closeABC() {
+    abcActive = false;
+    clearInterval(abcInterval);
+    document.getElementById('abcOverlay').classList.add('hidden');
+    document.getElementById('abcField').innerHTML = '';
+    
+    if (abcScore > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      if (abcScore >= 5) needs.energy = Math.min(MAX_NEED, needs.energy + 1);
+      renderNeeds();
+      saveState();
+      showReaction('🔤');
+      showSpeech('Great letters! 🔤📝');
+      emojiBurst(['🔤', '📝', '⭐', '✨', 'A', 'B', 'C'], 8);
     }
   }
 

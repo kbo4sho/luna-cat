@@ -192,6 +192,23 @@
         "Wrong answers wobble gently — no punishment, just encouragement to try again"
       ],
       "summary": "Added Emotion Recognition Game — teaches Luna to identify and name 8 different feelings. Kitty shows an emotion and asks 'How do you feel?' Luna taps to match the emoji face with the feeling word (Happy, Sad, Angry, Sleepy, etc.). Each emotion celebrates with themed bursts. Sticker reward every 5 correct. Builds emotional vocabulary and empathy in a playful, low-pressure way. Perfect for 3yo social-emotional learning!"
+    },
+    {
+      "date": "2026-02-27",
+      "function": "ABC Letters Game",
+      "description": "Letter recognition and phonics game for early literacy",
+      "details": [
+        "26 letters of the alphabet float up the screen at random",
+        "Each letter has unique color and sound when tapped",
+        "Large touch-friendly letters (80px) with colorful borders",
+        "Tapping a letter plays its sound and shows the letter name",
+        "Score tracking with celebration every 5 letters",
+        "Sticker reward at 10 letters collected",
+        "Teaches: letter recognition, letter names, basic phonics",
+        "Auto-spawning letters keep the game engaging",
+        "Floating animation creates visual interest and challenge"
+      ],
+      "summary": "Added ABC Letters Game — fun letter recognition activity where colorful letters float up the screen. Luna taps each letter to hear its name and a unique musical tone. Letters appear randomly from A-Z with different colors. Celebrates progress every 5 letters with bursts and awards a sticker at 10 letters. Perfect complement to existing educational games (numbers, colors, shapes, emotions). Teaches alphabet recognition and letter sounds in an engaging, age-appropriate way for preschoolers!"
     }
   ]
 }
