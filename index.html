@@ -3135,6 +3135,130 @@
     margin: 10px 0 20px;
   }
   .abc-close:active { transform: scale(0.95); background: var(--pink-light); }
+
+  /* ===== FIREWORKS SHOW ===== */
+  .fireworks-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(180deg, #0a0a2e 0%, #1a1a3e 30%, #2d1b4e 70%, #0a0a2e 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 900;
+    padding: 20px;
+    overflow: hidden;
+  }
+  .fireworks-overlay.hidden { display: none; }
+  .fireworks-title {
+    font-size: 28px;
+    color: #ffcc66;
+    text-shadow: 0 0 20px rgba(255, 204, 102, 0.8);
+    z-index: 2;
+    animation: colorPulse 2s ease infinite alternate;
+  }
+  .fireworks-cat {
+    font-size: 100px;
+    line-height: 1;
+    z-index: 2;
+    animation: catBounce 2s ease infinite;
+    margin: 10px 0;
+  }
+  .fireworks-sky {
+    position: relative;
+    flex: 1;
+    width: 100%;
+    max-width: 500px;
+    overflow: hidden;
+    z-index: 1;
+    cursor: pointer;
+    border-radius: 20px;
+    background: radial-gradient(circle at 30% 40%, rgba(77, 201, 246, 0.1), transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(201, 160, 220, 0.1), transparent 50%);
+  }
+  .firework {
+    position: absolute;
+    pointer-events: none;
+  }
+  .firework-particle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    animation: fireworkParticle var(--duration) ease-out forwards;
+  }
+  @keyframes fireworkParticle {
+    0% {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(0.3);
+      opacity: 0;
+    }
+  }
+  .firework-emoji {
+    position: absolute;
+    font-size: 40px;
+    pointer-events: none;
+    animation: fireworkEmoji var(--duration) ease-out forwards;
+  }
+  @keyframes fireworkEmoji {
+    0% {
+      transform: translate(0, 0) scale(0.5) rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot));
+      opacity: 0;
+    }
+  }
+  .firework-launch {
+    position: absolute;
+    width: 4px;
+    height: 80px;
+    bottom: 0;
+    animation: fireworkLaunch var(--launch-duration) ease-out forwards;
+  }
+  @keyframes fireworkLaunch {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(var(--launch-height));
+      opacity: 0;
+    }
+  }
+  .fireworks-count {
+    font-size: 24px;
+    color: #ffcc66;
+    z-index: 2;
+    margin: 10px 0;
+  }
+  .fireworks-close {
+    padding: 12px 28px;
+    font-size: 22px;
+    border-radius: 30px;
+    border: 3px solid #ffcc66;
+    background: rgba(255, 204, 102, 0.2);
+    color: #ffcc66;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 2;
+    margin: 10px 0 20px;
+    box-shadow: 0 4px 16px rgba(255, 204, 102, 0.4);
+  }
+  .fireworks-close:active {
+    transform: scale(0.95);
+    background: rgba(255, 204, 102, 0.3);
+  }
+
   .emotion-title {
     font-size: 28px;
     color: var(--pink-deep);
@@ -3561,6 +3685,15 @@
   <button class="abc-close" onclick="closeABC()">🔙 Back</button>
 </div>
 
+<!-- Fireworks show overlay -->
+<div class="fireworks-overlay hidden" id="fireworksOverlay">
+  <div class="fireworks-title">🎆 Fireworks Show! 🎆</div>
+  <div class="fireworks-cat">😸</div>
+  <div class="fireworks-count" id="fireworksCount">Tap the sky! 🌟</div>
+  <div class="fireworks-sky" id="fireworksSky"></div>
+  <button class="fireworks-close" onclick="closeFireworks()">🔙 Back</button>
+</div>
+
 <!-- Header -->
 <div class="header">
   <h1>Luna's Kitty 🐱💕</h1>
@@ -3721,6 +3854,10 @@
   <button class="action-btn" onclick="openABC()" style="border-color: #ffcc66;">
     <span>🔤</span>
     <span class="label">ABCs</span>
+  </button>
+  <button class="action-btn" onclick="openFireworks()" style="border-color: #ff9966;">
+    <span>🎆</span>
+    <span class="label">Fireworks</span>
   </button>
 </div>
 
@@ -7979,6 +8116,187 @@
       showReaction('🔤');
       showSpeech('Great letters! 🔤📝');
       emojiBurst(['🔤', '📝', '⭐', '✨', 'A', 'B', 'C'], 8);
+    }
+  }
+
+  // ===== FIREWORKS SHOW =====
+  let fireworksCount = 0;
+  const fireworkColors = ['#ff4444', '#44ff44', '#4444ff', '#ffcc00', '#ff44ff', '#44ffff', '#ff8844', '#ff44aa'];
+  const fireworkEmojis = ['⭐', '✨', '💫', '🌟', '💖', '🌈', '🎉', '🎊'];
+  const fireworkPatterns = ['burst', 'ring', 'emoji', 'sparkle'];
+
+  function openFireworks() {
+    fireworksCount = 0;
+    document.getElementById('fireworksCount').textContent = 'Tap the sky! 🌟';
+    document.getElementById('fireworksOverlay').classList.remove('hidden');
+    const sky = document.getElementById('fireworksSky');
+    sky.innerHTML = '';
+    playSound('happy');
+
+    // Add click/touch handler
+    sky.onclick = (e) => launchFirework(e);
+    sky.ontouchstart = (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      launchFirework({ clientX: touch.clientX, clientY: touch.clientY });
+    };
+  }
+
+  function launchFirework(e) {
+    const sky = document.getElementById('fireworksSky');
+    const rect = sky.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Launch trail
+    const launch = document.createElement('div');
+    launch.className = 'firework-launch';
+    launch.style.left = x + 'px';
+    launch.style.background = 'linear-gradient(to top, transparent, #ffcc66)';
+    const launchHeight = -(rect.height - y);
+    launch.style.setProperty('--launch-height', launchHeight + 'px');
+    launch.style.setProperty('--launch-duration', '0.5s');
+    sky.appendChild(launch);
+    setTimeout(() => launch.remove(), 500);
+
+    // Play launch sound
+    try {
+      const ctx = getAudioCtx();
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(200, ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, ctx.currentTime + 0.4);
+      gain.gain.setValueAtTime(0.08, ctx.currentTime);
+      gain.gain.linearRampToValueAtTime(0, ctx.currentTime + 0.5);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.5);
+    } catch(e) {}
+
+    // After launch, explode
+    setTimeout(() => {
+      explodeFirework(x, y);
+    }, 500);
+  }
+
+  function explodeFirework(x, y) {
+    const sky = document.getElementById('fireworksSky');
+    const pattern = fireworkPatterns[Math.floor(Math.random() * fireworkPatterns.length)];
+    const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
+
+    // Play explosion sound
+    playSound('tada');
+
+    fireworksCount++;
+    document.getElementById('fireworksCount').textContent = `🎆 ${fireworksCount} fireworks! 🎆`;
+
+    if (pattern === 'burst') {
+      // Classic starburst
+      const particles = 20 + Math.floor(Math.random() * 15);
+      for (let i = 0; i < particles; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'firework-particle';
+        particle.style.left = x + 'px';
+        particle.style.top = y + 'px';
+        particle.style.background = color;
+        const angle = (Math.PI * 2 * i) / particles;
+        const distance = 80 + Math.random() * 80;
+        particle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+        particle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+        const duration = 0.8 + Math.random() * 0.5;
+        particle.style.setProperty('--duration', duration + 's');
+        sky.appendChild(particle);
+        setTimeout(() => particle.remove(), duration * 1000);
+      }
+    } else if (pattern === 'ring') {
+      // Ring pattern
+      const rings = 3;
+      for (let r = 0; r < rings; r++) {
+        const particles = 12;
+        const delay = r * 100;
+        setTimeout(() => {
+          for (let i = 0; i < particles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'firework-particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.background = fireworkColors[(fireworkColors.indexOf(color) + r) % fireworkColors.length];
+            const angle = (Math.PI * 2 * i) / particles;
+            const distance = (r + 1) * 50;
+            particle.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+            particle.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+            particle.style.setProperty('--duration', '1s');
+            sky.appendChild(particle);
+            setTimeout(() => particle.remove(), 1000);
+          }
+        }, delay);
+      }
+    } else if (pattern === 'emoji') {
+      // Emoji burst
+      const emojis = 10;
+      const emojiSet = fireworkEmojis[Math.floor(Math.random() * fireworkEmojis.length)];
+      for (let i = 0; i < emojis; i++) {
+        const emoji = document.createElement('div');
+        emoji.className = 'firework-emoji';
+        emoji.textContent = emojiSet;
+        emoji.style.left = x + 'px';
+        emoji.style.top = y + 'px';
+        const angle = (Math.PI * 2 * i) / emojis;
+        const distance = 60 + Math.random() * 60;
+        emoji.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+        emoji.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+        emoji.style.setProperty('--rot', (Math.random() * 720 - 360) + 'deg');
+        const duration = 1 + Math.random() * 0.5;
+        emoji.style.setProperty('--duration', duration + 's');
+        sky.appendChild(emoji);
+        setTimeout(() => emoji.remove(), duration * 1000);
+      }
+    } else if (pattern === 'sparkle') {
+      // Sparkle trail
+      const trails = 8;
+      for (let i = 0; i < trails; i++) {
+        const trail = document.createElement('div');
+        trail.className = 'firework-particle';
+        trail.style.left = x + 'px';
+        trail.style.top = y + 'px';
+        trail.style.background = color;
+        trail.style.boxShadow = `0 0 10px ${color}`;
+        const angle = (Math.PI * 2 * i) / trails;
+        const distance = 100 + Math.random() * 50;
+        trail.style.setProperty('--tx', Math.cos(angle) * distance + 'px');
+        trail.style.setProperty('--ty', Math.sin(angle) * distance + 'px');
+        const duration = 1.2;
+        trail.style.setProperty('--duration', duration + 's');
+        sky.appendChild(trail);
+        setTimeout(() => trail.remove(), duration * 1000);
+      }
+    }
+
+    // Celebration milestones
+    if (fireworksCount % 5 === 0) {
+      playSound('happy');
+      showReaction('🎆');
+    }
+
+    // Award sticker at 10
+    if (fireworksCount === 10) {
+      setTimeout(() => awardSticker(), 1000);
+    }
+  }
+
+  function closeFireworks() {
+    document.getElementById('fireworksOverlay').classList.add('hidden');
+    document.getElementById('fireworksSky').innerHTML = '';
+    // Reward for playing
+    if (fireworksCount > 0) {
+      needs.love = Math.min(MAX_NEED, needs.love + 1);
+      needs.energy = Math.max(0, needs.energy - 1);
+      renderNeeds();
+      saveState();
+      showReaction('🎆');
+      showSpeech('Beautiful fireworks! 🎆');
     }
   }
 

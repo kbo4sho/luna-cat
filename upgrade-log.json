@@ -209,6 +209,25 @@
         "Floating animation creates visual interest and challenge"
       ],
       "summary": "Added ABC Letters Game — fun letter recognition activity where colorful letters float up the screen. Luna taps each letter to hear its name and a unique musical tone. Letters appear randomly from A-Z with different colors. Celebrates progress every 5 letters with bursts and awards a sticker at 10 letters. Perfect complement to existing educational games (numbers, colors, shapes, emotions). Teaches alphabet recognition and letter sounds in an engaging, age-appropriate way for preschoolers!"
+    },
+    {
+      "date": "2026-02-28",
+      "function": "Fireworks Show",
+      "description": "Interactive fireworks display that Luna can create by tapping the night sky",
+      "details": [
+        "Dark night sky background with gradient atmosphere",
+        "Tap anywhere on screen to launch a firework from that position",
+        "Launch trail with whoosh sound effect (200Hz → 800Hz sweep)",
+        "4 different explosion patterns: burst (starburst), ring (expanding circles), emoji (flying emoji), sparkle (glowing trails)",
+        "8 vibrant colors: red, green, blue, yellow, magenta, cyan, orange, pink",
+        "Each pattern has unique particle physics and timing",
+        "Celebration sounds and reactions every 5 fireworks",
+        "Sticker reward at 10 fireworks",
+        "Teaches: cause and effect, visual patterns, color recognition, counting",
+        "Touch-optimized with large tap surface (entire sky)",
+        "Age-appropriate visuals with big, bright, celebratory effects"
+      ],
+      "summary": "Added Fireworks Show — magical interactive experience where Luna taps the night sky to create colorful fireworks! Each tap launches a firework with a whoosh sound, followed by one of 4 beautiful explosion patterns (starburst, rings, emoji bursts, or sparkle trails). 8 vibrant colors cycle randomly. Milestone celebrations every 5 fireworks, sticker at 10. Teaches cause-and-effect, visual tracking, and counting in a delightful, celebratory way. Perfect for 3yo — big touch targets, immediate visual feedback, and pure joy! Rewards curiosity and playful experimentation."
     }
   ]
 }
