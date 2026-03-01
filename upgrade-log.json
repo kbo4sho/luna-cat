@@ -228,6 +228,25 @@
         "Age-appropriate visuals with big, bright, celebratory effects"
       ],
       "summary": "Added Fireworks Show — magical interactive experience where Luna taps the night sky to create colorful fireworks! Each tap launches a firework with a whoosh sound, followed by one of 4 beautiful explosion patterns (starburst, rings, emoji bursts, or sparkle trails). 8 vibrant colors cycle randomly. Milestone celebrations every 5 fireworks, sticker at 10. Teaches cause-and-effect, visual tracking, and counting in a delightful, celebratory way. Perfect for 3yo — big touch targets, immediate visual feedback, and pure joy! Rewards curiosity and playful experimentation."
+    },
+    {
+      "date": "2026-03-01",
+      "function": "Simple Puzzle",
+      "description": "3-piece jigsaw puzzle game teaching visual reasoning and spatial awareness",
+      "details": [
+        "3 puzzle pieces: kitty head (😺), paws (🐾), and tail (〰️)",
+        "2x2 grid board with 3 active slots + decorative heart slot",
+        "Tap-to-place mechanic — tap a piece to place it in its correct spot",
+        "Pieces shuffle randomly at start of each puzzle",
+        "Each placed piece celebrates with burst animation and sound",
+        "Completed puzzle triggers big celebration with 12-emoji burst",
+        "Auto-restarts after completion for repeated play",
+        "Sticker reward when puzzle is completed",
+        "Teaches: visual reasoning, spatial awareness, part-to-whole relationships, problem-solving",
+        "Perfect for 3yo cognitive development",
+        "Age-appropriate difficulty (3 pieces vs traditional 4+ piece puzzles)"
+      ],
+      "summary": "Added Simple Puzzle — a 3-piece jigsaw puzzle where Luna taps pieces to complete a picture of the kitty! Pieces (head, paws, tail) shuffle at start and Luna taps each one to place it in the correct spot on the board. Each placement celebrates with bursts and sounds. Completing the puzzle triggers a huge celebration with sticker reward, then auto-restarts for more play. Teaches visual reasoning, spatial awareness, and problem-solving in an age-appropriate way for 3yo. Perfect complement to existing cognitive games (memory match, shapes, colors). Builds confidence through achievable challenge!"
     }
   ]
 }

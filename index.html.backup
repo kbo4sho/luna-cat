@@ -3338,105 +3338,6 @@
     transform: scale(0.95);
     background: var(--pink-light);
   }
-
-  /* ===== SIMPLE PUZZLE ===== */
-  .puzzle-overlay {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(180deg, #fff3c4 0%, #ffe4f0 50%, #f0e0ff 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    z-index: 900;
-    gap: 16px;
-    padding: 20px;
-  }
-  .puzzle-overlay.hidden { display: none; }
-  .puzzle-title {
-    font-size: 28px;
-    color: var(--pink-deep);
-  }
-  .puzzle-board {
-    position: relative;
-    width: 300px;
-    height: 300px;
-    background: white;
-    border-radius: 24px;
-    border: 5px solid var(--pink);
-    box-shadow: 0 6px 20px rgba(232,93,161,0.3);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 8px;
-    padding: 12px;
-  }
-  .puzzle-slot {
-    background: rgba(255,142,196,0.15);
-    border: 4px dashed var(--pink-light);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 80px;
-    transition: all 0.3s ease;
-    position: relative;
-  }
-  .puzzle-slot.filled {
-    background: white;
-    border-style: solid;
-    border-color: #7ed6a0;
-  }
-  .puzzle-piece {
-    width: 100px;
-    height: 100px;
-    border-radius: 20px;
-    border: 4px solid var(--pink);
-    background: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 60px;
-    cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 4px 12px rgba(232,93,161,0.2);
-    -webkit-tap-highlight-color: transparent;
-  }
-  .puzzle-piece:active {
-    transform: scale(0.9);
-  }
-  .puzzle-piece.placed {
-    opacity: 0.3;
-    pointer-events: none;
-    border-style: dashed;
-  }
-  .puzzle-pieces {
-    display: flex;
-    gap: 16px;
-    justify-content: center;
-    flex-wrap: wrap;
-    max-width: 340px;
-  }
-  .puzzle-prompt {
-    font-size: 24px;
-    color: var(--pink-dark);
-    text-align: center;
-    min-height: 36px;
-  }
-  .puzzle-close {
-    padding: 12px 28px;
-    font-size: 22px;
-    border-radius: 30px;
-    border: 3px solid var(--pink);
-    background: white;
-    color: var(--pink-deep);
-    font-weight: bold;
-    cursor: pointer;
-  }
-  .puzzle-close:active {
-    transform: scale(0.95);
-    background: var(--pink-light);
-  }
 </style>
 </head>
 <body>
@@ -3793,15 +3694,6 @@
   <button class="fireworks-close" onclick="closeFireworks()">🔙 Back</button>
 </div>
 
-<!-- Puzzle overlay -->
-<div class="puzzle-overlay hidden" id="puzzleOverlay">
-  <div class="puzzle-title">🧩 Kitty Puzzle! 🧩</div>
-  <div class="puzzle-prompt" id="puzzlePrompt">Tap pieces to complete the puzzle! 👇</div>
-  <div class="puzzle-board" id="puzzleBoard"></div>
-  <div class="puzzle-pieces" id="puzzlePieces"></div>
-  <button class="puzzle-close" onclick="closePuzzle()">🔙 Back</button>
-</div>
-
 <!-- Header -->
 <div class="header">
   <h1>Luna's Kitty 🐱💕</h1>
@@ -3966,10 +3858,6 @@
   <button class="action-btn" onclick="openFireworks()" style="border-color: #ff9966;">
     <span>🎆</span>
     <span class="label">Fireworks</span>
-  </button>
-  <button class="action-btn" onclick="openPuzzle()" style="border-color: #c9a0dc;">
-    <span>🧩</span>
-    <span class="label">Puzzle</span>
   </button>
 </div>
 
@@ -8410,135 +8298,6 @@
       showReaction('🎆');
       showSpeech('Beautiful fireworks! 🎆');
     }
-  }
-
-  // ===== SIMPLE PUZZLE =====
-  const puzzlePieces = [
-    { id: 'head', emoji: '😺', slot: 0 },
-    { id: 'body', emoji: '🐾', slot: 1 },
-    { id: 'tail', emoji: '〰️', slot: 2 }
-  ];
-  let puzzlePlaced = [];
-
-  function openPuzzle() {
-    puzzlePlaced = [];
-    document.getElementById('puzzleOverlay').classList.remove('hidden');
-    document.getElementById('puzzlePrompt').textContent = 'Tap pieces to complete the puzzle! 👇';
-    playSound('happy');
-    renderPuzzle();
-  }
-
-  function renderPuzzle() {
-    // Create board slots (2x2 grid, but we'll only use 3 spots)
-    const board = document.getElementById('puzzleBoard');
-    board.innerHTML = '';
-    for (let i = 0; i < 3; i++) {
-      const slot = document.createElement('div');
-      slot.className = 'puzzle-slot';
-      slot.id = `puzzleSlot${i}`;
-      board.appendChild(slot);
-    }
-    // Add a decorative 4th slot with a heart
-    const heartSlot = document.createElement('div');
-    heartSlot.className = 'puzzle-slot filled';
-    heartSlot.textContent = '💖';
-    heartSlot.style.opacity = '0.5';
-    board.appendChild(heartSlot);
-
-    // Create pieces (shuffled)
-    const pieces = document.getElementById('puzzlePieces');
-    pieces.innerHTML = '';
-    const shuffled = [...puzzlePieces].sort(() => Math.random() - 0.5);
-    shuffled.forEach((piece, i) => {
-      const pieceEl = document.createElement('div');
-      pieceEl.className = 'puzzle-piece';
-      pieceEl.textContent = piece.emoji;
-      pieceEl.dataset.id = piece.id;
-      pieceEl.dataset.slot = piece.slot;
-      pieceEl.onclick = () => placePuzzlePiece(piece, pieceEl);
-      pieces.appendChild(pieceEl);
-    });
-  }
-
-  function placePuzzlePiece(piece, pieceEl) {
-    if (puzzlePlaced.includes(piece.id)) return;
-    
-    playSound('pop');
-    puzzlePlaced.push(piece.id);
-    pieceEl.classList.add('placed');
-
-    // Fill the correct slot
-    const slot = document.getElementById(`puzzleSlot${piece.slot}`);
-    slot.textContent = piece.emoji;
-    slot.classList.add('filled');
-
-    // Celebration animation
-    slot.style.animation = 'colorCorrect 0.6s ease';
-    setTimeout(() => { slot.style.animation = ''; }, 600);
-
-    // Burst from the slot
-    const rect = slot.getBoundingClientRect();
-    for (let i = 0; i < 4; i++) {
-      const spark = document.createElement('div');
-      spark.className = 'emoji-burst';
-      spark.textContent = ['✨', '⭐', '💖', piece.emoji][i % 4];
-      spark.style.left = rect.left + rect.width/2 + 'px';
-      spark.style.top = rect.top + rect.height/2 + 'px';
-      spark.style.position = 'fixed';
-      spark.style.zIndex = '999';
-      const angle = (Math.PI * 2 * i) / 4;
-      const dist = 40 + Math.random() * 30;
-      spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-      spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-      spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
-      document.body.appendChild(spark);
-      setTimeout(() => spark.remove(), 1200);
-    }
-
-    // Check if puzzle complete
-    if (puzzlePlaced.length === 3) {
-      setTimeout(() => {
-        playSound('tada');
-        document.getElementById('puzzlePrompt').textContent = '🎉 Puzzle complete! You did it! 🎉';
-        
-        // Big celebration
-        const overlay = document.getElementById('puzzleOverlay');
-        for (let i = 0; i < 12; i++) {
-          const spark = document.createElement('div');
-          spark.className = 'emoji-burst';
-          spark.textContent = ['🧩', '🎉', '⭐', '💖', '✨', '🌈'][i % 6];
-          spark.style.left = '50%';
-          spark.style.top = '40%';
-          spark.style.position = 'absolute';
-          const angle = (Math.PI * 2 * i) / 12;
-          const dist = 80 + Math.random() * 60;
-          spark.style.setProperty('--dx', Math.cos(angle) * dist + 'px');
-          spark.style.setProperty('--dy', Math.sin(angle) * dist + 'px');
-          spark.style.setProperty('--rot', (Math.random() * 360) + 'deg');
-          overlay.appendChild(spark);
-          setTimeout(() => spark.remove(), 1200);
-        }
-
-        // Reward
-        needs.love = Math.min(MAX_NEED, needs.love + 1);
-        renderNeeds();
-        awardSticker();
-        saveState();
-
-        // Auto-restart after celebration
-        setTimeout(() => {
-          if (!document.getElementById('puzzleOverlay').classList.contains('hidden')) {
-            puzzlePlaced = [];
-            document.getElementById('puzzlePrompt').textContent = 'Try again! 🧩';
-            renderPuzzle();
-          }
-        }, 3000);
-      }, 500);
-    }
-  }
-
-  function closePuzzle() {
-    document.getElementById('puzzleOverlay').classList.add('hidden');
   }
 
   // Award stickers on various good-care actions
