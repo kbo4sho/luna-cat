@@ -3493,6 +3493,11 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
   }
+  .weather-options.is-complete {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .weather-option {
     min-height: 126px;
     display: flex;
@@ -8772,6 +8777,7 @@
     document.getElementById('weatherFeedback').textContent = 'Choose one helpful item.';
 
     const options = document.getElementById('weatherOptions');
+    options.classList.remove('is-complete');
     options.innerHTML = '';
     round.options.forEach(([emoji, label]) => {
       const button = document.createElement('button');
@@ -8845,7 +8851,9 @@
     document.getElementById('weatherProgress').textContent = 'All 4 weather days complete!';
     document.getElementById('weatherScene').textContent = '😻🌈';
     document.getElementById('weatherPrompt').textContent = 'You helped Kitty in every kind of weather!';
-    document.getElementById('weatherOptions').innerHTML = '<div class="weather-celebration"><span class="big-celebration" aria-hidden="true">🎉🌦️🎉</span>Weather helper superstar!</div>';
+    const options = document.getElementById('weatherOptions');
+    options.classList.add('is-complete');
+    options.innerHTML = '<div class="weather-celebration"><span class="big-celebration" aria-hidden="true">🎉🌦️🎉</span>Weather helper superstar!</div>';
     document.getElementById('weatherFeedback').textContent = 'Great matching! Sunny, rainy, snowy, and windy—done!';
     const replay = document.createElement('button');
     replay.type = 'button';
@@ -8856,7 +8864,7 @@
       renderWeatherRound();
       document.querySelector('#weatherOptions .weather-option').focus();
     });
-    document.getElementById('weatherOptions').appendChild(replay);
+    options.appendChild(replay);
     playSound('happy');
     emojiBurst(['🌦️', '☀️', '🌧️', '❄️', '💨', '🌈'], 12);
     needs.love = Math.min(MAX_NEED, needs.love + 1);

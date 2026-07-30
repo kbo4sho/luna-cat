@@ -65,3 +65,9 @@ test('mobile layout includes a narrow-screen adaptation', () => {
   assert.match(html, /\.weather-card\s*\{[\s\S]*?width:\s*min\(100%, 560px\)/);
   assert.match(html, /calc\(100dvh - 20px\)/);
 });
+
+test('completion celebration leaves the three-column option grid', () => {
+  assert.match(html, /\.weather-options\.is-complete\s*\{[\s\S]*?display:\s*flex;[\s\S]*?flex-direction:\s*column;/);
+  assert.match(html, /options\.classList\.add\('is-complete'\)/);
+  assert.match(html, /options\.classList\.remove\('is-complete'\)/);
+});
