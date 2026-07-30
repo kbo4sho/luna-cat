@@ -3437,6 +3437,149 @@
     transform: scale(0.95);
     background: var(--pink-light);
   }
+
+  /* ===== WEATHER DAY ===== */
+  .weather-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 950;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(180deg, #dff5ff 0%, #fff3c4 48%, #ffe4f0 100%);
+    overflow-y: auto;
+  }
+  .weather-overlay.hidden { display: none; }
+  .weather-card {
+    width: min(100%, 560px);
+    min-height: min(680px, calc(100dvh - 40px));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 24px;
+    border: 5px solid #4dc9f6;
+    border-radius: 32px;
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 10px 30px rgba(65, 135, 170, 0.22);
+    text-align: center;
+  }
+  .weather-title {
+    color: var(--pink-deep);
+    font-size: 30px;
+  }
+  .weather-progress {
+    color: var(--pink-dark);
+    font-size: 19px;
+    font-weight: bold;
+  }
+  .weather-scene {
+    font-size: 92px;
+    line-height: 1;
+    animation: catBounce 1.6s ease infinite;
+  }
+  .weather-prompt {
+    max-width: 430px;
+    min-height: 64px;
+    color: var(--pink-deep);
+    font-size: 25px;
+    line-height: 1.25;
+  }
+  .weather-options {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .weather-option {
+    min-height: 126px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 10px 6px;
+    border: 4px solid #4dc9f6;
+    border-radius: 24px;
+    background: white;
+    color: var(--pink-deep);
+    box-shadow: 0 5px 14px rgba(77,201,246,0.2);
+    cursor: pointer;
+    font: inherit;
+    font-weight: bold;
+    -webkit-tap-highlight-color: transparent;
+    transition: transform 0.15s, border-color 0.15s, background 0.15s;
+  }
+  .weather-option .emoji-part { font-size: 54px; line-height: 1; }
+  .weather-option .label-part { font-size: 17px; }
+  .weather-option:active { transform: scale(0.92); }
+  .weather-option.correct {
+    border-color: #378a58;
+    background: #e8f8e0;
+    animation: colorCorrect 0.6s ease;
+  }
+  .weather-option.wrong {
+    border-color: #c63863;
+    background: #fff0f5;
+    animation: colorWrong 0.4s ease;
+  }
+  .weather-option:disabled { cursor: default; opacity: 0.75; }
+  .weather-option.correct:disabled { opacity: 1; }
+  .weather-feedback {
+    min-height: 34px;
+    color: #7a3762;
+    font-size: 21px;
+    font-weight: bold;
+  }
+  .weather-close,
+  .weather-replay {
+    min-height: 52px;
+    padding: 10px 28px;
+    border: 3px solid var(--pink);
+    border-radius: 30px;
+    background: white;
+    color: var(--pink-deep);
+    cursor: pointer;
+    font: inherit;
+    font-size: 21px;
+    font-weight: bold;
+  }
+  .weather-replay { border-color: #4dc9f6; }
+  .weather-close:active,
+  .weather-replay:active { transform: scale(0.95); }
+  .weather-option:focus-visible,
+  .weather-close:focus-visible,
+  .weather-replay:focus-visible,
+  #weatherButton:focus-visible {
+    outline: 5px solid #673ab7;
+    outline-offset: 4px;
+  }
+  .weather-celebration {
+    font-size: 26px;
+    color: var(--pink-deep);
+    line-height: 1.35;
+  }
+  .weather-celebration .big-celebration { font-size: 90px; display: block; }
+  @media (max-width: 420px), (max-height: 700px) {
+    .weather-overlay { padding: 10px; }
+    .weather-card {
+      min-height: calc(100dvh - 20px);
+      gap: 9px;
+      padding: 16px 12px;
+      border-radius: 24px;
+    }
+    .weather-title { font-size: 25px; }
+    .weather-scene { font-size: 72px; }
+    .weather-prompt { min-height: 52px; font-size: 21px; }
+    .weather-options { gap: 8px; }
+    .weather-option { min-height: 108px; border-width: 3px; border-radius: 20px; }
+    .weather-option .emoji-part { font-size: 45px; }
+    .weather-option .label-part { font-size: 15px; }
+    .weather-feedback { min-height: 28px; font-size: 18px; }
+    .weather-close, .weather-replay { min-height: 48px; font-size: 19px; }
+  }
 </style>
 </head>
 <body>
@@ -3802,6 +3945,19 @@
   <button class="puzzle-close" onclick="closePuzzle()">🔙 Back</button>
 </div>
 
+<!-- Weather Day overlay -->
+<div class="weather-overlay hidden" id="weatherOverlay" role="dialog" aria-modal="true" aria-labelledby="weatherTitle" aria-describedby="weatherPrompt" tabindex="-1">
+  <div class="weather-card">
+    <div class="weather-title" id="weatherTitle">🌦️ Weather Day! 🐾</div>
+    <div class="weather-progress" id="weatherProgress">Weather 1 of 4</div>
+    <div class="weather-scene" id="weatherScene" aria-hidden="true"></div>
+    <div class="weather-prompt" id="weatherPrompt"></div>
+    <div class="weather-options" id="weatherOptions"></div>
+    <div class="weather-feedback" id="weatherFeedback" aria-live="polite" aria-atomic="true"></div>
+    <button class="weather-close" id="weatherClose" onclick="closeWeatherDay()">🔙 Back</button>
+  </div>
+</div>
+
 <!-- Header -->
 <div class="header">
   <h1>Luna's Kitty 🐱💕</h1>
@@ -3970,6 +4126,10 @@
   <button class="action-btn" onclick="openPuzzle()" style="border-color: #c9a0dc;">
     <span>🧩</span>
     <span class="label">Puzzle</span>
+  </button>
+  <button class="action-btn" id="weatherButton" onclick="openWeatherDay()" style="border-color: #4dc9f6;">
+    <span>🌦️</span>
+    <span class="label">Weather</span>
   </button>
 </div>
 
@@ -8540,6 +8700,208 @@
   function closePuzzle() {
     document.getElementById('puzzleOverlay').classList.add('hidden');
   }
+
+  // ===== WEATHER DAY =====
+  const weatherRounds = [
+    {
+      name: 'sunny',
+      scene: '☀️😺',
+      prompt: 'It is sunny! What helps keep Kitty cool?',
+      answer: 'Sun hat',
+      options: [['👒', 'Sun hat'], ['🧣', 'Scarf'], ['☂️', 'Umbrella']],
+      success: 'Yes! A sun hat gives Kitty shade. 👒'
+    },
+    {
+      name: 'rainy',
+      scene: '🌧️😺',
+      prompt: 'It is rainy! What helps Kitty stay dry?',
+      answer: 'Umbrella',
+      options: [['☂️', 'Umbrella'], ['🕶️', 'Sunglasses'], ['🛷', 'Sled']],
+      success: 'Yes! An umbrella keeps the rain off. ☂️'
+    },
+    {
+      name: 'snowy',
+      scene: '❄️😺',
+      prompt: 'It is snowy! What helps Kitty stay warm?',
+      answer: 'Warm coat',
+      options: [['🧥', 'Warm coat'], ['🪁', 'Kite'], ['🩴', 'Sandals']],
+      success: 'Yes! A warm coat makes snow day cozy. 🧥'
+    },
+    {
+      name: 'windy',
+      scene: '💨😺',
+      prompt: 'It is windy! What is fun to fly in the breeze?',
+      answer: 'Kite',
+      options: [['🪁', 'Kite'], ['🛟', 'Swim ring'], ['🥄', 'Spoon']],
+      success: 'Yes! The wind helps a kite fly high. 🪁'
+    }
+  ];
+  let weatherRoundIndex = 0;
+  let weatherLocked = false;
+  let weatherNextTimer = null;
+  let weatherReturnFocus = null;
+
+  function emitWeatherEvent(type, detail = {}) {
+    const eventDetail = { type, round: weatherRoundIndex + 1, ...detail };
+    document.dispatchEvent(new CustomEvent('luna:weather-day', { detail: eventDetail }));
+    console.info('[Weather Day]', JSON.stringify(eventDetail));
+  }
+
+  function openWeatherDay() {
+    weatherReturnFocus = document.activeElement === document.body
+      ? document.getElementById('weatherButton')
+      : document.activeElement;
+    weatherRoundIndex = 0;
+    weatherLocked = false;
+    clearTimeout(weatherNextTimer);
+    const overlay = document.getElementById('weatherOverlay');
+    overlay.classList.remove('hidden');
+    renderWeatherRound();
+    const firstOption = document.querySelector('#weatherOptions .weather-option');
+    (firstOption || overlay).focus();
+    playSound('happy');
+    emitWeatherEvent('opened', { weather: weatherRounds[0].name });
+  }
+
+  function renderWeatherRound() {
+    const round = weatherRounds[weatherRoundIndex];
+    weatherLocked = false;
+    document.getElementById('weatherProgress').textContent = `Weather ${weatherRoundIndex + 1} of ${weatherRounds.length}: ${round.name}`;
+    document.getElementById('weatherScene').textContent = round.scene;
+    document.getElementById('weatherPrompt').textContent = round.prompt;
+    document.getElementById('weatherFeedback').textContent = 'Choose one helpful item.';
+
+    const options = document.getElementById('weatherOptions');
+    options.innerHTML = '';
+    round.options.forEach(([emoji, label]) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'weather-option';
+      button.setAttribute('aria-label', label);
+      button.innerHTML = `<span class="emoji-part" aria-hidden="true">${emoji}</span><span class="label-part">${label}</span>`;
+      button.addEventListener('click', () => chooseWeatherItem(label, button));
+      options.appendChild(button);
+    });
+  }
+
+  function chooseWeatherItem(label, button) {
+    if (weatherLocked) return;
+    const round = weatherRounds[weatherRoundIndex];
+    const feedback = document.getElementById('weatherFeedback');
+
+    if (label !== round.answer) {
+      button.classList.remove('wrong');
+      void button.offsetWidth;
+      button.classList.add('wrong');
+      feedback.textContent = `Not ${label}. Try again!`;
+      playSound('pop');
+      emitWeatherEvent('try-again', { weather: round.name, choice: label });
+      setTimeout(() => button.classList.remove('wrong'), 500);
+      return;
+    }
+
+    weatherLocked = true;
+    button.classList.add('correct');
+    document.querySelectorAll('#weatherOptions .weather-option').forEach(option => {
+      option.disabled = true;
+    });
+    feedback.textContent = round.success;
+    playSound('tada');
+    emitWeatherEvent('matched', { weather: round.name, choice: label });
+    weatherCelebrationBurst(button);
+
+    weatherNextTimer = setTimeout(() => {
+      weatherRoundIndex++;
+      if (weatherRoundIndex === weatherRounds.length) {
+        completeWeatherDay();
+      } else {
+        renderWeatherRound();
+        document.querySelector('#weatherOptions .weather-option').focus();
+      }
+    }, 1400);
+  }
+
+  function weatherCelebrationBurst(source) {
+    const rect = source.getBoundingClientRect();
+    for (let i = 0; i < 8; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'emoji-burst';
+      spark.textContent = ['✨', '⭐', '🌈', '💖'][i % 4];
+      spark.style.left = rect.left + rect.width / 2 + 'px';
+      spark.style.top = rect.top + rect.height / 2 + 'px';
+      spark.style.position = 'fixed';
+      spark.style.zIndex = '999';
+      const angle = (Math.PI * 2 * i) / 8;
+      spark.style.setProperty('--dx', Math.cos(angle) * 80 + 'px');
+      spark.style.setProperty('--dy', Math.sin(angle) * 80 + 'px');
+      spark.style.setProperty('--rot', (i * 45) + 'deg');
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 1200);
+    }
+  }
+
+  function completeWeatherDay() {
+    weatherLocked = true;
+    document.getElementById('weatherProgress').textContent = 'All 4 weather days complete!';
+    document.getElementById('weatherScene').textContent = '😻🌈';
+    document.getElementById('weatherPrompt').textContent = 'You helped Kitty in every kind of weather!';
+    document.getElementById('weatherOptions').innerHTML = '<div class="weather-celebration"><span class="big-celebration" aria-hidden="true">🎉🌦️🎉</span>Weather helper superstar!</div>';
+    document.getElementById('weatherFeedback').textContent = 'Great matching! Sunny, rainy, snowy, and windy—done!';
+    const replay = document.createElement('button');
+    replay.type = 'button';
+    replay.className = 'weather-replay';
+    replay.textContent = '🔄 Play again';
+    replay.addEventListener('click', () => {
+      weatherRoundIndex = 0;
+      renderWeatherRound();
+      document.querySelector('#weatherOptions .weather-option').focus();
+    });
+    document.getElementById('weatherOptions').appendChild(replay);
+    playSound('happy');
+    emojiBurst(['🌦️', '☀️', '🌧️', '❄️', '💨', '🌈'], 12);
+    needs.love = Math.min(MAX_NEED, needs.love + 1);
+    renderNeeds();
+    saveState();
+    replay.focus();
+    emitWeatherEvent('completed', { totalRounds: weatherRounds.length });
+  }
+
+  function closeWeatherDay() {
+    const overlay = document.getElementById('weatherOverlay');
+    if (overlay.classList.contains('hidden')) return;
+    clearTimeout(weatherNextTimer);
+    overlay.classList.add('hidden');
+    document.getElementById('weatherOptions').innerHTML = '';
+    emitWeatherEvent('closed');
+    if (weatherReturnFocus && typeof weatherReturnFocus.focus === 'function') {
+      weatherReturnFocus.focus();
+    }
+  }
+
+  document.addEventListener('keydown', event => {
+    const overlay = document.getElementById('weatherOverlay');
+    if (!overlay || overlay.classList.contains('hidden')) return;
+
+    if (event.key === 'Escape') {
+      event.preventDefault();
+      closeWeatherDay();
+      return;
+    }
+
+    if (event.key === 'Tab') {
+      const focusable = [...overlay.querySelectorAll('button:not(:disabled)')];
+      if (!focusable.length) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && (document.activeElement === first || document.activeElement === overlay)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  });
 
   // Award stickers on various good-care actions
   // (We hook into saveState — every 3rd save, chance of sticker)
